@@ -1,0 +1,85 @@
+/* Hero Section — see README.md for usage */
+
+.hero {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 90vh;
+	background: #1a1208; /* Fallback color — replace with background-image */
+	background-size: cover;
+	background-position: center;
+	color: #ffffff;
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+}
+
+/* Dark overlay for text readability over images */
+.hero::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(26, 18, 8, 0.6);
+	z-index: 1;
+}
+
+.hero__content {
+	position: relative;
+	z-index: 2;
+	max-width: 750px;
+	padding: 2rem;
+}
+
+.hero__label {
+	font-size: 0.9rem;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	margin-bottom: 1rem;
+	font-weight: 600;
+}
+
+.hero__title {
+	font-size: 4rem;
+	line-height: 1.1;
+	margin-bottom: 1.25rem;
+}
+
+.hero__text {
+	font-size: 1.15rem;
+	line-height: 1.8;
+	opacity: 0.85;
+	margin-bottom: 2.5rem;
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.hero__buttons {
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+	.hero__title {
+		font-size: 2.75rem;
+	}
+
+	.hero__text {
+		font-size: 1rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.hero__title {
+		font-size: 2.25rem;
+	}
+
+	.hero__text {
+		font-size: 0.95rem;
+	}
+}

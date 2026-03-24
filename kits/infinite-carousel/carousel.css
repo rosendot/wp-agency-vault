@@ -1,0 +1,104 @@
+/* Infinite Carousel — see README.md for usage */
+
+.carousel {
+	max-width: 1200px;
+	margin: 0 auto;
+	overflow: hidden;
+	position: relative;
+	padding: 0 2.5rem;
+}
+
+.carousel__track {
+	display: flex;
+	transition: transform 0.5s ease;
+}
+
+.carousel__slide {
+	flex: 0 0 25%;
+	padding: 0 1rem;
+}
+
+.carousel--gallery .carousel__slide {
+	flex: 0 0 33.333%;
+	padding: 0 0.5rem;
+}
+
+.carousel__arrow {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	background: #ffffff;
+	color: #1a1a1a;
+	border: 1px solid #e0e0e0;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	font-size: 1.5rem;
+	line-height: 1;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.3s, box-shadow 0.3s;
+	z-index: 10;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.carousel__arrow:hover {
+	background: #1a1a1a;
+	color: #ffffff;
+}
+
+.carousel__arrow--prev {
+	left: 0;
+}
+
+.carousel__arrow--next {
+	right: 0;
+}
+
+.carousel__dots {
+	display: flex;
+	justify-content: center;
+	gap: 0.5rem;
+	margin-top: 2rem;
+}
+
+.carousel__dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: #d0d0d0;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	transition: background 0.3s;
+}
+
+.carousel__dot--active {
+	background: #b42318; /* Replace with your theme's primary color */
+}
+
+@media (max-width: 768px) {
+	.carousel__arrow {
+		display: none;
+	}
+
+	.carousel__slide {
+		flex: 0 0 33.333%;
+	}
+
+	.carousel--gallery .carousel__slide {
+		flex: 0 0 50%;
+	}
+}
+
+@media (max-width: 480px) {
+	.carousel__slide {
+		flex: 0 0 100%;
+	}
+
+	.carousel--gallery .carousel__slide {
+		flex: 0 0 100%;
+	}
+}

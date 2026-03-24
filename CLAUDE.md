@@ -6,17 +6,17 @@ Personal knowledge base and reusable toolkit for building WordPress client sites
 
 ```
 wp-agency-vault/
-├── guides/              # Step-by-step reference docs (Bedrock, LocalWP, deployment, etc.)
-├── boilerplate/         # Starter files to copy into new client projects
-│   ├── theme/           # Blank starter theme skeleton
-│   ├── .claude/         # Claude config to drop into any project
-│   └── .env.example     # Template .env with comments
-├── snippets/            # Copy-paste code patterns
-│   ├── php/             # Meta boxes, nav walkers, queries, CPTs
-│   ├── css/             # Grid layouts, responsive nav, hero sections
-│   └── js/              # Mobile menu toggle, scroll effects
-└── plugins/             # Notes on vetted plugins
-    └── recommended.md   # Plugin list with use cases
+├── kits/                    # Ready-to-ship feature kits (grab and go)
+│   ├── infinite-carousel/   # Carousel with infinite loop, arrows, swipe
+│   ├── mobile-nav/          # Responsive hamburger menu
+│   ├── hero-section/        # Full-width hero with overlay
+│   ├── google-map-embed/    # Maps iframe + contact info grid
+│   └── custom-post-type/    # CPT + taxonomy + meta box
+├── guides/                  # Step-by-step reference docs
+├── boilerplate/             # Starter files to copy into new projects
+│   └── theme/               # Blank starter theme skeleton
+└── plugins/                 # Notes on vetted plugins
+    └── recommended.md
 ```
 
 ## Conventions
@@ -25,7 +25,8 @@ wp-agency-vault/
 - WordPress core and plugins are managed via **Composer** — never edit them directly
 - Only the custom theme is version-controlled in client projects
 - `.env` files contain secrets and are never committed
-- Snippets should be self-contained and include a comment header explaining usage
+- Each kit is self-contained: all files for one feature in one folder with a README
+- Kit READMEs explain integration, HTML structure, and customization options
 - PHP follows WordPress coding standards (tabs for indentation, snake_case functions)
 
 ## Stack

@@ -1,0 +1,77 @@
+/* Mobile Nav — see README.md for usage */
+
+.navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem 3rem;
+	background: #1a1208;
+	position: sticky;
+	top: 0;
+	z-index: 100;
+}
+
+.nav-links {
+	display: flex;
+	list-style: none;
+	gap: 2rem;
+	align-items: center;
+}
+
+.nav-links li a {
+	color: #faf6f0;
+	font-size: 0.85rem;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 1.5px;
+	text-decoration: none;
+	transition: color 0.3s;
+}
+
+/* Hamburger icon — hidden on desktop */
+.nav-toggle {
+	display: none;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0.5rem;
+}
+
+.nav-toggle span {
+	display: block;
+	width: 25px;
+	height: 2px;
+	background: #faf6f0;
+	margin: 6px 0;
+	transition: all 0.3s;
+}
+
+/* Mobile: show hamburger, hide nav until .active */
+@media (max-width: 768px) {
+	.navbar {
+		flex-wrap: wrap;
+		padding: 1rem 1.5rem;
+	}
+
+	.nav-links {
+		display: none;
+		flex-direction: column;
+		width: 100%;
+		gap: 0;
+		padding-top: 1rem;
+	}
+
+	.nav-links.active {
+		display: flex;
+	}
+
+	.nav-links li a {
+		display: block;
+		padding: 0.75rem 0;
+		border-top: 1px solid rgba(250, 246, 240, 0.1);
+	}
+
+	.nav-toggle {
+		display: block;
+	}
+}
