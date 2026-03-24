@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
-import KitBrowser from "./components/KitBrowser";
+import Dashboard from "./components/Dashboard";
 
 export interface KitVariable {
   label: string;
@@ -18,6 +18,23 @@ export interface KitData {
   variables: Record<string, KitVariable>;
   variants: Record<string, { label: string; class: string }>;
   dependencies: string[];
+  fileContents: Record<string, string>;
+}
+
+export interface ThemeData {
+  name: string;
+  slug: string;
+  description: string;
+  category: string;
+  tags: string[];
+  style: string;
+  layout: string;
+  version: string;
+  pages: string[];
+  kits_used: string[];
+  files: Record<string, string[]>;
+  kit_files: Record<string, string[]>;
+  variables: Record<string, KitVariable>;
   fileContents: Record<string, string>;
 }
 
@@ -55,25 +72,52 @@ async function getKits(): Promise<KitData[]> {
   return kits;
 }
 
+async function getThemes(): Promise<ThemeData[]> {
+  const themesDir = path.join(process.cwd(), "..", "themes");
+  let folders: string[];
+  try {
+    folders = await fs.readdir(themesDir);
+  } catch {
+    return [];
+  }
+  const themes: ThemeData[] = [];
+
+  for (const folder of folders) {
+    const themeJsonPath = path.join(themesDir, folder, "theme.json");
+    try {
+      const raw = await fs.readFile(themeJsonPath, "utf-8");
+      const theme = JSON.parse(raw) as ThemeData;
+
+      const fileContents: Record<string, string> = {};
+      for (const [, files] of Object.entries(theme.files)) {
+        for (const file of files) {
+          const filePath = path.join(themesDir, folder, file);
+          try {
+            const content = await fs.readFile(filePath, "utf-8");
+            fileContents[file] = content;
+          } catch {
+            fileContents[file] = "// File not found";
+          }
+        }
+      }
+      theme.fileContents = fileContents;
+
+      themes.push(theme);
+    } catch {
+      // skip folders without theme.json
+    }
+  }
+
+  return themes;
+}
+
 export default async function Home() {
   const kits = await getKits();
+  const themes = await getThemes();
 
   return (
     <main className="min-h-screen">
-      <header className="border-b border-[var(--card-border)] px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-[var(--accent)] rounded-lg flex items-center justify-center text-white font-bold text-sm">
-            V
-          </div>
-          <h1 className="text-lg font-semibold tracking-tight">
-            WP Agency Vault
-          </h1>
-        </div>
-        <span className="text-sm text-[var(--muted)]">
-          {kits.length} kits available
-        </span>
-      </header>
-      <KitBrowser kits={kits} />
+      <Dashboard kits={kits} themes={themes} />
     </main>
   );
 }

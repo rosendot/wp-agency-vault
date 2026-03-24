@@ -1,0 +1,115 @@
+{
+  "name": "Classic Restaurant",
+  "slug": "restaurant-classic",
+  "description": "Warm, traditional restaurant theme with hero overlay, fan favorites carousel, Google Maps, photo gallery, menu page, and about page.",
+  "category": "restaurant",
+  "tags": ["food", "restaurant", "mexican", "italian", "american", "carousel", "google-maps", "menu-page", "gallery", "dark-header", "warm-tones", "serif-headings"],
+  "style": "warm",
+  "layout": "hero-first",
+  "version": "1.0.0",
+  "preview": "screenshot.png",
+  "pages": ["home", "menu", "about"],
+  "kits_used": ["infinite-carousel", "mobile-nav", "hero-section", "google-map-embed", "custom-post-type"],
+  "files": {
+    "php": [
+      "front-page.php",
+      "page-menu.php",
+      "page-about.php",
+      "header.php",
+      "footer.php",
+      "functions.php",
+      "index.php"
+    ],
+    "css": ["style.css"],
+    "js": []
+  },
+  "kit_files": {
+    "css": [
+      "kits/mobile-nav/mobile-nav.css",
+      "kits/hero-section/hero.css",
+      "kits/infinite-carousel/carousel.css",
+      "kits/google-map-embed/map.css"
+    ],
+    "js": [
+      "kits/mobile-nav/mobile-nav.js",
+      "kits/infinite-carousel/carousel.js"
+    ]
+  },
+  "variables": {
+    "business_name": {
+      "label": "Business Name",
+      "type": "string",
+      "default": "Restaurant Name"
+    },
+    "tagline": {
+      "label": "Tagline",
+      "type": "string",
+      "default": "Authentic Kitchen"
+    },
+    "address_line_1": {
+      "label": "Street Address",
+      "type": "string",
+      "default": "123 Main Street"
+    },
+    "address_line_2": {
+      "label": "City, State, Zip",
+      "type": "string",
+      "default": "City, ST 00000"
+    },
+    "phone": {
+      "label": "Phone Number",
+      "type": "string",
+      "default": "(555) 000-0000"
+    },
+    "email": {
+      "label": "Email",
+      "type": "string",
+      "default": "hello@example.com"
+    },
+    "hours_weekday": {
+      "label": "Weekday Hours",
+      "type": "string",
+      "default": "Mon-Fri: 11am - 10pm"
+    },
+    "hours_weekend": {
+      "label": "Weekend Hours",
+      "type": "string",
+      "default": "Sat-Sun: 10am - 11pm"
+    },
+    "color_primary": {
+      "label": "Primary Color",
+      "type": "color",
+      "default": "#b42318"
+    },
+    "color_secondary": {
+      "label": "Secondary/Accent Color",
+      "type": "color",
+      "default": "#d4a017"
+    },
+    "color_dark": {
+      "label": "Dark Background",
+      "type": "color",
+      "default": "#1a1208"
+    },
+    "color_cream": {
+      "label": "Light Background",
+      "type": "color",
+      "default": "#faf6f0"
+    },
+    "google_maps_embed": {
+      "label": "Google Maps Embed URL",
+      "type": "string",
+      "default": ""
+    },
+    "hero_title": {
+      "label": "Hero Title",
+      "type": "string",
+      "default": "Your City's Home for Authentic Cuisine"
+    },
+    "hero_text": {
+      "label": "Hero Description",
+      "type": "string",
+      "default": "Bold flavors and family tradition — every dish is crafted with recipes passed down through generations."
+    }
+  }
+}

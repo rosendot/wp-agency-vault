@@ -9,7 +9,7 @@ A personal knowledge base, reusable toolkit, and internal kit browser for buildi
 | `dashboard/` | Next.js kit browser UI — browse kits visually, view code, and customize variables |
 | `kits/` | Ready-to-ship feature kits — each kit is a self-contained folder with all files for one feature (JS, CSS, PHP, README, kit.json) |
 | `guides/` | Step-by-step reference docs — Bedrock setup, LocalWP config, theme development, CPTs |
-| `boilerplate/` | Starter files to copy into new projects — theme skeleton |
+| `themes/` | Complete ready-to-ship themes with placeholder content — copy into a project, swap placeholders, ship |
 | `plugins/` | Notes on plugins you've vetted and when to use them |
 
 ## Kit Browser UI
@@ -42,10 +42,20 @@ Each kit is a grab-and-go folder with a `kit.json` that defines metadata, custom
 | `google-map-embed/` | Section | Google Maps iframe embed with contact info grid |
 | `custom-post-type/` | Data | CPT registration + taxonomy + meta box with nonces |
 
+## Themes
+
+Complete themes with all placeholder content — copy into a Bedrock project, swap in client data, and deploy.
+
+| Theme | Description |
+|-------|-------------|
+| `restaurant-classic/` | Warm traditional restaurant — hero overlay, fan favorites carousel, Google Maps, photo gallery, menu page (CPT), about page |
+
+Each theme has a `theme.json` with customizable variables (colors, business name, address, etc.) for the dashboard UI.
+
 ## How to Use
 
-1. **Browse kits** — Run the kit browser (`cd dashboard && npm run dev`) to visually explore what's available
-2. **Starting a new client project?** Copy `boilerplate/theme/` into your new repo, then pull in kits as needed
+1. **Browse kits & themes** — Run the dashboard (`cd dashboard && npm run dev`) to visually explore what's available
+2. **Starting a new client project?** Pick a theme from `themes/`, copy it into your Bedrock project's `web/app/themes/`, swap placeholders
 3. **Need a feature?** Grab the kit folder from `kits/`, read its README, and integrate
 4. **Need to set something up?** Check `guides/` for step-by-step instructions
 5. **Choosing a plugin?** Check `plugins/recommended.md` for vetted options

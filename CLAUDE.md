@@ -19,9 +19,9 @@ wp-agency-vault/
 │   ├── hero-section/        # Full-width hero with overlay
 │   ├── google-map-embed/    # Maps iframe + contact info grid
 │   └── custom-post-type/    # CPT + taxonomy + meta box
+├── themes/                  # Complete ready-to-ship themes (placeholder content)
+│   └── restaurant-classic/   # Warm traditional restaurant theme
 ├── guides/                  # Step-by-step reference docs
-├── boilerplate/             # Starter files to copy into new projects
-│   └── theme/               # Blank starter theme skeleton
 └── plugins/                 # Notes on vetted plugins
     └── recommended.md
 ```
