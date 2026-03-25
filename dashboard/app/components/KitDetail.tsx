@@ -20,6 +20,7 @@ export default function KitDetail({
     files.map((f) => ({ name: f, lang }))
   );
   const [activeFile, setActiveFile] = useState(allFiles[0]?.name || "");
+  const [activeTab, setActiveTab] = useState<"preview" | "code">("preview");
   const [variables, setVariables] = useState<Record<string, string | number>>(
     Object.fromEntries(
       Object.entries(kit.variables).map(([key, v]) => [key, v.default])
@@ -41,36 +42,70 @@ export default function KitDetail({
         <span className="text-xs text-[var(--muted)] bg-[var(--card-bg)] px-2 py-0.5 rounded">
           {kit.category}
         </span>
+        <div className="ml-auto flex gap-1">
+          <button
+            onClick={() => setActiveTab("preview")}
+            className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
+              activeTab === "preview"
+                ? "bg-[var(--accent)] text-white"
+                : "text-[var(--muted)] hover:bg-[var(--card-bg)]"
+            }`}
+          >
+            Preview
+          </button>
+          <button
+            onClick={() => setActiveTab("code")}
+            className={`px-3 py-1.5 text-sm rounded-lg transition-colors ${
+              activeTab === "code"
+                ? "bg-[var(--accent)] text-white"
+                : "text-[var(--muted)] hover:bg-[var(--card-bg)]"
+            }`}
+          >
+            Code
+          </button>
+        </div>
       </div>
 
       <div className="flex">
-        {/* Left: Code viewer */}
+        {/* Left: Preview or Code viewer */}
         <div className="flex-1 border-r border-[var(--card-border)]">
-          {/* File tabs */}
-          <div className="flex border-b border-[var(--card-border)] px-4">
-            {allFiles.map(({ name, lang }) => (
-              <button
-                key={name}
-                onClick={() => setActiveFile(name)}
-                className={`px-4 py-2.5 text-sm font-mono transition-colors border-b-2 ${
-                  activeFile === name
-                    ? `${LANG_COLORS[lang] || "text-[var(--foreground)]"} border-current`
-                    : "text-[var(--muted)] border-transparent hover:text-[var(--foreground)]"
-                }`}
-              >
-                {name}
-              </button>
-            ))}
-          </div>
+          {activeTab === "preview" ? (
+            <div className="h-[calc(100vh-180px)]">
+              <iframe
+                src={`/api/kit-preview/${kit.slug}`}
+                className="w-full h-full border-0"
+                title={`${kit.name} preview`}
+              />
+            </div>
+          ) : (
+            <>
+              {/* File tabs */}
+              <div className="flex border-b border-[var(--card-border)] px-4">
+                {allFiles.map(({ name, lang }) => (
+                  <button
+                    key={name}
+                    onClick={() => setActiveFile(name)}
+                    className={`px-4 py-2.5 text-sm font-mono transition-colors border-b-2 ${
+                      activeFile === name
+                        ? `${LANG_COLORS[lang] || "text-[var(--foreground)]"} border-current`
+                        : "text-[var(--muted)] border-transparent hover:text-[var(--foreground)]"
+                    }`}
+                  >
+                    {name}
+                  </button>
+                ))}
+              </div>
 
-          {/* Code block */}
-          <div className="p-4 overflow-auto max-h-[calc(100vh-180px)]">
-            <pre className="text-sm font-mono leading-relaxed">
-              <code className="text-[var(--foreground)]">
-                {kit.fileContents[activeFile] || "// No content available"}
-              </code>
-            </pre>
-          </div>
+              {/* Code block */}
+              <div className="p-4 overflow-auto max-h-[calc(100vh-180px)]">
+                <pre className="text-sm font-mono leading-relaxed">
+                  <code className="text-[var(--foreground)]">
+                    {kit.fileContents[activeFile] || "// No content available"}
+                  </code>
+                </pre>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Right: Kit info & variables */}

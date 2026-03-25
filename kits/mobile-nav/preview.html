@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Nav Preview</title>
+    <link rel="stylesheet" href="mobile-nav.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #faf6f0;
+        }
+        .nav-brand {
+            color: #d4a017;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            font-family: Georgia, serif;
+        }
+        .nav-brand small {
+            display: block;
+            font-size: 0.65rem;
+            color: #faf6f0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: -apple-system, sans-serif;
+            font-weight: 400;
+            opacity: 0.7;
+        }
+        .nav-contact a {
+            color: #faf6f0;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        .content h1 {
+            color: #1a1208;
+            margin-bottom: 1rem;
+        }
+        .content p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .hint {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#" class="nav-brand">
+            Restaurant Name
+            <small>123 Main Street, City</small>
+        </a>
+
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+
+        <div class="nav-contact">
+            <a href="tel:5550000000">(555) 000-0000</a>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="hint">
+            Resize this preview to below 768px to see the mobile hamburger menu. Click the three lines to toggle the nav.
+        </div>
+        <h1>Page Content</h1>
+        <p>This is a preview of the mobile nav kit. The navbar is sticky at the top with a dark background, brand name with address, navigation links, and a phone number CTA.</p>
+        <p>On mobile, the nav links collapse behind a hamburger toggle. The toggle animates the three lines and slides the nav open below.</p>
+    </div>
+
+    <script src="mobile-nav.js"></script>
+</body>
+</html>
