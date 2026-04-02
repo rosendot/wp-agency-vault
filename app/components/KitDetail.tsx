@@ -1,7 +1,17 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, type ComponentType } from "react";
 import type { KitData } from "../page";
+import HeroSection from "./kit-previews/HeroSection";
+import InfiniteCarousel from "./kit-previews/InfiniteCarousel";
+import GoogleMapEmbed from "./kit-previews/GoogleMapEmbed";
+
+// Registry of kit slugs → React preview components
+const KIT_PREVIEWS: Record<string, ComponentType<Record<string, string | number>>> = {
+  "hero-section": HeroSection,
+  "infinite-carousel": InfiniteCarousel,
+  "google-map-embed": GoogleMapEmbed,
+};
 
 const LANG_COLORS: Record<string, string> = {
   js: "text-yellow-400 border-yellow-400/30",
@@ -26,18 +36,6 @@ export default function KitDetail({
       Object.entries(kit.variables).map(([key, v]) => [key, v.default])
     )
   );
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-
-  // Send variable updates to the preview iframe
-  useEffect(() => {
-    const iframe = iframeRef.current;
-    if (iframe?.contentWindow) {
-      iframe.contentWindow.postMessage(
-        { type: "update-variables", variables },
-        "*"
-      );
-    }
-  }, [variables]);
 
   const handleVariableChange = (key: string, value: string | number) => {
     setVariables((prev) => ({ ...prev, [key]: value }));
@@ -86,20 +84,18 @@ export default function KitDetail({
         {/* Left: Preview or Code viewer */}
         <div className="flex-1 border-r border-[var(--card-border)]">
           {activeTab === "preview" ? (
-            <div className="h-[calc(100vh-180px)]">
-              <iframe
-                ref={iframeRef}
-                src={`/api/kit-preview/${kit.slug}`}
-                className="w-full h-full border-0"
-                title={`${kit.name} preview`}
-                onLoad={() => {
-                  // Send initial variables once iframe loads
-                  iframeRef.current?.contentWindow?.postMessage(
-                    { type: "update-variables", variables },
-                    "*"
+            <div className="h-[calc(100vh-180px)] overflow-auto">
+              {(() => {
+                const PreviewComponent = KIT_PREVIEWS[kit.slug];
+                if (!PreviewComponent) {
+                  return (
+                    <div className="flex items-center justify-center h-full text-[var(--muted)]">
+                      <p>No preview component for this kit. Add one to <code className="text-xs bg-[var(--card-bg)] px-1.5 py-0.5 rounded">kit-previews/</code></p>
+                    </div>
                   );
-                }}
-              />
+                }
+                return <PreviewComponent {...variables} />;
+              })()}
             </div>
           ) : (
             <>

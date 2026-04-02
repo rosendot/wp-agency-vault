@@ -18,10 +18,8 @@ wp-agency-vault/
 │   └── globals.css          # Dark theme variables
 ├── kits/                    # Ready-to-ship feature kits (grab and go)
 │   ├── infinite-carousel/   # Carousel with infinite loop, arrows, swipe
-│   ├── mobile-nav/          # Responsive hamburger menu
 │   ├── hero-section/        # Full-width hero with overlay
-│   ├── google-map-embed/    # Maps iframe + contact info grid
-│   └── custom-post-type/    # CPT + taxonomy + meta box
+│   └── google-map-embed/    # Maps iframe + contact info grid
 ├── themes/                  # Complete ready-to-ship themes (placeholder content)
 │   └── restaurant-classic/  # Warm traditional restaurant theme
 ├── plugins/                 # Structured plugin registry (JSON per plugin)

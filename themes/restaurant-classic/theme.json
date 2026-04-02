@@ -9,7 +9,7 @@
   "version": "1.0.0",
   "preview": "screenshot.png",
   "pages": ["home", "menu", "about"],
-  "kits_used": ["infinite-carousel", "mobile-nav", "hero-section", "google-map-embed", "custom-post-type"],
+  "kits_used": ["infinite-carousel", "hero-section", "google-map-embed"],
   "plugins_required": {},
   "files": {
     "php": [
@@ -26,13 +26,11 @@
   },
   "kit_files": {
     "css": [
-      "kits/mobile-nav/mobile-nav.css",
       "kits/hero-section/hero.css",
       "kits/infinite-carousel/carousel.css",
       "kits/google-map-embed/map.css"
     ],
     "js": [
-      "kits/mobile-nav/mobile-nav.js",
       "kits/infinite-carousel/carousel.js"
     ]
   },
