@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Gallery Preview</title>
+    <link rel="stylesheet" href="grid-gallery.css">
+    <style>
+        :root {
+            --color-primary: #b42318;
+            --color-secondary: #d4a017;
+            --color-dark: #1a1208;
+            --color-cream: #faf6f0;
+            --color-text: #2c2416;
+            --color-text-light: #6b5e4f;
+            --color-border: #e0d6c8;
+            --font-heading: Georgia, 'Times New Roman', serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-body);
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <section class="grid-gallery">
+        <div class="grid-gallery__header">
+            <h2 class="grid-gallery__title">Gallery</h2>
+        </div>
+        <div class="grid-gallery__grid" style="grid-template-columns: repeat(5, 1fr); gap: 4px;">
+            <div class="grid-gallery__item"><div class="grid-gallery__placeholder" style="background: #c4b5a0;">1</div><div class="grid-gallery__overlay"><span class="grid-gallery__icon">+</span></div></div>
+            <div class="grid-gallery__item"><div class="grid-gallery__placeholder" style="background: #b8a892;">2</div><div class="grid-gallery__overlay"><span class="grid-gallery__icon">+</span></div></div>
+            <div class="grid-gallery__item"><div class="grid-gallery__placeholder" style="background: #d4c5b0;">3</div><div class="grid-gallery__overlay"><span class="grid-gallery__icon">+</span></div></div>
+            <div class="grid-gallery__item"><div class="grid-gallery__placeholder" style="background: #a89880;">4</div><div class="grid-gallery__overlay"><span class="grid-gallery__icon">+</span></div></div>
+            <div class="grid-gallery__item"><div class="grid-gallery__placeholder" style="background: #c0b09a;">5</div><div class="grid-gallery__overlay"><span class="grid-gallery__icon">+</span></div></div>
+            <div class="grid-gallery__item"><div class="grid-gallery__placeholder" style="background: #baa88e;">6</div><div class="grid-gallery__overlay"><span class="grid-gallery__icon">+</span></div></div>
+            <div class="grid-gallery__item"><div class="grid-gallery__placeholder" style="background: #d0c0aa;">7</div><div class="grid-gallery__overlay"><span class="grid-gallery__icon">+</span></div></div>
+            <div class="grid-gallery__item"><div class="grid-gallery__placeholder" style="background: #a49484;">8</div><div class="grid-gallery__overlay"><span class="grid-gallery__icon">+</span></div></div>
+            <div class="grid-gallery__item"><div class="grid-gallery__placeholder" style="background: #c8b89e;">9</div><div class="grid-gallery__overlay"><span class="grid-gallery__icon">+</span></div></div>
+            <div class="grid-gallery__item"><div class="grid-gallery__placeholder" style="background: #b4a490;">10</div><div class="grid-gallery__overlay"><span class="grid-gallery__icon">+</span></div></div>
+            <div class="grid-gallery__item"><div class="grid-gallery__placeholder" style="background: #c0b098;">11</div><div class="grid-gallery__overlay"><span class="grid-gallery__icon">+</span></div></div>
+            <div class="grid-gallery__item"><div class="grid-gallery__placeholder" style="background: #a89078;">12</div><div class="grid-gallery__overlay"><span class="grid-gallery__icon">+</span></div></div>
+            <div class="grid-gallery__item"><div class="grid-gallery__placeholder" style="background: #d4c0a8;">13</div><div class="grid-gallery__overlay"><span class="grid-gallery__icon">+</span></div></div>
+            <div class="grid-gallery__item"><div class="grid-gallery__placeholder" style="background: #b0a08c;">14</div><div class="grid-gallery__overlay"><span class="grid-gallery__icon">+</span></div></div>
+            <div class="grid-gallery__item"><div class="grid-gallery__placeholder" style="background: #c8b8a0;">15</div><div class="grid-gallery__overlay"><span class="grid-gallery__icon">+</span></div></div>
+        </div>
+    </section>
+
+</body>
+</html>

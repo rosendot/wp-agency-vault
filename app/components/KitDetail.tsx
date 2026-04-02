@@ -10,6 +10,7 @@ import MegaMenu from "./kit-previews/MegaMenu";
 import MenuList from "./kit-previews/MenuList";
 import MenuGrid from "./kit-previews/MenuGrid";
 import MenuCards from "./kit-previews/MenuCards";
+import GridGallery from "./kit-previews/GridGallery";
 
 // Registry of kit slugs → React preview components
 const KIT_PREVIEWS: Record<string, ComponentType<Record<string, string | number>>> = {
@@ -21,6 +22,7 @@ const KIT_PREVIEWS: Record<string, ComponentType<Record<string, string | number>
   "menu-list": MenuList,
   "menu-grid": MenuGrid,
   "menu-cards": MenuCards,
+  "grid-gallery": GridGallery,
 };
 
 const LANG_COLORS: Record<string, string> = {

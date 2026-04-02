@@ -1,0 +1,35 @@
+{
+  "name": "Grid Gallery",
+  "slug": "grid-gallery",
+  "description": "Responsive photo grid with configurable rows and columns. Hover overlay with zoom effect. Lightbox-ready structure.",
+  "category": "section",
+  "tags": ["gallery", "grid", "photos", "images", "portfolio", "lightbox", "responsive"],
+  "files": {
+    "css": ["grid-gallery.css"],
+    "php": ["grid-gallery.php"]
+  },
+  "variables": {
+    "columns": {
+      "label": "Columns",
+      "type": "number",
+      "default": 5
+    },
+    "rows": {
+      "label": "Rows",
+      "type": "number",
+      "default": 3
+    },
+    "gap": {
+      "label": "Gap between items",
+      "type": "string",
+      "default": "4px"
+    },
+    "sectionTitle": {
+      "label": "Section title",
+      "type": "string",
+      "default": "Gallery"
+    }
+  },
+  "variants": {},
+  "dependencies": []
+}
