@@ -1,0 +1,26 @@
+{
+  "name": "FAQ Two-Column",
+  "slug": "faq-two-column",
+  "description": "Two-column FAQ layout. Questions listed on the left, selected answer displayed on the right. Clean and spacious.",
+  "category": "interactive",
+  "tags": ["faq", "two-column", "questions", "answers", "split", "interactive"],
+  "files": {
+    "css": ["faq-two-column.css"],
+    "js": ["faq-two-column.js"],
+    "php": ["faq-two-column.php"]
+  },
+  "variables": {
+    "sectionTitle": {
+      "label": "Section title",
+      "type": "string",
+      "default": "Frequently Asked Questions"
+    },
+    "sectionSubtitle": {
+      "label": "Subtitle",
+      "type": "string",
+      "default": "Click a question to see the answer"
+    }
+  },
+  "variants": {},
+  "dependencies": []
+}

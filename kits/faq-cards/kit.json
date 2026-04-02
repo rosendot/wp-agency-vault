@@ -1,0 +1,30 @@
+{
+  "name": "FAQ Cards",
+  "slug": "faq-cards",
+  "description": "Q&A displayed as a grid of cards. Question as card title, answer as body text. Great for short, scannable answers.",
+  "category": "section",
+  "tags": ["faq", "cards", "grid", "questions", "answers", "scannable"],
+  "files": {
+    "css": ["faq-cards.css"],
+    "php": ["faq-cards.php"]
+  },
+  "variables": {
+    "sectionTitle": {
+      "label": "Section title",
+      "type": "string",
+      "default": "Frequently Asked Questions"
+    },
+    "sectionSubtitle": {
+      "label": "Subtitle",
+      "type": "string",
+      "default": "Quick answers to common questions"
+    },
+    "columns": {
+      "label": "Columns (desktop)",
+      "type": "number",
+      "default": 3
+    }
+  },
+  "variants": {},
+  "dependencies": []
+}

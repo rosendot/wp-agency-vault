@@ -1,0 +1,123 @@
+/* FAQ Two-Column — see README.md for usage */
+
+.faq-two-col {
+	max-width: 1100px;
+	margin: 0 auto;
+	padding: 4rem 1.5rem;
+	font-family: var(--font-body);
+}
+
+.faq-two-col__header {
+	text-align: center;
+	margin-bottom: 3rem;
+}
+
+.faq-two-col__title {
+	font-family: var(--font-heading);
+	font-size: 2.5rem;
+	font-weight: 700;
+	color: var(--color-dark);
+	margin: 0 0 0.5rem;
+}
+
+.faq-two-col__subtitle {
+	font-size: 1.1rem;
+	color: var(--color-text-light);
+	margin: 0;
+}
+
+.faq-two-col__grid {
+	display: grid;
+	grid-template-columns: 1fr 1.2fr;
+	gap: 2.5rem;
+	align-items: start;
+}
+
+/* Questions list */
+.faq-two-col__questions {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+}
+
+.faq-two-col__question {
+	display: block;
+	width: 100%;
+	padding: 1rem 1.25rem;
+	background: none;
+	border: none;
+	border-left: 3px solid transparent;
+	text-align: left;
+	font-family: var(--font-body);
+	font-size: 1rem;
+	font-weight: 500;
+	color: var(--color-text);
+	cursor: pointer;
+	transition: all 0.2s ease;
+	border-bottom: 1px solid var(--color-border);
+}
+
+.faq-two-col__question:last-child {
+	border-bottom: none;
+}
+
+.faq-two-col__question:hover {
+	color: var(--color-primary);
+	background: rgba(0, 0, 0, 0.02);
+}
+
+.faq-two-col__question--active {
+	border-left-color: var(--color-primary);
+	color: var(--color-primary);
+	font-weight: 600;
+	background: rgba(0, 0, 0, 0.02);
+}
+
+/* Answer panel */
+.faq-two-col__answer {
+	background: var(--color-cream);
+	border-radius: 12px;
+	padding: 2rem;
+	border: 1px solid var(--color-border);
+	min-height: 200px;
+	position: sticky;
+	top: 2rem;
+}
+
+.faq-two-col__answer-title {
+	font-family: var(--font-heading);
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: var(--color-dark);
+	margin: 0 0 1rem;
+}
+
+.faq-two-col__answer-text {
+	font-size: 1rem;
+	line-height: 1.8;
+	color: var(--color-text-light);
+	margin: 0;
+}
+
+.faq-two-col__answer-empty {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 200px;
+	color: var(--color-text-light);
+	font-style: italic;
+}
+
+@media (max-width: 768px) {
+	.faq-two-col__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.faq-two-col__answer {
+		position: static;
+	}
+
+	.faq-two-col__title {
+		font-size: 2rem;
+	}
+}

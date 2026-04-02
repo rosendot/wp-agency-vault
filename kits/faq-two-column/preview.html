@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Two-Column Preview</title>
+    <link rel="stylesheet" href="faq-two-column.css">
+    <style>
+        :root {
+            --color-primary: #b42318;
+            --color-secondary: #d4a017;
+            --color-dark: #1a1208;
+            --color-cream: #faf6f0;
+            --color-text: #2c2416;
+            --color-text-light: #6b5e4f;
+            --color-border: #e0d6c8;
+            --font-heading: Georgia, 'Times New Roman', serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-body); background: #fff; }
+    </style>
+</head>
+<body>
+
+    <section class="faq-two-col">
+        <div class="faq-two-col__header">
+            <h2 class="faq-two-col__title">Frequently Asked Questions</h2>
+            <p class="faq-two-col__subtitle">Click a question to see the answer</p>
+        </div>
+        <div class="faq-two-col__grid">
+            <div class="faq-two-col__questions" role="tablist">
+                <button class="faq-two-col__question" role="tab" aria-selected="false" data-question="What are your hours?" data-answer="We are open Monday through Friday from 11am to 10pm, and Saturday through Sunday from 10am to 11pm. We are closed on major holidays.">What are your hours?</button>
+                <button class="faq-two-col__question" role="tab" aria-selected="false" data-question="Do you take reservations?" data-answer="Yes! You can call us directly or book online through our website. Walk-ins are always welcome, but we recommend reservations for parties of 6 or more.">Do you take reservations?</button>
+                <button class="faq-two-col__question" role="tab" aria-selected="false" data-question="Do you offer catering?" data-answer="We offer catering for events of all sizes. Contact us for a custom menu and pricing. We typically need at least one week's notice for large orders.">Do you offer catering?</button>
+                <button class="faq-two-col__question" role="tab" aria-selected="false" data-question="Is there parking available?" data-answer="Yes, we have a free parking lot behind the building with 30 spaces available. Street parking is also available on Main Street and Oak Avenue.">Is there parking available?</button>
+                <button class="faq-two-col__question" role="tab" aria-selected="false" data-question="Do you accommodate dietary restrictions?" data-answer="Absolutely. We offer vegetarian, vegan, and gluten-free options on our menu. Please let your server know about any allergies and we will do our best to accommodate you.">Do you accommodate dietary restrictions?</button>
+                <button class="faq-two-col__question" role="tab" aria-selected="false" data-question="Do you have a private dining room?" data-answer="Yes, our private dining room seats up to 24 guests. It includes a dedicated server, customizable menu, and AV equipment for presentations. Contact us to reserve.">Do you have a private dining room?</button>
+            </div>
+            <div class="faq-two-col__answer" role="tabpanel">
+                <h3 class="faq-two-col__answer-title"></h3>
+                <p class="faq-two-col__answer-text"></p>
+                <div class="faq-two-col__answer-empty">Select a question to see the answer</div>
+            </div>
+        </div>
+    </section>
+
+    <script src="faq-two-column.js"></script>
+</body>
+</html>

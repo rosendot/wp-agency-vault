@@ -11,6 +11,8 @@ import MenuList from "./kit-previews/MenuList";
 import MenuGrid from "./kit-previews/MenuGrid";
 import MenuCards from "./kit-previews/MenuCards";
 import GridGallery from "./kit-previews/GridGallery";
+import FaqTwoColumn from "./kit-previews/FaqTwoColumn";
+import FaqCards from "./kit-previews/FaqCards";
 
 // Registry of kit slugs → React preview components
 const KIT_PREVIEWS: Record<string, ComponentType<Record<string, string | number>>> = {
@@ -18,6 +20,8 @@ const KIT_PREVIEWS: Record<string, ComponentType<Record<string, string | number>
   "infinite-carousel": InfiniteCarousel,
   "google-map-embed": GoogleMapEmbed,
   "faq-accordion": FaqAccordion,
+  "faq-two-column": FaqTwoColumn,
+  "faq-cards": FaqCards,
   "mega-menu": MegaMenu,
   "menu-list": MenuList,
   "menu-grid": MenuGrid,
