@@ -16,18 +16,18 @@ wp-agency-vault/
 │   ├── page.tsx             # Reads kit.json, template.json, palette.json at build time
 │   ├── layout.tsx           # Root layout
 │   └── globals.css          # Dark theme variables
-├── kits/                    # Ready-to-ship feature kits (grab and go)
+├── kits/                    # Individual components — the building blocks
 │   ├── infinite-carousel/   # Carousel with infinite loop, arrows, swipe
 │   ├── hero-section/        # Full-width hero with overlay
 │   ├── google-map-embed/    # Maps iframe + contact info grid
 │   ├── faq-accordion/       # Expandable Q&A with animations
-│   └── mega-menu/           # Full-width hover dropdown navigation
-├── palettes/                # Color systems + typography (mix and match with sections/templates)
+│   ├── mega-menu/           # Full-width hover dropdown navigation
+│   ├── menu-list/           # Vertical menu list with dotted leaders
+│   ├── menu-grid/           # Responsive menu card grid with filter tabs
+│   └── menu-cards/          # Large editorial menu cards with overlays
+├── palettes/                # Color systems + typography (mix and match with anything)
 │   └── ember-hearth/        # Rich reds, warm golds, serif headings
-├── sections/                # Pre-built page sections focused on layout structure
-│   ├── menu-list/           # Classic vertical menu list
-│   ├── menu-grid/           # Responsive card grid with tabs
-│   └── menu-cards/          # Large editorial cards with overlays
+├── sections/                # Full page-level compositions of kits + palette (e.g., a complete menu page)
 ├── templates/               # Full page layouts that compose kits + reference a palette
 │   └── restaurant-classic/  # Restaurant template with hero, carousel, map, gallery
 ├── plugins/                 # Structured plugin registry (JSON per plugin)
@@ -84,14 +84,18 @@ Self-contained components. Every kit must contain:
 - `dependencies` — other kits this one requires
 
 ### Sections
-Pre-built page sections focused on layout structure. Every section must contain:
+Full page-level compositions that wire multiple kits together into a complete page view. A section is NOT a single component — it's how an entire page tab is laid out.
+
+Example: A "Menu Classic" section composes a hero-section kit at the top, a menu-list kit in the middle, and a CTA at the bottom. A "Menu Modern" section uses the same menu-grid kit but with filter tabs and no hero.
+
+Every section must contain:
 - `section.json` — metadata (name, slug, category, layout, default_palette, kits_used, variables)
-- `section.php` — WordPress template partial
-- `section.css` — styles using CSS custom properties for all colors/fonts
-- `preview.html` — self-contained preview
+- `section.php` — WordPress template that composes kits together
+- `section.css` — layout-level styles (spacing between kits, page structure)
+- `preview.html` — self-contained preview of the full page
 - `README.md` — integration instructions
 
-Sections use CSS custom properties for colors (`var(--color-primary)`, etc.) so palettes can be swapped. Content variables (titles, subtitles, column counts) live in `section.json`. Color variables do NOT — those come from the palette.
+Sections use CSS custom properties for colors so palettes can be swapped. Content variables (titles, subtitles) live in `section.json`. Color variables do NOT — those come from the palette. Individual component styling lives in the kits, not the section.
 
 ### Palettes
 Color system + typography. Every palette must contain:

@@ -1,0 +1,30 @@
+{
+  "name": "Menu Grid",
+  "slug": "menu-grid",
+  "description": "Responsive card grid with photo, item name, description, price badge, and category filter tabs.",
+  "category": "section",
+  "tags": ["menu", "grid", "cards", "food", "pricing", "responsive", "tabs", "restaurant"],
+  "files": {
+    "css": ["menu-grid.css"],
+    "php": ["menu-grid.php"]
+  },
+  "variables": {
+    "sectionTitle": {
+      "label": "Section title",
+      "type": "string",
+      "default": "Our Menu"
+    },
+    "sectionSubtitle": {
+      "label": "Subtitle",
+      "type": "string",
+      "default": "Tap a category to filter"
+    },
+    "columns": {
+      "label": "Columns (desktop)",
+      "type": "number",
+      "default": 3
+    }
+  },
+  "variants": {},
+  "dependencies": []
+}

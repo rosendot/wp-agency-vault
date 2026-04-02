@@ -1,0 +1,25 @@
+{
+  "name": "Menu Cards",
+  "slug": "menu-cards",
+  "description": "Large editorial cards with full-width photos, gradient overlay, name overlay, description, price, and CTA button. Magazine-style presentation.",
+  "category": "section",
+  "tags": ["menu", "cards", "editorial", "magazine", "food", "featured", "large", "restaurant"],
+  "files": {
+    "css": ["menu-cards.css"],
+    "php": ["menu-cards.php"]
+  },
+  "variables": {
+    "sectionTitle": {
+      "label": "Section title",
+      "type": "string",
+      "default": "Featured Dishes"
+    },
+    "sectionSubtitle": {
+      "label": "Subtitle",
+      "type": "string",
+      "default": "Chef's favorites, crafted with care"
+    }
+  },
+  "variants": {},
+  "dependencies": []
+}

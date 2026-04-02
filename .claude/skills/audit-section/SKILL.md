@@ -24,7 +24,8 @@ Validates a section folder for completeness and correctness.
 - [ ] `slug` matches the folder name
 - [ ] `tags` is a non-empty array
 - [ ] `default_palette` references a palette that exists in `palettes/`
-- [ ] `kits_used` references kits that exist in `kits/` (if any)
+- [ ] `kits_used` is a non-empty array (sections must compose multiple kits)
+- [ ] Every kit in `kits_used` exists in `kits/`
 
 ### Files match section.json
 - [ ] Every file listed in `files` exists on disk

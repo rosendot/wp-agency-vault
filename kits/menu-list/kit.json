@@ -1,0 +1,25 @@
+{
+  "name": "Menu List",
+  "slug": "menu-list",
+  "description": "Classic vertical menu list grouped by category. Item name and price with dotted leader, description below, optional photo thumbnail.",
+  "category": "section",
+  "tags": ["menu", "list", "food", "pricing", "vertical", "classic", "restaurant"],
+  "files": {
+    "css": ["menu-list.css"],
+    "php": ["menu-list.php"]
+  },
+  "variables": {
+    "sectionTitle": {
+      "label": "Section title",
+      "type": "string",
+      "default": "Our Menu"
+    },
+    "sectionSubtitle": {
+      "label": "Subtitle",
+      "type": "string",
+      "default": "Fresh ingredients, bold flavors"
+    }
+  },
+  "variants": {},
+  "dependencies": []
+}

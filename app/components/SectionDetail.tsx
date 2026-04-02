@@ -2,14 +2,10 @@
 
 import { useState, type ComponentType } from "react";
 import type { PaletteData, SectionData } from "../page";
-import MenuList from "./section-previews/MenuList";
-import MenuGrid from "./section-previews/MenuGrid";
-import MenuCards from "./section-previews/MenuCards";
 
+// Registry of section slugs → React preview components
+// Add entries here as you build full page-composition sections
 const SECTION_PREVIEWS: Record<string, ComponentType<Record<string, string | number>>> = {
-  "menu-list": MenuList,
-  "menu-grid": MenuGrid,
-  "menu-cards": MenuCards,
 };
 
 const LANG_COLORS: Record<string, string> = {

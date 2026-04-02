@@ -25,7 +25,7 @@ npm run dev
 Four tabs: **Templates**, **Sections**, **Kits**, and **Palettes**.
 
 - **Templates** — Browse full page layouts with live previews, swap palettes, edit content variables
-- **Sections** — Browse pre-built page sections (menu layouts, hero styles, etc.), swap palettes, compare structures
+- **Sections** — Browse full page compositions (a complete menu page, about page, etc.) that wire kits together with a palette
 - **Kits** — Browse individual components with live previews, view code, see tags/variants/dependencies
 - **Palettes** — Browse color systems with swatches, font previews, and CSS custom property output
 
@@ -38,14 +38,13 @@ Four tabs: **Templates**, **Sections**, **Kits**, and **Palettes**.
 | `google-map-embed/` | Section | Google Maps iframe embed with contact info grid |
 | `faq-accordion/` | Interactive | Expandable Q&A accordion with smooth animations |
 | `mega-menu/` | Navigation | Full-width hover dropdown with multi-column panels |
+| `menu-list/` | Section | Vertical menu list with dotted leaders, grouped by category |
+| `menu-grid/` | Section | Responsive menu card grid with category filter tabs |
+| `menu-cards/` | Section | Large editorial menu cards with photo overlays |
 
 ## Sections
 
-| Section | Category | Layout | Description |
-|---------|----------|--------|-------------|
-| `menu-list/` | Menu | List | Classic vertical list with dotted leaders, grouped by category |
-| `menu-grid/` | Menu | Grid | Responsive card grid with category filter tabs |
-| `menu-cards/` | Menu | Cards | Large editorial cards with photo overlays, magazine style |
+Sections are full page-level compositions that wire multiple kits together. None built yet — the infrastructure is ready for when you compose your first full page view (e.g., a complete restaurant menu page that combines hero + menu-list + CTA).
 
 ## Palettes
 

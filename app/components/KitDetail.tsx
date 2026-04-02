@@ -7,6 +7,9 @@ import InfiniteCarousel from "./kit-previews/InfiniteCarousel";
 import GoogleMapEmbed from "./kit-previews/GoogleMapEmbed";
 import FaqAccordion from "./kit-previews/FaqAccordion";
 import MegaMenu from "./kit-previews/MegaMenu";
+import MenuList from "./kit-previews/MenuList";
+import MenuGrid from "./kit-previews/MenuGrid";
+import MenuCards from "./kit-previews/MenuCards";
 
 // Registry of kit slugs → React preview components
 const KIT_PREVIEWS: Record<string, ComponentType<Record<string, string | number>>> = {
@@ -15,6 +18,9 @@ const KIT_PREVIEWS: Record<string, ComponentType<Record<string, string | number>
   "google-map-embed": GoogleMapEmbed,
   "faq-accordion": FaqAccordion,
   "mega-menu": MegaMenu,
+  "menu-list": MenuList,
+  "menu-grid": MenuGrid,
+  "menu-cards": MenuCards,
 };
 
 const LANG_COLORS: Record<string, string> = {
