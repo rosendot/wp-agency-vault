@@ -1,7 +1,13 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, type ComponentType } from "react";
 import type { ThemeData } from "../page";
+import RestaurantClassic from "./theme-previews/RestaurantClassic";
+
+// Registry of theme slugs → React preview components
+const THEME_PREVIEWS: Record<string, ComponentType<Record<string, string | number>>> = {
+  "restaurant-classic": RestaurantClassic,
+};
 
 const LANG_COLORS: Record<string, string> = {
   js: "text-yellow-400 border-yellow-400/30",
@@ -30,17 +36,6 @@ export default function ThemeDetail({
       Object.entries(theme.variables).map(([key, v]) => [key, v.default])
     )
   );
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-
-  useEffect(() => {
-    const iframe = iframeRef.current;
-    if (iframe?.contentWindow) {
-      iframe.contentWindow.postMessage(
-        { type: "update-variables", variables },
-        "*"
-      );
-    }
-  }, [variables]);
 
   const handleVariableChange = (key: string, value: string | number) => {
     setVariables((prev) => ({ ...prev, [key]: value }));
@@ -87,19 +82,18 @@ export default function ThemeDetail({
 
       {/* Preview view */}
       {activeView === "preview" && (
-        <div className="h-[calc(100vh-114px)]">
-          <iframe
-            ref={iframeRef}
-            src={`/api/theme-preview/${theme.slug}`}
-            className="w-full h-full border-0"
-            title={`${theme.name} full preview`}
-            onLoad={() => {
-              iframeRef.current?.contentWindow?.postMessage(
-                { type: "update-variables", variables },
-                "*"
+        <div className="h-[calc(100vh-114px)] overflow-auto">
+          {(() => {
+            const PreviewComponent = THEME_PREVIEWS[theme.slug];
+            if (!PreviewComponent) {
+              return (
+                <div className="flex items-center justify-center h-full text-[var(--muted)]">
+                  <p>No preview component for this theme. Add one to <code className="text-xs bg-[var(--card-bg)] px-1.5 py-0.5 rounded">theme-previews/</code></p>
+                </div>
               );
-            }}
-          />
+            }
+            return <PreviewComponent {...variables} />;
+          })()}
         </div>
       )}
 
@@ -233,7 +227,7 @@ export default function ThemeDetail({
                     type="text"
                     value={variables[key]}
                     onChange={(e) =>
-                      setVariables({ ...variables, [key]: e.target.value })
+                      handleVariableChange(key, e.target.value)
                     }
                     className="w-full bg-[var(--background)] border border-[var(--card-border)] rounded px-3 py-2 text-sm font-mono text-[var(--foreground)] focus:outline-none focus:border-[var(--accent)]"
                   />
