@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 export interface RestaurantClassicProps {
+  // Template variables (content)
   business_name: string;
   tagline: string;
   address_line_1: string;
@@ -11,13 +12,22 @@ export interface RestaurantClassicProps {
   email: string;
   hours_weekday: string;
   hours_weekend: string;
-  color_primary: string;
-  color_secondary: string;
-  color_dark: string;
-  color_cream: string;
   google_maps_embed: string;
   hero_title: string;
   hero_text: string;
+  // Palette colors (injected from palette)
+  color_primary: string;
+  color_primary_dark: string;
+  color_secondary: string;
+  color_dark: string;
+  color_cream: string;
+  color_text: string;
+  color_text_light: string;
+  color_border: string;
+  color_white: string;
+  // Palette fonts (injected from palette)
+  font_heading: string;
+  font_body: string;
 }
 
 const defaultProps: RestaurantClassicProps = {
@@ -29,13 +39,20 @@ const defaultProps: RestaurantClassicProps = {
   email: "hello@example.com",
   hours_weekday: "Mon-Fri: 11am - 10pm",
   hours_weekend: "Sat-Sun: 10am - 11pm",
-  color_primary: "#b42318",
-  color_secondary: "#d4a017",
-  color_dark: "#1a1208",
-  color_cream: "#faf6f0",
   google_maps_embed: "",
   hero_title: "Your City's Home for Authentic Cuisine",
   hero_text: "Bold flavors and family tradition — every dish is crafted with recipes passed down through generations.",
+  color_primary: "#b42318",
+  color_primary_dark: "#8c1a11",
+  color_secondary: "#d4a017",
+  color_dark: "#1a1208",
+  color_cream: "#faf6f0",
+  color_text: "#2c2416",
+  color_text_light: "#6b5e4f",
+  color_border: "#e0d6c8",
+  color_white: "#ffffff",
+  font_heading: "Georgia, 'Times New Roman', serif",
+  font_body: "'Inter', -apple-system, sans-serif",
 };
 
 const dishes = [
@@ -113,11 +130,11 @@ function Carousel({
 export default function RestaurantClassic(props: Partial<RestaurantClassicProps>) {
   const v = { ...defaultProps, ...props };
 
-  const font = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
-  const fontHeading = "Georgia, 'Times New Roman', serif";
+  const font = v.font_body;
+  const fontHeading = v.font_heading;
 
   return (
-    <div style={{ fontFamily: font, color: "#2c2416", lineHeight: 1.6 }}>
+    <div style={{ fontFamily: font, color: v.color_text, lineHeight: 1.6 }}>
       {/* ===== HERO ===== */}
       <section
         style={{
@@ -168,7 +185,7 @@ export default function RestaurantClassic(props: Partial<RestaurantClassicProps>
                   Photo
                 </div>
                 <h3 style={{ fontFamily: fontHeading, fontSize: "1rem", color: v.color_primary, textTransform: "uppercase", letterSpacing: 0.5, marginBottom: "0.5rem" }}>{dish.name}</h3>
-                <p style={{ fontSize: "0.85rem", color: "#6b5e4f", lineHeight: 1.5, marginBottom: "0.5rem" }}>{dish.desc}</p>
+                <p style={{ fontSize: "0.85rem", color: v.color_text_light, lineHeight: 1.5, marginBottom: "0.5rem" }}>{dish.desc}</p>
                 <span style={{ fontWeight: 700, fontSize: "1rem", color: v.color_primary }}>{dish.price}</span>
               </div>
             );

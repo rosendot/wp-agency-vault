@@ -1,18 +1,27 @@
 "use client";
 
 import { useState } from "react";
-import type { KitData, ThemeData } from "../page";
+import type { KitData, PaletteData, TemplateData } from "../page";
 import KitBrowser from "./KitBrowser";
-import ThemeBrowser from "./ThemeBrowser";
+import PaletteBrowser from "./PaletteBrowser";
+import TemplateBrowser from "./TemplateBrowser";
 
 export default function Dashboard({
   kits,
-  themes,
+  palettes,
+  templates,
 }: {
   kits: KitData[];
-  themes: ThemeData[];
+  palettes: PaletteData[];
+  templates: TemplateData[];
 }) {
-  const [activeTab, setActiveTab] = useState<"kits" | "themes">("themes");
+  const [activeTab, setActiveTab] = useState<"templates" | "kits" | "palettes">("templates");
+
+  const tabs = [
+    { key: "templates" as const, label: "Templates", count: templates.length },
+    { key: "kits" as const, label: "Kits", count: kits.length },
+    { key: "palettes" as const, label: "Palettes", count: palettes.length },
+  ];
 
   return (
     <>
@@ -28,49 +37,35 @@ export default function Dashboard({
           </div>
 
           <nav className="flex gap-1 bg-[var(--card-bg)] rounded-lg p-1">
-            <button
-              onClick={() => setActiveTab("themes")}
-              className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                activeTab === "themes"
-                  ? "bg-[var(--accent)] text-white"
-                  : "text-[var(--muted)] hover:text-[var(--foreground)]"
-              }`}
-            >
-              Themes
-              <span
-                className={`ml-1.5 text-xs ${
-                  activeTab === "themes" ? "text-white/70" : "text-[var(--muted)]"
+            {tabs.map((tab) => (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                  activeTab === tab.key
+                    ? "bg-[var(--accent)] text-white"
+                    : "text-[var(--muted)] hover:text-[var(--foreground)]"
                 }`}
               >
-                {themes.length}
-              </span>
-            </button>
-            <button
-              onClick={() => setActiveTab("kits")}
-              className={`px-4 py-1.5 rounded-md text-sm font-medium transition-colors ${
-                activeTab === "kits"
-                  ? "bg-[var(--accent)] text-white"
-                  : "text-[var(--muted)] hover:text-[var(--foreground)]"
-              }`}
-            >
-              Kits
-              <span
-                className={`ml-1.5 text-xs ${
-                  activeTab === "kits" ? "text-white/70" : "text-[var(--muted)]"
-                }`}
-              >
-                {kits.length}
-              </span>
-            </button>
+                {tab.label}
+                <span
+                  className={`ml-1.5 text-xs ${
+                    activeTab === tab.key ? "text-white/70" : "text-[var(--muted)]"
+                  }`}
+                >
+                  {tab.count}
+                </span>
+              </button>
+            ))}
           </nav>
         </div>
       </header>
 
-      {activeTab === "kits" ? (
-        <KitBrowser kits={kits} />
-      ) : (
-        <ThemeBrowser themes={themes} />
+      {activeTab === "templates" && (
+        <TemplateBrowser templates={templates} palettes={palettes} />
       )}
+      {activeTab === "kits" && <KitBrowser kits={kits} />}
+      {activeTab === "palettes" && <PaletteBrowser palettes={palettes} />}
     </>
   );
 }

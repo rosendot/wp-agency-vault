@@ -1,0 +1,21 @@
+{
+  "name": "Warm Restaurant",
+  "slug": "warm-restaurant",
+  "description": "Rich reds, warm golds, dark backgrounds with cream accents. Serif headings.",
+  "tags": ["warm", "traditional", "serif", "dark", "restaurant"],
+  "colors": {
+    "primary": { "label": "Primary", "value": "#b42318" },
+    "primary_dark": { "label": "Primary Dark", "value": "#8c1a11" },
+    "secondary": { "label": "Secondary / Accent", "value": "#d4a017" },
+    "dark": { "label": "Dark Background", "value": "#1a1208" },
+    "cream": { "label": "Light Background", "value": "#faf6f0" },
+    "text": { "label": "Body Text", "value": "#2c2416" },
+    "text_light": { "label": "Muted Text", "value": "#6b5e4f" },
+    "border": { "label": "Border", "value": "#e0d6c8" },
+    "white": { "label": "White", "value": "#ffffff" }
+  },
+  "fonts": {
+    "heading": { "label": "Heading Font", "value": "Georgia, 'Times New Roman', serif" },
+    "body": { "label": "Body Font", "value": "'Inter', -apple-system, sans-serif" }
+  }
+}

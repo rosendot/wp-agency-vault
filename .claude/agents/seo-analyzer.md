@@ -112,5 +112,5 @@ Improvements that would enhance SEO but aren't strictly required.
 - Always write the report to `seo-report.md` in the theme directory — the `/seo-improve` skill depends on this file
 - Every issue MUST include the exact file path, line number(s), and a specific fix instruction
 - Do not suggest hardcoding meta tags if Rank Math is in the plugin stack — note it as "delegated to Rank Math" and mark as passed
-- Do not flag things that are correctly handled by plugins listed in `theme.json` `plugins_required` or the vault's `plugins/core/` registry
+- Do not flag things that are correctly handled by plugins listed in `template.json` `plugins_required` or the vault's `plugins/core/` registry
 - Be specific in fix instructions — "add alt text" is too vague, "add descriptive alt attribute to the <img> on line 42 of front-page.php" is correct

@@ -7,8 +7,8 @@ export async function GET(
   { params }: { params: Promise<{ slug: string }> }
 ) {
   const { slug } = await params;
-  const themesDir = path.join(process.cwd(), "themes");
-  const previewPath = path.join(themesDir, slug, "preview.html");
+  const templatesDir = path.join(process.cwd(), "templates");
+  const previewPath = path.join(templatesDir, slug, "preview.html");
 
   try {
     let html = await fs.readFile(previewPath, "utf-8");
@@ -24,10 +24,10 @@ export async function GET(
     );
 
     // Rewrite relative paths to theme files (style.css, etc.)
-    // href="style.css" -> href="/api/theme-file/{slug}/style.css"
+    // href="style.css" -> href="/api/template-file/{slug}/style.css"
     html = html.replace(
       /href="((?!http|\/)[^"]+\.css)"/g,
-      (_, filePath) => `href="/api/theme-file/${slug}/${filePath}"`
+      (_, filePath) => `href="/api/template-file/${slug}/${filePath}"`
     );
 
     // Inject variable listener script before </body>

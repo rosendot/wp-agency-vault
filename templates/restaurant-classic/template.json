@@ -1,14 +1,14 @@
 {
   "name": "Classic Restaurant",
   "slug": "restaurant-classic",
-  "description": "Warm, traditional restaurant theme with hero overlay, fan favorites carousel, Google Maps, photo gallery, menu page, and about page.",
+  "description": "Traditional restaurant template with hero overlay, fan favorites carousel, Google Maps, photo gallery, menu page, and about page.",
   "category": "restaurant",
-  "tags": ["food", "restaurant", "mexican", "italian", "american", "carousel", "google-maps", "menu-page", "gallery", "dark-header", "warm-tones", "serif-headings"],
-  "style": "warm",
   "layout": "hero-first",
   "version": "1.0.0",
   "preview": "screenshot.png",
   "pages": ["home", "menu", "about"],
+  "tags": ["food", "restaurant", "mexican", "italian", "american", "carousel", "google-maps", "menu-page", "gallery", "dark-header", "serif-headings"],
+  "default_palette": "warm-restaurant",
   "kits_used": ["infinite-carousel", "hero-section", "google-map-embed"],
   "plugins_required": {},
   "files": {
@@ -74,26 +74,6 @@
       "label": "Weekend Hours",
       "type": "string",
       "default": "Sat-Sun: 10am - 11pm"
-    },
-    "color_primary": {
-      "label": "Primary Color",
-      "type": "color",
-      "default": "#b42318"
-    },
-    "color_secondary": {
-      "label": "Secondary/Accent Color",
-      "type": "color",
-      "default": "#d4a017"
-    },
-    "color_dark": {
-      "label": "Dark Background",
-      "type": "color",
-      "default": "#1a1208"
-    },
-    "color_cream": {
-      "label": "Light Background",
-      "type": "color",
-      "default": "#faf6f0"
     },
     "google_maps_embed": {
       "label": "Google Maps Embed URL",

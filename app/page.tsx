@@ -21,16 +21,35 @@ export interface KitData {
   fileContents: Record<string, string>;
 }
 
-export interface ThemeData {
+export interface PaletteColor {
+  label: string;
+  value: string;
+}
+
+export interface PaletteFont {
+  label: string;
+  value: string;
+}
+
+export interface PaletteData {
+  name: string;
+  slug: string;
+  description: string;
+  tags: string[];
+  colors: Record<string, PaletteColor>;
+  fonts: Record<string, PaletteFont>;
+}
+
+export interface TemplateData {
   name: string;
   slug: string;
   description: string;
   category: string;
   tags: string[];
-  style: string;
   layout: string;
   version: string;
   pages: string[];
+  default_palette: string;
   kits_used: string[];
   files: Record<string, string[]>;
   kit_files: Record<string, string[]>;
@@ -72,26 +91,50 @@ async function getKits(): Promise<KitData[]> {
   return kits;
 }
 
-async function getThemes(): Promise<ThemeData[]> {
-  const themesDir = path.join(process.cwd(), "themes");
+async function getPalettes(): Promise<PaletteData[]> {
+  const palettesDir = path.join(process.cwd(), "palettes");
   let folders: string[];
   try {
-    folders = await fs.readdir(themesDir);
+    folders = await fs.readdir(palettesDir);
   } catch {
     return [];
   }
-  const themes: ThemeData[] = [];
+  const palettes: PaletteData[] = [];
 
   for (const folder of folders) {
-    const themeJsonPath = path.join(themesDir, folder, "theme.json");
+    const paletteJsonPath = path.join(palettesDir, folder, "palette.json");
     try {
-      const raw = await fs.readFile(themeJsonPath, "utf-8");
-      const theme = JSON.parse(raw) as ThemeData;
+      const raw = await fs.readFile(paletteJsonPath, "utf-8");
+      const palette = JSON.parse(raw) as PaletteData;
+      palettes.push(palette);
+    } catch {
+      // skip folders without palette.json
+    }
+  }
+
+  return palettes;
+}
+
+async function getTemplates(): Promise<TemplateData[]> {
+  const templatesDir = path.join(process.cwd(), "templates");
+  let folders: string[];
+  try {
+    folders = await fs.readdir(templatesDir);
+  } catch {
+    return [];
+  }
+  const templates: TemplateData[] = [];
+
+  for (const folder of folders) {
+    const templateJsonPath = path.join(templatesDir, folder, "template.json");
+    try {
+      const raw = await fs.readFile(templateJsonPath, "utf-8");
+      const template = JSON.parse(raw) as TemplateData;
 
       const fileContents: Record<string, string> = {};
-      for (const [, files] of Object.entries(theme.files)) {
+      for (const [, files] of Object.entries(template.files)) {
         for (const file of files) {
-          const filePath = path.join(themesDir, folder, file);
+          const filePath = path.join(templatesDir, folder, file);
           try {
             const content = await fs.readFile(filePath, "utf-8");
             fileContents[file] = content;
@@ -100,24 +143,25 @@ async function getThemes(): Promise<ThemeData[]> {
           }
         }
       }
-      theme.fileContents = fileContents;
+      template.fileContents = fileContents;
 
-      themes.push(theme);
+      templates.push(template);
     } catch {
-      // skip folders without theme.json
+      // skip folders without template.json
     }
   }
 
-  return themes;
+  return templates;
 }
 
 export default async function Home() {
   const kits = await getKits();
-  const themes = await getThemes();
+  const palettes = await getPalettes();
+  const templates = await getTemplates();
 
   return (
     <main className="min-h-screen">
-      <Dashboard kits={kits} themes={themes} />
+      <Dashboard kits={kits} palettes={palettes} templates={templates} />
     </main>
   );
 }

@@ -7,21 +7,25 @@ Personal knowledge base, reusable toolkit, and internal dashboard for building W
 ```
 wp-agency-vault/
 ├── app/                     # Next.js dashboard UI (TypeScript + Tailwind)
-│   ├── components/          # Dashboard, KitBrowser, KitDetail, ThemeBrowser, ThemeDetail
+│   ├── components/          # Dashboard, TemplateBrowser, TemplateDetail, KitBrowser, KitDetail, PaletteBrowser, PaletteDetail
 │   ├── api/
 │   │   ├── kit-preview/     # Serves kit preview.html with correct asset paths
 │   │   ├── kit-file/        # Serves kit static files (CSS, JS)
-│   │   ├── theme-preview/   # Serves theme preview.html
-│   │   └── theme-file/      # Serves theme static files
-│   ├── page.tsx             # Reads kit.json + theme.json at build time
+│   │   ├── template-preview/# Serves template preview.html
+│   │   └── template-file/   # Serves template static files
+│   ├── page.tsx             # Reads kit.json, template.json, palette.json at build time
 │   ├── layout.tsx           # Root layout
 │   └── globals.css          # Dark theme variables
 ├── kits/                    # Ready-to-ship feature kits (grab and go)
 │   ├── infinite-carousel/   # Carousel with infinite loop, arrows, swipe
 │   ├── hero-section/        # Full-width hero with overlay
-│   └── google-map-embed/    # Maps iframe + contact info grid
-├── themes/                  # Complete ready-to-ship themes (placeholder content)
-│   └── restaurant-classic/  # Warm traditional restaurant theme
+│   ├── google-map-embed/    # Maps iframe + contact info grid
+│   ├── faq-accordion/       # Expandable Q&A with animations
+│   └── mega-menu/           # Full-width hover dropdown navigation
+├── palettes/                # Color systems + typography (mix and match with templates)
+│   └── warm-restaurant/     # Rich reds, warm golds, serif headings
+├── templates/               # Full page layouts that compose kits + reference a palette
+│   └── restaurant-classic/  # Restaurant template with hero, carousel, map, gallery
 ├── plugins/                 # Structured plugin registry (JSON per plugin)
 │   ├── core/                # Install on every client site
 │   ├── restaurant/          # Restaurant-specific (Clover, Toast)
@@ -33,21 +37,28 @@ wp-agency-vault/
 
 Run with `npm run dev` → http://localhost:3000
 
-Two tabs: **Themes** and **Kits**.
+Three tabs: **Templates**, **Kits**, and **Palettes**.
 
-### Themes tab
-- Browse themes as cards with live iframe preview thumbnails
+### Templates tab
+- Browse templates as cards with live preview thumbnails
 - Search by name or tag
-- Click a theme to see: full-page live preview, code viewer with file tabs, customizable variables (colors, text, etc.)
+- Click a template to see: full-page live preview, code viewer with file tabs, content variables, palette picker
+- Switch palettes to see the same layout with different color schemes
 
 ### Kits tab
 - Browse kits filtered by category (Sections, Interactive, Navigation, Data)
 - Search by name or tag
-- Click a kit to see: live preview (iframe), code viewer with file tabs, customizable variables, tags, variants, dependencies
+- Click a kit to see: live preview, code viewer with file tabs, customizable variables, tags, variants, dependencies
 
-## Kit Structure
+### Palettes tab
+- Browse palettes as cards with color swatches and font previews
+- Search by name or tag
+- Click a palette to see: full color swatches, typography preview, CSS custom properties output
 
-Every kit must contain:
+## Three-Layer Architecture
+
+### Kits
+Self-contained components. Every kit must contain:
 - Source files (JS, CSS, PHP)
 - `README.md` — integration instructions and HTML structure
 - `kit.json` — metadata powering the dashboard UI
@@ -62,15 +73,24 @@ Every kit must contain:
 - `variants` — alternative configurations with CSS class names
 - `dependencies` — other kits this one requires
 
-## Theme Structure
+### Palettes
+Color system + typography. Every palette must contain:
+- `palette.json` — colors and fonts
 
-Every theme must contain:
+`palette.json` schema:
+- `name`, `slug`, `description` — identity
+- `tags` — searchable keywords (warm, modern, serif, dark, etc.)
+- `colors` — 9 required keys: `primary`, `primary_dark`, `secondary`, `dark`, `cream`, `text`, `text_light`, `border`, `white` — each with `label` and `value`
+- `fonts` — 2 required keys: `heading`, `body` — each with `label` and `value`
+
+### Templates
+Full page layouts that compose kits and reference a palette. Every template must contain:
 - PHP templates, CSS, and an `index.php`
-- `theme.json` — metadata (name, slug, category, tags, style, layout, kits_used, variables)
-- `preview.html` — self-contained HTML preview of the full theme
+- `template.json` — metadata (name, slug, category, layout, default_palette, kits_used, variables)
+- `preview.html` — self-contained HTML preview of the full template
 - `README.md` — setup instructions
 
-Themes reference kits via `kits_used` — they do NOT duplicate kit code.
+Templates reference kits via `kits_used` and a default palette via `default_palette`. They do NOT duplicate kit code. Color variables live in the palette, not the template — template `variables` contain only content values (business name, phone, hours, etc.).
 
 ## Plugin Registry
 
@@ -85,7 +105,8 @@ Plugins have a `buy_when` field: `day-1` (buy before first client) or `later` (b
 - Only the custom theme is version-controlled in client projects
 - `.env` files contain secrets and are never committed
 - Each kit is self-contained: all files for one feature in one folder
-- Themes reference kits, never duplicate kit code
+- Templates reference kits, never duplicate kit code
+- Colors and fonts live in palettes, not templates
 - PHP follows WordPress coding standards (tabs for indentation, snake_case functions)
 
 ## Rules
@@ -95,9 +116,11 @@ Plugins have a `buy_when` field: `day-1` (buy before first client) or `later` (b
 - Never create a kit without `kit.json`, `preview.html`, and `README.md`
 - Run `/audit-kit <slug>` after any kit changes to validate
 
-### Theme-kit boundary
-- Themes must reference kits via `kits_used` in `theme.json` — never copy kit code into a theme folder
-- Kit CSS/JS paths in `theme.json` `kit_files` must point to real files in `kits/`
+### Template-kit-palette boundary
+- Templates must reference kits via `kits_used` in `template.json` — never copy kit code into a template folder
+- Kit CSS/JS paths in `template.json` `kit_files` must point to real files in `kits/`
+- Templates must reference a palette via `default_palette` — never hardcode colors in template variables
+- Color variables belong in palettes, content variables belong in templates
 
 ### Security
 - Never create, stage, or display `.env` files, API keys, or database credentials
@@ -106,9 +129,10 @@ Plugins have a `buy_when` field: `day-1` (buy before first client) or `later` (b
 - All user input must be sanitized before saving (`sanitize_text_field`, etc.)
 
 ### Dashboard consistency
-- All new kits and themes must be browsable in the dashboard
+- All new kits, templates, and palettes must be browsable in the dashboard
 - Every kit needs a valid `kit.json` and working `preview.html`
-- Every theme needs a valid `theme.json` and working `preview.html`
+- Every template needs a valid `template.json` and working `preview.html`
+- Every palette needs a valid `palette.json`
 
 ### Git hygiene
 - Never commit `vendor/`, `web/wp/`, `node_modules/`, `web/app/plugins/`, or `web/app/uploads/`

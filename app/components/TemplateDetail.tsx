@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, type ComponentType } from "react";
-import type { ThemeData } from "../page";
-import RestaurantClassic from "./theme-previews/RestaurantClassic";
+import type { PaletteData, TemplateData } from "../page";
+import RestaurantClassic from "./template-previews/RestaurantClassic";
 
-// Registry of theme slugs → React preview components
-const THEME_PREVIEWS: Record<string, ComponentType<Record<string, string | number>>> = {
+// Registry of template slugs → React preview components
+const TEMPLATE_PREVIEWS: Record<string, ComponentType<Record<string, string | number>>> = {
   "restaurant-classic": RestaurantClassic,
 };
 
@@ -15,31 +15,48 @@ const LANG_COLORS: Record<string, string> = {
   php: "text-purple-400 border-purple-400/30",
 };
 
-export default function ThemeDetail({
-  theme,
+export default function TemplateDetail({
+  template,
+  palettes,
+  defaultPalette,
   onBack,
 }: {
-  theme: ThemeData;
+  template: TemplateData;
+  palettes: PaletteData[];
+  defaultPalette?: PaletteData;
   onBack: () => void;
 }) {
   const [activeView, setActiveView] = useState<"preview" | "code" | "variables">(
     "preview"
   );
 
-  const allFiles = Object.entries(theme.files).flatMap(([lang, files]) =>
+  const allFiles = Object.entries(template.files).flatMap(([lang, files]) =>
     files.map((f) => ({ name: f, lang }))
   );
   const [activeFile, setActiveFile] = useState(allFiles[0]?.name || "");
 
+  const [activePalette, setActivePalette] = useState<PaletteData | undefined>(defaultPalette);
+
   const [variables, setVariables] = useState<Record<string, string | number>>(
     Object.fromEntries(
-      Object.entries(theme.variables).map(([key, v]) => [key, v.default])
+      Object.entries(template.variables).map(([key, v]) => [key, v.default])
     )
   );
 
   const handleVariableChange = (key: string, value: string | number) => {
     setVariables((prev) => ({ ...prev, [key]: value }));
   };
+
+  // Build preview props by merging template variables + active palette
+  const previewProps: Record<string, string | number> = { ...variables };
+  if (activePalette) {
+    for (const [key, color] of Object.entries(activePalette.colors)) {
+      previewProps[`color_${key}`] = color.value;
+    }
+    for (const [key, font] of Object.entries(activePalette.fonts)) {
+      previewProps[`font_${key}`] = font.value;
+    }
+  }
 
   return (
     <div className="min-h-[calc(100vh-57px)]">
@@ -50,16 +67,45 @@ export default function ThemeDetail({
             onClick={onBack}
             className="text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors flex items-center gap-1.5"
           >
-            <span>←</span> Back to themes
+            <span>←</span> Back to templates
           </button>
           <span className="text-[var(--card-border)]">|</span>
-          <h2 className="font-semibold">{theme.name}</h2>
+          <h2 className="font-semibold">{template.name}</h2>
           <span className="text-xs text-[var(--muted)] bg-[var(--card-bg)] px-2 py-0.5 rounded capitalize">
-            {theme.category}
+            {template.category}
           </span>
-          <span className="text-xs text-[var(--muted)] bg-[var(--card-bg)] px-2 py-0.5 rounded capitalize">
-            {theme.style}
-          </span>
+
+          {/* Palette picker */}
+          <span className="text-[var(--card-border)]">|</span>
+          <label className="text-xs text-[var(--muted)]">Palette:</label>
+          <select
+            value={activePalette?.slug || ""}
+            onChange={(e) => {
+              const p = palettes.find((p) => p.slug === e.target.value);
+              setActivePalette(p);
+            }}
+            className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded px-2 py-1 text-xs text-[var(--foreground)] focus:outline-none focus:border-[var(--accent)]"
+          >
+            {palettes.map((p) => (
+              <option key={p.slug} value={p.slug}>
+                {p.name}
+              </option>
+            ))}
+          </select>
+
+          {/* Palette swatches */}
+          {activePalette && (
+            <div className="flex gap-1 ml-1">
+              {Object.values(activePalette.colors).slice(0, 5).map((color, i) => (
+                <div
+                  key={i}
+                  className="w-4 h-4 rounded-full border border-[var(--card-border)]"
+                  style={{ background: color.value }}
+                  title={color.label}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         {/* View toggle */}
@@ -84,15 +130,15 @@ export default function ThemeDetail({
       {activeView === "preview" && (
         <div className="h-[calc(100vh-114px)] overflow-auto">
           {(() => {
-            const PreviewComponent = THEME_PREVIEWS[theme.slug];
+            const PreviewComponent = TEMPLATE_PREVIEWS[template.slug];
             if (!PreviewComponent) {
               return (
                 <div className="flex items-center justify-center h-full text-[var(--muted)]">
-                  <p>No preview component for this theme. Add one to <code className="text-xs bg-[var(--card-bg)] px-1.5 py-0.5 rounded">theme-previews/</code></p>
+                  <p>No preview component for this template. Add one to <code className="text-xs bg-[var(--card-bg)] px-1.5 py-0.5 rounded">template-previews/</code></p>
                 </div>
               );
             }
-            return <PreviewComponent {...variables} />;
+            return <PreviewComponent {...previewProps} />;
           })()}
         </div>
       )}
@@ -122,20 +168,20 @@ export default function ThemeDetail({
             <div className="flex-1 p-4 overflow-auto">
               <pre className="text-sm font-mono leading-relaxed">
                 <code className="text-[var(--foreground)]">
-                  {theme.fileContents[activeFile] || "// No content available"}
+                  {template.fileContents[activeFile] || "// No content available"}
                 </code>
               </pre>
             </div>
           </div>
 
-          {/* Right sidebar: theme info */}
+          {/* Right sidebar */}
           <div className="w-72 border-l border-[var(--card-border)] p-5 overflow-auto">
             <div className="mb-5">
               <h3 className="text-xs uppercase tracking-wider text-[var(--muted)] mb-2">
                 Pages
               </h3>
               <div className="flex flex-wrap gap-1.5">
-                {theme.pages.map((page) => (
+                {template.pages.map((page) => (
                   <span
                     key={page}
                     className="text-xs text-[var(--foreground)] bg-[var(--card-bg)] border border-[var(--card-border)] px-2 py-0.5 rounded capitalize"
@@ -151,7 +197,7 @@ export default function ThemeDetail({
                 Kits Used
               </h3>
               <div className="flex flex-col gap-1.5">
-                {theme.kits_used.map((kit) => (
+                {template.kits_used.map((kit) => (
                   <span
                     key={kit}
                     className="text-xs text-[var(--accent)] bg-[var(--accent)]/10 px-2 py-1 rounded"
@@ -164,10 +210,19 @@ export default function ThemeDetail({
 
             <div className="mb-5">
               <h3 className="text-xs uppercase tracking-wider text-[var(--muted)] mb-2">
+                Palette
+              </h3>
+              <span className="text-xs text-[var(--gold)] bg-[var(--gold)]/10 px-2 py-0.5 rounded-full">
+                {activePalette?.name || template.default_palette}
+              </span>
+            </div>
+
+            <div className="mb-5">
+              <h3 className="text-xs uppercase tracking-wider text-[var(--muted)] mb-2">
                 Tags
               </h3>
               <div className="flex flex-wrap gap-1.5">
-                {theme.tags.map((tag) => (
+                {template.tags.map((tag) => (
                   <span
                     key={tag}
                     className="text-xs text-[var(--gold)] bg-[var(--gold)]/10 px-2 py-0.5 rounded-full"
@@ -184,13 +239,13 @@ export default function ThemeDetail({
       {/* Variables view */}
       {activeView === "variables" && (
         <div className="max-w-2xl mx-auto p-8">
-          <h3 className="text-lg font-semibold mb-1">Theme Variables</h3>
+          <h3 className="text-lg font-semibold mb-1">Template Variables</h3>
           <p className="text-sm text-[var(--muted)] mb-6">
-            These values get swapped per client when deploying this theme.
+            Content values that get swapped per client. Colors come from the palette.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {Object.entries(theme.variables).map(([key, variable]) => (
+            {Object.entries(template.variables).map(([key, variable]) => (
               <div
                 key={key}
                 className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-lg p-4"
@@ -198,40 +253,12 @@ export default function ThemeDetail({
                 <label className="text-xs text-[var(--muted)] block mb-2">
                   {variable.label}
                 </label>
-                {variable.type === "color" ? (
-                  <div className="flex items-center gap-2">
-                    <input
-                      type="color"
-                      value={
-                        typeof variables[key] === "string" &&
-                        variables[key].toString().startsWith("#")
-                          ? (variables[key] as string)
-                          : "#b42318"
-                      }
-                      onChange={(e) =>
-                        handleVariableChange(key, e.target.value)
-                      }
-                      className="w-10 h-10 rounded border border-[var(--card-border)] cursor-pointer bg-transparent"
-                    />
-                    <input
-                      type="text"
-                      value={variables[key]}
-                      onChange={(e) =>
-                        handleVariableChange(key, e.target.value)
-                      }
-                      className="flex-1 bg-[var(--background)] border border-[var(--card-border)] rounded px-3 py-2 text-sm font-mono text-[var(--foreground)] focus:outline-none focus:border-[var(--accent)]"
-                    />
-                  </div>
-                ) : (
-                  <input
-                    type="text"
-                    value={variables[key]}
-                    onChange={(e) =>
-                      handleVariableChange(key, e.target.value)
-                    }
-                    className="w-full bg-[var(--background)] border border-[var(--card-border)] rounded px-3 py-2 text-sm font-mono text-[var(--foreground)] focus:outline-none focus:border-[var(--accent)]"
-                  />
-                )}
+                <input
+                  type="text"
+                  value={variables[key]}
+                  onChange={(e) => handleVariableChange(key, e.target.value)}
+                  className="w-full bg-[var(--background)] border border-[var(--card-border)] rounded px-3 py-2 text-sm font-mono text-[var(--foreground)] focus:outline-none focus:border-[var(--accent)]"
+                />
               </div>
             ))}
           </div>

@@ -1,6 +1,6 @@
 # Deploy Checklist
 
-Generates a step-by-step deployment checklist for taking a client site from local dev to production. Integrates the full analyzer→improver pipeline as pre-launch quality gates.
+Generates a step-by-step deployment checklist for taking a client site from local dev to production. Integrates the full analyzer/improver pipeline as pre-launch quality gates.
 
 ## Usage
 `/deploy-checklist <client-name>`
@@ -23,31 +23,31 @@ Generates a step-by-step deployment checklist for taking a client site from loca
 ### 2. Quality gates (run in order)
 
 #### Kit validation
-- [ ] Run `/audit-kit` on all kits used by the theme — fix any errors
+- [ ] Run `/audit-kit` on all kits used by the template — fix any errors
 
 #### Code review
-- [ ] Run **theme-reviewer agent** on the theme — fix Critical and Warning issues
+- [ ] Run **template-reviewer agent** on the template — fix Critical and Warning issues
 
 #### Client readiness
-- [ ] Run **theme-preflight agent** on the theme with client name "$ARGUMENTS"
+- [ ] Run **template-preflight agent** on the template with client name "$ARGUMENTS"
 - [ ] Run `/client-preflight` — replace all placeholder content with real client values, fix blockers
 
 #### SEO
-- [ ] Run **seo-analyzer agent** on the theme
+- [ ] Run **seo-analyzer agent** on the template
 - [ ] Run `/seo-improve` — apply all Critical and Warning fixes
 
 #### Accessibility
-- [ ] Run **a11y-analyzer agent** on the theme
+- [ ] Run **a11y-analyzer agent** on the template
 - [ ] Run `/a11y-improve` — apply all Critical and Warning fixes
 - [ ] Manually verify items flagged in the a11y report (contrast, keyboard nav)
 
 #### Performance
-- [ ] Run **perf-analyzer agent** on the theme
+- [ ] Run **perf-analyzer agent** on the template
 - [ ] Run `/perf-improve` — apply all Critical and Warning fixes
 
 ### 3. Code pushed to GitHub
 - [ ] Repo created: `client-$ARGUMENTS`
-- [ ] Only theme + Bedrock config committed (no vendor/, wp/, uploads/)
+- [ ] Only template + Bedrock config committed (no vendor/, wp/, uploads/)
 - [ ] `.env.example` committed (no secrets)
 - [ ] `composer.lock` committed
 
