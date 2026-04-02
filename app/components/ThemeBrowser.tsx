@@ -1,8 +1,58 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, type ComponentType } from "react";
 import type { ThemeData } from "../page";
 import ThemeDetail from "./ThemeDetail";
+import RestaurantClassic from "./theme-previews/RestaurantClassic";
+
+// Same registry as ThemeDetail — used for card thumbnails
+const THEME_PREVIEWS: Record<string, ComponentType<Record<string, string | number>>> = {
+  "restaurant-classic": RestaurantClassic,
+};
+
+function ThemeThumbnail({ theme }: { theme: ThemeData }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(0);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const updateScale = () => setScale(el.offsetWidth / 1440);
+    updateScale();
+    const observer = new ResizeObserver(updateScale);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const Preview = THEME_PREVIEWS[theme.slug];
+  if (!Preview) {
+    return (
+      <div className="aspect-video bg-[var(--background)] border-b border-[var(--card-border)] flex items-center justify-center text-[var(--muted)] text-sm">
+        No preview
+      </div>
+    );
+  }
+
+  const vars = Object.fromEntries(
+    Object.entries(theme.variables).map(([key, v]) => [key, v.default])
+  );
+
+  return (
+    <div
+      ref={containerRef}
+      className="aspect-video bg-[var(--background)] border-b border-[var(--card-border)] overflow-hidden relative"
+    >
+      {scale > 0 && (
+        <div
+          className="pointer-events-none absolute top-0 left-0 origin-top-left"
+          style={{ width: 1440, transform: `scale(${scale})` }}
+        >
+          <Preview {...vars} />
+        </div>
+      )}
+    </div>
+  );
+}
 
 const STYLE_LABELS: Record<string, string> = {
   warm: "Warm",
@@ -113,16 +163,7 @@ export default function ThemeBrowser({ themes }: { themes: ThemeData[] }) {
               onClick={() => setSelectedTheme(theme)}
               className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl overflow-hidden text-left hover:border-[var(--accent)] transition-all hover:shadow-lg hover:shadow-[var(--accent)]/5 group"
             >
-              {/* Preview thumbnail */}
-              <div className="h-48 bg-[var(--background)] border-b border-[var(--card-border)] flex items-center justify-center overflow-hidden">
-                <iframe
-                  src={`/api/theme-preview/${theme.slug}`}
-                  className="w-[1200px] h-[800px] border-0 pointer-events-none"
-                  style={{ transform: "scale(0.25)", transformOrigin: "top left" }}
-                  title={`${theme.name} preview`}
-                  tabIndex={-1}
-                />
-              </div>
+              <ThemeThumbnail theme={theme} />
 
               <div className="p-5">
                 {/* Header */}
