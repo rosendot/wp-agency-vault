@@ -1,8 +1,8 @@
 {
-  "name": "Warm Restaurant",
-  "slug": "warm-restaurant",
-  "description": "Rich reds, warm golds, dark backgrounds with cream accents. Serif headings.",
-  "tags": ["warm", "traditional", "serif", "dark", "restaurant"],
+  "name": "Ember Hearth",
+  "slug": "ember-hearth",
+  "description": "Rich reds, warm golds, dark backgrounds with cream accents. Serif headings. A fireside warmth that works for any traditional or family-run business.",
+  "tags": ["warm", "traditional", "serif", "dark", "red", "gold", "hearth"],
   "colors": {
     "primary": { "label": "Primary", "value": "#b42318" },
     "primary_dark": { "label": "Primary Dark", "value": "#8c1a11" },

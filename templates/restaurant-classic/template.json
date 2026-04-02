@@ -8,7 +8,7 @@
   "preview": "screenshot.png",
   "pages": ["home", "menu", "about"],
   "tags": ["food", "restaurant", "mexican", "italian", "american", "carousel", "google-maps", "menu-page", "gallery", "dark-header", "serif-headings"],
-  "default_palette": "warm-restaurant",
+  "default_palette": "ember-hearth",
   "kits_used": ["infinite-carousel", "hero-section", "google-map-embed"],
   "plugins_required": {},
   "files": {
