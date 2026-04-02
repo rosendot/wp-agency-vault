@@ -6,6 +6,7 @@ import HeroSection from "./kit-previews/HeroSection";
 import InfiniteCarousel from "./kit-previews/InfiniteCarousel";
 import GoogleMapEmbed from "./kit-previews/GoogleMapEmbed";
 import FaqAccordion from "./kit-previews/FaqAccordion";
+import MegaMenu from "./kit-previews/MegaMenu";
 
 // Registry of kit slugs → React preview components
 const KIT_PREVIEWS: Record<string, ComponentType<Record<string, string | number>>> = {
@@ -13,6 +14,7 @@ const KIT_PREVIEWS: Record<string, ComponentType<Record<string, string | number>
   "infinite-carousel": InfiniteCarousel,
   "google-map-embed": GoogleMapEmbed,
   "faq-accordion": FaqAccordion,
+  "mega-menu": MegaMenu,
 };
 
 const LANG_COLORS: Record<string, string> = {

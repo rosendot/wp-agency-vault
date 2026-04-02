@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Menu Preview</title>
+    <link rel="stylesheet" href="mega-menu.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #faf6f0;
+        }
+        .page-content {
+            padding: 4rem 2rem;
+            text-align: center;
+            color: #6b5e4f;
+        }
+        .page-content h1 {
+            font-family: Georgia, serif;
+            font-size: 2.5rem;
+            color: #1a1208;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="mega-menu" aria-label="Main navigation">
+        <div class="mega-menu__bar">
+            <a href="#" class="mega-menu__brand">Restaurant Name</a>
+
+            <ul class="mega-menu__nav">
+                <li class="mega-menu__item">
+                    <button class="mega-menu__trigger" aria-expanded="false" aria-haspopup="true">
+                        Menu <span class="mega-menu__arrow" aria-hidden="true">▾</span>
+                    </button>
+                    <div class="mega-menu__panel" role="menu">
+                        <div class="mega-menu__panel-inner">
+                            <div>
+                                <h3 class="mega-menu__column-title">Food</h3>
+                                <ul class="mega-menu__links">
+                                    <li><a href="#" class="mega-menu__link" role="menuitem">Appetizers</a></li>
+                                    <li><a href="#" class="mega-menu__link" role="menuitem">Entrees</a></li>
+                                    <li><a href="#" class="mega-menu__link" role="menuitem">Desserts</a></li>
+                                    <li><a href="#" class="mega-menu__link" role="menuitem">Kids Menu</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="mega-menu__column-title">Drinks</h3>
+                                <ul class="mega-menu__links">
+                                    <li><a href="#" class="mega-menu__link" role="menuitem">Cocktails</a></li>
+                                    <li><a href="#" class="mega-menu__link" role="menuitem">Wine List</a></li>
+                                    <li><a href="#" class="mega-menu__link" role="menuitem">Beer</a></li>
+                                    <li><a href="#" class="mega-menu__link" role="menuitem">Non-Alcoholic</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="mega-menu__column-title">Specials</h3>
+                                <ul class="mega-menu__links">
+                                    <li>
+                                        <a href="#" class="mega-menu__link" role="menuitem">
+                                            Daily Specials
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="mega-menu__link" role="menuitem">
+                                            Happy Hour
+                                            <span class="mega-menu__link-desc">Mon–Fri, 4–6pm</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="mega-menu__link" role="menuitem">
+                                            Weekend Brunch
+                                            <span class="mega-menu__link-desc">Sat–Sun, 10am–2pm</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="mega-menu__item">
+                    <button class="mega-menu__trigger" aria-expanded="false" aria-haspopup="true">
+                        About <span class="mega-menu__arrow" aria-hidden="true">▾</span>
+                    </button>
+                    <div class="mega-menu__panel" role="menu">
+                        <div class="mega-menu__panel-inner">
+                            <div>
+                                <h3 class="mega-menu__column-title">Our Story</h3>
+                                <ul class="mega-menu__links">
+                                    <li><a href="#" class="mega-menu__link" role="menuitem">History</a></li>
+                                    <li><a href="#" class="mega-menu__link" role="menuitem">Our Team</a></li>
+                                    <li><a href="#" class="mega-menu__link" role="menuitem">Press</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h3 class="mega-menu__column-title">Visit</h3>
+                                <ul class="mega-menu__links">
+                                    <li><a href="#" class="mega-menu__link" role="menuitem">Location & Hours</a></li>
+                                    <li><a href="#" class="mega-menu__link" role="menuitem">Parking</a></li>
+                                    <li><a href="#" class="mega-menu__link" role="menuitem">Private Events</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="mega-menu__item">
+                    <a href="#" class="mega-menu__trigger">Gallery</a>
+                </li>
+
+                <li class="mega-menu__item">
+                    <a href="#" class="mega-menu__trigger">Contact</a>
+                </li>
+            </ul>
+
+            <a href="#" class="mega-menu__cta">Order Online</a>
+        </div>
+    </nav>
+
+    <div class="page-content">
+        <h1>Hover the nav tabs above</h1>
+        <p>Menu and About have multi-column dropdown panels. Gallery and Contact are regular links.</p>
+    </div>
+
+    <script src="mega-menu.js"></script>
+</body>
+</html>

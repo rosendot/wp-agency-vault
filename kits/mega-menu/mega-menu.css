@@ -1,0 +1,211 @@
+/* Mega Menu — see README.md for usage */
+
+.mega-menu {
+	position: relative;
+	z-index: 1000;
+}
+
+.mega-menu__bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: #1a1208;
+	padding: 0 2rem;
+	height: 64px;
+}
+
+.mega-menu__brand {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.mega-menu__nav {
+	display: flex;
+	align-items: center;
+	height: 100%;
+	gap: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.mega-menu__item {
+	position: relative;
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.mega-menu__trigger {
+	display: flex;
+	align-items: center;
+	gap: 0.35rem;
+	height: 100%;
+	padding: 0 1.25rem;
+	color: #ffffff;
+	font-size: 0.9rem;
+	font-weight: 500;
+	text-decoration: none;
+	background: none;
+	border: none;
+	cursor: pointer;
+	transition: color 0.2s;
+	white-space: nowrap;
+}
+
+.mega-menu__trigger:hover,
+.mega-menu__item--open .mega-menu__trigger {
+	color: #b42318;
+}
+
+.mega-menu__arrow {
+	font-size: 0.6rem;
+	transition: transform 0.2s;
+}
+
+.mega-menu__item--open .mega-menu__arrow {
+	transform: rotate(180deg);
+}
+
+/* Panel — the dropdown */
+.mega-menu__panel {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	width: 100vw;
+	background: #ffffff;
+	border-top: 3px solid #b42318;
+	border-bottom: 1px solid #e0d6c8;
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(-4px);
+	transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+	padding: 2.5rem 0;
+}
+
+/* Position full-width panels from the left edge of the viewport */
+.mega-menu__item:first-child .mega-menu__panel {
+	left: 0;
+}
+
+.mega-menu__panel {
+	left: 50%;
+	transform: translateX(-50%) translateY(-4px);
+}
+
+.mega-menu__item--open .mega-menu__panel {
+	opacity: 1;
+	visibility: visible;
+	transform: translateX(-50%) translateY(0);
+}
+
+/* Contained variant — max-width instead of full viewport */
+.mega-menu--contained .mega-menu__panel {
+	width: auto;
+	min-width: 600px;
+	max-width: 900px;
+	left: 0;
+	transform: translateY(-4px);
+	border-radius: 0 0 8px 8px;
+}
+
+.mega-menu--contained .mega-menu__item--open .mega-menu__panel {
+	transform: translateY(0);
+}
+
+.mega-menu__panel-inner {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 2.5rem;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 2rem;
+}
+
+.mega-menu__column-title {
+	font-size: 0.75rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1.5px;
+	color: #1a1208;
+	margin-bottom: 1rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 2px solid #b42318;
+}
+
+.mega-menu__links {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+.mega-menu__link {
+	display: block;
+	padding: 0.4rem 0;
+	color: #2c2416;
+	text-decoration: none;
+	font-size: 0.9rem;
+	transition: color 0.15s;
+}
+
+.mega-menu__link:hover {
+	color: #b42318;
+}
+
+.mega-menu__link-desc {
+	display: block;
+	font-size: 0.8rem;
+	color: #6b5e4f;
+	margin-top: 0.1rem;
+}
+
+/* CTA button in nav bar */
+.mega-menu__cta {
+	display: inline-block;
+	padding: 0.5rem 1.25rem;
+	font-size: 0.8rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	border: 2px solid #ffffff;
+	color: #ffffff;
+	text-decoration: none;
+	border-radius: 4px;
+	transition: all 0.2s;
+	margin-left: 1rem;
+}
+
+.mega-menu__cta:hover {
+	background: #ffffff;
+	color: #1a1208;
+}
+
+/* Mobile — collapse to hamburger at 768px */
+@media (max-width: 768px) {
+	.mega-menu__nav {
+		display: none;
+	}
+
+	.mega-menu__cta {
+		display: none;
+	}
+
+	.mega-menu__panel {
+		position: static;
+		width: 100%;
+		box-shadow: none;
+		border-top: 1px solid #e0d6c8;
+		transform: none;
+	}
+
+	.mega-menu__panel-inner {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+}

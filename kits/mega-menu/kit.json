@@ -1,0 +1,65 @@
+{
+  "name": "Mega Menu",
+  "slug": "mega-menu",
+  "description": "Full-width dropdown navigation panel that reveals on hover, with multi-column layouts, links, and optional descriptions.",
+  "category": "navigation",
+  "tags": ["menu", "navigation", "dropdown", "mega-menu", "header", "nav"],
+  "files": {
+    "css": ["mega-menu.css"],
+    "js": ["mega-menu.js"],
+    "php": ["mega-menu.php"]
+  },
+  "variables": {
+    "panelBg": {
+      "label": "Panel background",
+      "type": "color",
+      "default": "#ffffff"
+    },
+    "panelBorder": {
+      "label": "Panel border color",
+      "type": "color",
+      "default": "#e0d6c8"
+    },
+    "navBg": {
+      "label": "Nav bar background",
+      "type": "color",
+      "default": "#1a1208"
+    },
+    "navTextColor": {
+      "label": "Nav text color",
+      "type": "color",
+      "default": "#ffffff"
+    },
+    "accentColor": {
+      "label": "Accent / hover color",
+      "type": "color",
+      "default": "#b42318"
+    },
+    "columnHeadingColor": {
+      "label": "Column heading color",
+      "type": "color",
+      "default": "#1a1208"
+    },
+    "linkColor": {
+      "label": "Link color",
+      "type": "color",
+      "default": "#2c2416"
+    },
+    "descColor": {
+      "label": "Description text color",
+      "type": "color",
+      "default": "#6b5e4f"
+    }
+  },
+  "variants": {
+    "default": {
+      "label": "Full-width panel",
+      "class": "mega-menu"
+    },
+    "contained": {
+      "label": "Contained width",
+      "class": "mega-menu mega-menu--contained"
+    }
+  },
+  "dependencies": []
+}
