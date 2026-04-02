@@ -1,0 +1,26 @@
+{
+  "name": "FAQ Tabbed",
+  "slug": "faq-tabbed",
+  "description": "Category tabs at the top with accordion Q&As below. Each tab shows its own set of questions. Great for large FAQ sets.",
+  "category": "interactive",
+  "tags": ["faq", "tabs", "categories", "accordion", "organized", "large"],
+  "files": {
+    "css": ["faq-tabbed.css"],
+    "js": ["faq-tabbed.js"],
+    "php": ["faq-tabbed.php"]
+  },
+  "variables": {
+    "sectionTitle": {
+      "label": "Section title",
+      "type": "string",
+      "default": "Frequently Asked Questions"
+    },
+    "sectionSubtitle": {
+      "label": "Subtitle",
+      "type": "string",
+      "default": "Browse by category"
+    }
+  },
+  "variants": {},
+  "dependencies": []
+}

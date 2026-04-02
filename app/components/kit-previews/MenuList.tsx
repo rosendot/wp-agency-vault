@@ -1,31 +1,13 @@
 "use client";
 
 export interface MenuListProps {
-  section_title: string;
-  section_subtitle: string;
-  color_primary: string;
-  color_secondary: string;
-  color_dark: string;
-  color_cream: string;
-  color_text: string;
-  color_text_light: string;
-  color_border: string;
-  font_heading: string;
-  font_body: string;
+  sectionTitle: string;
+  sectionSubtitle: string;
 }
 
 const defaults: MenuListProps = {
-  section_title: "Our Menu",
-  section_subtitle: "Fresh ingredients, bold flavors",
-  color_primary: "#b42318",
-  color_secondary: "#d4a017",
-  color_dark: "#1a1208",
-  color_cream: "#faf6f0",
-  color_text: "#2c2416",
-  color_text_light: "#6b5e4f",
-  color_border: "#e0d6c8",
-  font_heading: "Georgia, 'Times New Roman', serif",
-  font_body: "'Inter', -apple-system, sans-serif",
+  sectionTitle: "Our Menu",
+  sectionSubtitle: "Fresh ingredients, bold flavors",
 };
 
 const categories = [
@@ -53,38 +35,57 @@ export default function MenuList(props: Partial<MenuListProps>) {
   const v = { ...defaults, ...props };
 
   return (
-    <div style={{ maxWidth: 900, margin: "0 auto", padding: "4rem 1.5rem", background: v.color_cream, color: v.color_text, fontFamily: v.font_body }}>
-      <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-        <h2 style={{ fontFamily: v.font_heading, fontSize: "2.5rem", fontWeight: 700, color: v.color_dark, margin: "0 0 0.5rem" }}>{v.section_title}</h2>
-        <p style={{ fontSize: "1.125rem", color: v.color_text_light, margin: 0, fontStyle: "italic" }}>{v.section_subtitle}</p>
+    <div style={{ padding: "var(--space-16) var(--space-6)" }}>
+      {/* Section header */}
+      <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
+        <h2 style={{
+          fontFamily: "var(--font-heading)",
+          fontSize: "var(--text-4xl)",
+          fontWeight: 700,
+          color: "var(--color-dark)",
+          margin: "0 0 var(--space-2)",
+          lineHeight: "var(--leading-snug)",
+        }}>
+          {v.sectionTitle}
+        </h2>
+        <p style={{
+          fontSize: "var(--text-xl)",
+          color: "var(--color-text-light)",
+          margin: 0,
+        }}>
+          {v.sectionSubtitle}
+        </p>
       </div>
 
-      {categories.map((cat) => (
-        <div key={cat.name} style={{ marginBottom: "2.5rem" }}>
-          <h3 style={{ fontFamily: v.font_heading, fontSize: "1.75rem", fontWeight: 600, color: v.color_primary, margin: "0 0 0.25rem" }}>
-            {cat.name}
-          </h3>
-          <span style={{ display: "block", width: 60, height: 3, background: v.color_secondary, borderRadius: 2, marginBottom: "1rem" }} />
+      {/* Kit-specific content */}
+      <div style={{ maxWidth: "var(--max-w-md)", margin: "0 auto" }}>
+        {categories.map((cat) => (
+          <div key={cat.name} style={{ marginBottom: "var(--space-10)" }}>
+            <h3 style={{ fontFamily: "var(--font-heading)", fontSize: "var(--text-3xl)", fontWeight: 600, color: "var(--color-primary)", margin: "0 0 var(--space-1)" }}>
+              {cat.name}
+            </h3>
+            <span style={{ display: "block", width: 60, height: 3, background: "var(--color-secondary)", borderRadius: "var(--radius-sm)", marginBottom: "var(--space-4)" }} />
 
-          {cat.items.map((item, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "1rem", padding: "0.75rem 0", borderBottom: i < cat.items.length - 1 ? `1px solid ${v.color_border}` : "none" }}>
-              {item.hasPhoto && (
-                <div style={{ width: 60, height: 60, borderRadius: 8, background: "#d4cec4", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "#8a8279", fontSize: "0.7rem", fontStyle: "italic" }}>
-                  Photo
+            {cat.items.map((item, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "var(--space-4)", padding: "var(--space-3) 0", borderBottom: i < cat.items.length - 1 ? "1px solid var(--color-border)" : "none" }}>
+                {item.hasPhoto && (
+                  <div style={{ width: 60, height: 60, borderRadius: "var(--radius-lg)", background: "var(--color-cream)", flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "center", color: "var(--color-text-light)", fontSize: "var(--text-xs)" }}>
+                    Photo
+                  </div>
+                )}
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: "var(--space-2)" }}>
+                    <span style={{ fontFamily: "var(--font-heading)", fontSize: "var(--text-xl)", fontWeight: 600, color: "var(--color-dark)", whiteSpace: "nowrap", flexShrink: 0 }}>{item.name}</span>
+                    <span style={{ flex: 1, borderBottom: "2px dotted var(--color-border)", minWidth: "2rem", position: "relative", top: -4 }} />
+                    <span style={{ fontFamily: "var(--font-heading)", fontSize: "var(--text-xl)", fontWeight: 700, color: "var(--color-primary)", whiteSpace: "nowrap", flexShrink: 0 }}>{item.price}</span>
+                  </div>
+                  <p style={{ fontSize: "var(--text-sm)", color: "var(--color-text-light)", margin: "var(--space-1) 0 0", lineHeight: "var(--leading-relaxed)" }}>{item.desc}</p>
                 </div>
-              )}
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ display: "flex", alignItems: "baseline", gap: "0.5rem" }}>
-                  <span style={{ fontFamily: v.font_heading, fontSize: "1.125rem", fontWeight: 600, color: v.color_dark, whiteSpace: "nowrap", flexShrink: 0 }}>{item.name}</span>
-                  <span style={{ flex: 1, borderBottom: `2px dotted ${v.color_border}`, minWidth: "2rem", position: "relative", top: -4 }} />
-                  <span style={{ fontFamily: v.font_heading, fontSize: "1.125rem", fontWeight: 700, color: v.color_primary, whiteSpace: "nowrap", flexShrink: 0 }}>{item.price}</span>
-                </div>
-                <p style={{ fontSize: "0.9rem", color: v.color_text_light, margin: "0.25rem 0 0", lineHeight: 1.5 }}>{item.desc}</p>
               </div>
-            </div>
-          ))}
-        </div>
-      ))}
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

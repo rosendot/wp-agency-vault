@@ -3,33 +3,15 @@
 import { useState } from "react";
 
 export interface MenuGridProps {
-  section_title: string;
-  section_subtitle: string;
+  sectionTitle: string;
+  sectionSubtitle: string;
   columns: number;
-  color_primary: string;
-  color_secondary: string;
-  color_dark: string;
-  color_cream: string;
-  color_text: string;
-  color_text_light: string;
-  color_border: string;
-  font_heading: string;
-  font_body: string;
 }
 
 const defaults: MenuGridProps = {
-  section_title: "Our Menu",
-  section_subtitle: "Tap a category to filter",
+  sectionTitle: "Our Menu",
+  sectionSubtitle: "Tap a category to filter",
   columns: 3,
-  color_primary: "#b42318",
-  color_secondary: "#d4a017",
-  color_dark: "#1a1208",
-  color_cream: "#faf6f0",
-  color_text: "#2c2416",
-  color_text_light: "#6b5e4f",
-  color_border: "#e0d6c8",
-  font_heading: "Georgia, 'Times New Roman', serif",
-  font_body: "'Inter', -apple-system, sans-serif",
 };
 
 const items = [
@@ -51,48 +33,67 @@ export default function MenuGrid(props: Partial<MenuGridProps>) {
   const filtered = activeTab === "All" ? items : items.filter((i) => i.cat === activeTab.toLowerCase());
 
   return (
-    <div style={{ maxWidth: 1200, margin: "0 auto", padding: "4rem 1.5rem", fontFamily: v.font_body }}>
-      <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-        <h2 style={{ fontFamily: v.font_heading, fontSize: "2.25rem", fontWeight: 700, color: v.color_dark, margin: "0 0 0.5rem" }}>{v.section_title}</h2>
-        <p style={{ fontSize: "1.1rem", color: v.color_text_light, margin: 0 }}>{v.section_subtitle}</p>
+    <div style={{ padding: "var(--space-16) var(--space-6)" }}>
+      {/* Section header */}
+      <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
+        <h2 style={{
+          fontFamily: "var(--font-heading)",
+          fontSize: "var(--text-4xl)",
+          fontWeight: 700,
+          color: "var(--color-dark)",
+          margin: "0 0 var(--space-2)",
+          lineHeight: "var(--leading-snug)",
+        }}>
+          {v.sectionTitle}
+        </h2>
+        <p style={{
+          fontSize: "var(--text-xl)",
+          color: "var(--color-text-light)",
+          margin: 0,
+        }}>
+          {v.sectionSubtitle}
+        </p>
       </div>
 
-      <div style={{ display: "flex", gap: "0.5rem", justifyContent: "center", marginBottom: "2.5rem" }}>
-        {tabs.map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            style={{
-              fontFamily: v.font_body,
-              fontSize: "0.9rem",
-              fontWeight: 600,
-              padding: "0.5rem 1.25rem",
-              border: `2px solid ${activeTab === tab ? v.color_primary : v.color_border}`,
-              borderRadius: 9999,
-              background: activeTab === tab ? v.color_primary : "transparent",
-              color: activeTab === tab ? "#fff" : v.color_text,
-              cursor: "pointer",
-              whiteSpace: "nowrap",
-            }}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
+      {/* Kit-specific content */}
+      <div style={{ maxWidth: "var(--max-w-xl)", margin: "0 auto" }}>
+        <div style={{ display: "flex", gap: "var(--space-2)", justifyContent: "center", marginBottom: "var(--space-10)" }}>
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: "var(--text-sm)",
+                fontWeight: 600,
+                padding: "var(--space-2) var(--space-5)",
+                border: `2px solid ${activeTab === tab ? "var(--color-primary)" : "var(--color-border)"}`,
+                borderRadius: "var(--radius-full)",
+                background: activeTab === tab ? "var(--color-primary)" : "transparent",
+                color: activeTab === tab ? "var(--color-white)" : "var(--color-text)",
+                cursor: "pointer",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: "1.5rem" }}>
-        {filtered.map((item, i) => (
-          <div key={i} style={{ background: "#fff", borderRadius: "0.75rem", boxShadow: "0 2px 8px rgba(0,0,0,0.08)", overflow: "hidden" }}>
-            <div style={{ aspectRatio: "4/3", background: v.color_cream, display: "flex", alignItems: "center", justifyContent: "center", color: v.color_text_light, fontSize: "0.85rem", fontStyle: "italic" }}>
-              Photo
+        <div style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, 1fr)`, gap: "var(--space-6)" }}>
+          {filtered.map((item, i) => (
+            <div key={i} style={{ background: "var(--color-white)", borderRadius: "var(--radius-xl)", boxShadow: "var(--shadow-md)", overflow: "hidden" }}>
+              <div style={{ aspectRatio: "4/3", background: "var(--color-cream)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--color-text-light)", fontSize: "var(--text-sm)" }}>
+                Photo
+              </div>
+              <div style={{ padding: "var(--space-5)" }}>
+                <h3 style={{ fontFamily: "var(--font-heading)", fontSize: "var(--text-xl)", fontWeight: 700, color: "var(--color-dark)", margin: "0 0 var(--space-2)" }}>{item.name}</h3>
+                <p style={{ fontSize: "var(--text-sm)", lineHeight: "var(--leading-relaxed)", color: "var(--color-text-light)", margin: "0 0 var(--space-3)" }}>{item.desc}</p>
+                <span style={{ display: "inline-block", fontSize: "var(--text-sm)", fontWeight: 700, padding: "var(--space-1) var(--space-3)", background: "var(--color-primary)", color: "var(--color-white)", borderRadius: "var(--radius-full)" }}>{item.price}</span>
+              </div>
             </div>
-            <div style={{ padding: "1.25rem" }}>
-              <h3 style={{ fontFamily: v.font_heading, fontSize: "1.15rem", fontWeight: 700, color: v.color_dark, margin: "0 0 0.4rem" }}>{item.name}</h3>
-              <p style={{ fontSize: "0.9rem", lineHeight: 1.5, color: v.color_text_light, margin: "0 0 0.75rem" }}>{item.desc}</p>
-              <span style={{ display: "inline-block", fontSize: "0.85rem", fontWeight: 700, padding: "0.3rem 0.75rem", background: v.color_primary, color: "#fff", borderRadius: 9999 }}>{item.price}</span>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

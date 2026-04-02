@@ -13,6 +13,8 @@ import MenuCards from "./kit-previews/MenuCards";
 import GridGallery from "./kit-previews/GridGallery";
 import FaqTwoColumn from "./kit-previews/FaqTwoColumn";
 import FaqCards from "./kit-previews/FaqCards";
+import FaqTabbed from "./kit-previews/FaqTabbed";
+import { designTokens } from "./kit-previews/shared";
 
 // Registry of kit slugs → React preview components
 const KIT_PREVIEWS: Record<string, ComponentType<Record<string, string | number>>> = {
@@ -22,6 +24,7 @@ const KIT_PREVIEWS: Record<string, ComponentType<Record<string, string | number>
   "faq-accordion": FaqAccordion,
   "faq-two-column": FaqTwoColumn,
   "faq-cards": FaqCards,
+  "faq-tabbed": FaqTabbed,
   "mega-menu": MegaMenu,
   "menu-list": MenuList,
   "menu-grid": MenuGrid,
@@ -100,12 +103,20 @@ export default function KitDetail({
         {/* Left: Preview or Code viewer */}
         <div className="flex-1 border-r border-[var(--card-border)]">
           {activeTab === "preview" ? (
-            <div className="h-[calc(100vh-180px)] overflow-auto">
+            <div
+              className="h-[calc(100vh-180px)] overflow-auto"
+              style={{
+                background: "var(--color-white)",
+                color: "var(--color-text)",
+                fontFamily: "var(--font-body)",
+                ...designTokens,
+              } as React.CSSProperties}
+            >
               {(() => {
                 const PreviewComponent = KIT_PREVIEWS[kit.slug];
                 if (!PreviewComponent) {
                   return (
-                    <div className="flex items-center justify-center h-full text-[var(--muted)]">
+                    <div className="flex items-center justify-center h-full text-[var(--muted)]" style={{ background: "var(--background)" }}>
                       <p>No preview component for this kit. Add one to <code className="text-xs bg-[var(--card-bg)] px-1.5 py-0.5 rounded">kit-previews/</code></p>
                     </div>
                   );

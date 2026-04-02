@@ -5,27 +5,11 @@ import { useState } from "react";
 export interface FaqTwoColumnProps {
   sectionTitle: string;
   sectionSubtitle: string;
-  color_primary: string;
-  color_dark: string;
-  color_cream: string;
-  color_text: string;
-  color_text_light: string;
-  color_border: string;
-  font_heading: string;
-  font_body: string;
 }
 
 const defaults: FaqTwoColumnProps = {
   sectionTitle: "Frequently Asked Questions",
   sectionSubtitle: "Click a question to see the answer",
-  color_primary: "#b42318",
-  color_dark: "#1a1208",
-  color_cream: "#faf6f0",
-  color_text: "#2c2416",
-  color_text_light: "#6b5e4f",
-  color_border: "#e0d6c8",
-  font_heading: "Georgia, 'Times New Roman', serif",
-  font_body: "'Inter', -apple-system, sans-serif",
 };
 
 const faqs = [
@@ -42,48 +26,67 @@ export default function FaqTwoColumn(props: Partial<FaqTwoColumnProps>) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <div style={{ maxWidth: 1100, margin: "0 auto", padding: "4rem 1.5rem", fontFamily: v.font_body }}>
-      <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-        <h2 style={{ fontFamily: v.font_heading, fontSize: "2.5rem", fontWeight: 700, color: v.color_dark, margin: "0 0 0.5rem" }}>{v.sectionTitle}</h2>
-        <p style={{ fontSize: "1.1rem", color: v.color_text_light, margin: 0 }}>{v.sectionSubtitle}</p>
+    <div style={{ padding: "var(--space-16) var(--space-6)" }}>
+      {/* Section header */}
+      <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
+        <h2 style={{
+          fontFamily: "var(--font-heading)",
+          fontSize: "var(--text-4xl)",
+          fontWeight: 700,
+          color: "var(--color-dark)",
+          margin: "0 0 var(--space-2)",
+          lineHeight: "var(--leading-snug)",
+        }}>
+          {v.sectionTitle}
+        </h2>
+        <p style={{
+          fontSize: "var(--text-xl)",
+          color: "var(--color-text-light)",
+          margin: 0,
+        }}>
+          {v.sectionSubtitle}
+        </p>
       </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: "2.5rem", alignItems: "start" }}>
-        {/* Questions */}
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          {faqs.map((faq, i) => (
-            <button
-              key={i}
-              onClick={() => setActiveIndex(i)}
-              style={{
-                display: "block",
-                width: "100%",
-                padding: "1rem 1.25rem",
-                background: activeIndex === i ? "rgba(0,0,0,0.02)" : "none",
-                border: "none",
-                borderLeft: `3px solid ${activeIndex === i ? v.color_primary : "transparent"}`,
-                borderBottom: i < faqs.length - 1 ? `1px solid ${v.color_border}` : "none",
-                textAlign: "left",
-                fontFamily: v.font_body,
-                fontSize: "1rem",
-                fontWeight: activeIndex === i ? 600 : 500,
-                color: activeIndex === i ? v.color_primary : v.color_text,
-                cursor: "pointer",
-              }}
-            >
-              {faq.q}
-            </button>
-          ))}
-        </div>
+      {/* Kit-specific content */}
+      <div style={{ maxWidth: "var(--max-w-lg)", margin: "0 auto" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: "var(--space-10)", alignItems: "start" }}>
+          {/* Questions */}
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {faqs.map((faq, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveIndex(i)}
+                style={{
+                  display: "block",
+                  width: "100%",
+                  padding: "var(--space-4) var(--space-5)",
+                  background: activeIndex === i ? "rgba(0,0,0,0.02)" : "none",
+                  border: "none",
+                  borderLeft: `3px solid ${activeIndex === i ? "var(--color-primary)" : "transparent"}`,
+                  borderBottom: i < faqs.length - 1 ? "1px solid var(--color-border)" : "none",
+                  textAlign: "left",
+                  fontFamily: "var(--font-body)",
+                  fontSize: "var(--text-lg)",
+                  fontWeight: activeIndex === i ? 600 : 500,
+                  color: activeIndex === i ? "var(--color-primary)" : "var(--color-text)",
+                  cursor: "pointer",
+                }}
+              >
+                {faq.q}
+              </button>
+            ))}
+          </div>
 
-        {/* Answer */}
-        <div style={{ background: v.color_cream, borderRadius: 12, padding: "2rem", border: `1px solid ${v.color_border}`, minHeight: 200 }}>
-          <h3 style={{ fontFamily: v.font_heading, fontSize: "1.25rem", fontWeight: 700, color: v.color_dark, margin: "0 0 1rem" }}>
-            {faqs[activeIndex].q}
-          </h3>
-          <p style={{ fontSize: "1rem", lineHeight: 1.8, color: v.color_text_light, margin: 0 }}>
-            {faqs[activeIndex].a}
-          </p>
+          {/* Answer */}
+          <div style={{ background: "var(--color-cream)", borderRadius: "var(--radius-xl)", padding: "var(--space-8)", border: "1px solid var(--color-border)", minHeight: 200 }}>
+            <h3 style={{ fontFamily: "var(--font-heading)", fontSize: "var(--text-2xl)", fontWeight: 700, color: "var(--color-dark)", margin: "0 0 var(--space-4)" }}>
+              {faqs[activeIndex].q}
+            </h3>
+            <p style={{ fontSize: "var(--text-lg)", lineHeight: "var(--leading-loose)", color: "var(--color-text-light)", margin: 0 }}>
+              {faqs[activeIndex].a}
+            </p>
+          </div>
         </div>
       </div>
     </div>

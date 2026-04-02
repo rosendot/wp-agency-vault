@@ -11,10 +11,10 @@ export interface FaqAccordionProps {
 }
 
 const defaultProps: FaqAccordionProps = {
-  borderColor: "#e0d6c8",
-  iconColor: "#b42318",
-  questionColor: "#1a1208",
-  answerColor: "#6b5e4f",
+  borderColor: "var(--color-border)",
+  iconColor: "var(--color-primary)",
+  questionColor: "var(--color-dark)",
+  answerColor: "var(--color-text-light)",
   transitionSpeed: "0.3s",
 };
 
@@ -27,7 +27,7 @@ const faqs = [
 ];
 
 export default function FaqAccordion(props: Partial<FaqAccordionProps>) {
-  const vars = { ...defaultProps, ...props };
+  const v = { ...defaultProps, ...props };
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggle = (index: number) => {
@@ -35,19 +35,34 @@ export default function FaqAccordion(props: Partial<FaqAccordionProps>) {
   };
 
   return (
-    <div style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", background: "#faf6f0", padding: "4rem 2rem" }}>
-      <h2 style={{ textAlign: "center", fontFamily: "Georgia, serif", fontSize: "2.5rem", color: vars.questionColor, marginBottom: "0.5rem" }}>
-        Frequently Asked Questions
-      </h2>
-      <p style={{ textAlign: "center", color: vars.answerColor, marginBottom: "3rem", fontSize: "1rem" }}>
-        Everything you need to know before your visit
-      </p>
+    <div style={{ padding: "var(--space-16) var(--space-6)" }}>
+      {/* Section header */}
+      <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
+        <h2 style={{
+          fontFamily: "var(--font-heading)",
+          fontSize: "var(--text-4xl)",
+          fontWeight: 700,
+          color: "var(--color-dark)",
+          margin: "0 0 var(--space-2)",
+          lineHeight: "var(--leading-snug)",
+        }}>
+          Frequently Asked Questions
+        </h2>
+        <p style={{
+          fontSize: "var(--text-xl)",
+          color: "var(--color-text-light)",
+          margin: 0,
+        }}>
+          Everything you need to know before your visit
+        </p>
+      </div>
 
-      <div style={{ maxWidth: 800, margin: "0 auto" }}>
+      {/* Kit-specific content */}
+      <div style={{ maxWidth: "var(--max-w-sm)", margin: "0 auto" }}>
         {faqs.map((faq, i) => {
           const isOpen = openIndex === i;
           return (
-            <div key={i} style={{ borderBottom: `1px solid ${vars.borderColor}`, ...(i === 0 ? { borderTop: `1px solid ${vars.borderColor}` } : {}) }}>
+            <div key={i} style={{ borderBottom: `1px solid ${v.borderColor}`, ...(i === 0 ? { borderTop: `1px solid ${v.borderColor}` } : {}) }}>
               <button
                 onClick={() => toggle(i)}
                 style={{
@@ -55,16 +70,17 @@ export default function FaqAccordion(props: Partial<FaqAccordionProps>) {
                   alignItems: "center",
                   justifyContent: "space-between",
                   width: "100%",
-                  padding: "1.25rem 0",
+                  padding: "var(--space-5) 0",
                   background: "none",
                   border: "none",
                   cursor: "pointer",
                   textAlign: "left",
-                  fontSize: "1.05rem",
+                  fontSize: "var(--text-lg)",
                   fontWeight: 600,
-                  color: vars.questionColor,
-                  lineHeight: 1.4,
-                  gap: "1rem",
+                  color: v.questionColor,
+                  lineHeight: "var(--leading-normal)",
+                  gap: "var(--space-4)",
+                  fontFamily: "var(--font-body)",
                 }}
               >
                 {faq.q}
@@ -82,7 +98,7 @@ export default function FaqAccordion(props: Partial<FaqAccordionProps>) {
                     position: "absolute",
                     width: 14,
                     height: 2,
-                    background: vars.iconColor,
+                    background: v.iconColor,
                     top: "50%",
                     left: "50%",
                     transform: "translate(-50%, -50%)",
@@ -92,11 +108,11 @@ export default function FaqAccordion(props: Partial<FaqAccordionProps>) {
                     position: "absolute",
                     width: 2,
                     height: 14,
-                    background: vars.iconColor,
+                    background: v.iconColor,
                     top: "50%",
                     left: "50%",
                     transform: `translate(-50%, -50%) rotate(${isOpen ? "90deg" : "0deg"})`,
-                    transition: `transform ${vars.transitionSpeed} ease`,
+                    transition: `transform ${v.transitionSpeed} ease`,
                   }} />
                 </span>
               </button>
@@ -104,10 +120,10 @@ export default function FaqAccordion(props: Partial<FaqAccordionProps>) {
                 style={{
                   overflow: "hidden",
                   maxHeight: isOpen ? 300 : 0,
-                  transition: `max-height ${vars.transitionSpeed} ease`,
+                  transition: `max-height ${v.transitionSpeed} ease`,
                 }}
               >
-                <div style={{ padding: "0 0 1.25rem", fontSize: "0.95rem", lineHeight: 1.7, color: vars.answerColor }}>
+                <div style={{ padding: "0 0 var(--space-5)", fontSize: "var(--text-base)", lineHeight: "var(--leading-loose)", color: v.answerColor, fontFamily: "var(--font-body)" }}>
                   {faq.a}
                 </div>
               </div>

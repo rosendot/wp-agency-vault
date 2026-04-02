@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Tabbed Preview</title>
+    <link rel="stylesheet" href="faq-tabbed.css">
+    <style>
+        :root {
+            --color-primary: #b42318;
+            --color-secondary: #d4a017;
+            --color-dark: #1a1208;
+            --color-cream: #faf6f0;
+            --color-text: #2c2416;
+            --color-text-light: #6b5e4f;
+            --color-border: #e0d6c8;
+            --font-heading: Georgia, 'Times New Roman', serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-body); background: #fff; }
+    </style>
+</head>
+<body>
+
+    <section class="faq-tabbed">
+        <div class="faq-tabbed__header">
+            <h2 class="faq-tabbed__title">Frequently Asked Questions</h2>
+            <p class="faq-tabbed__subtitle">Browse by category</p>
+        </div>
+
+        <div class="faq-tabbed__tabs" role="tablist">
+            <button class="faq-tabbed__tab faq-tabbed__tab--active" role="tab" aria-selected="true" data-category="ordering">Ordering</button>
+            <button class="faq-tabbed__tab" role="tab" aria-selected="false" data-category="dining">Dining</button>
+            <button class="faq-tabbed__tab" role="tab" aria-selected="false" data-category="menu">Menu & Diet</button>
+        </div>
+
+        <div class="faq-tabbed__panel faq-tabbed__panel--active" data-category="ordering" role="tabpanel">
+            <div class="faq-tabbed__item">
+                <button class="faq-tabbed__question" aria-expanded="false">How do I place an order?<span class="faq-tabbed__icon" aria-hidden="true"></span></button>
+                <div class="faq-tabbed__answer"><div class="faq-tabbed__answer-inner">You can order online through our website, call us directly, or walk in and order at the counter.</div></div>
+            </div>
+            <div class="faq-tabbed__item">
+                <button class="faq-tabbed__question" aria-expanded="false">Do you offer delivery?<span class="faq-tabbed__icon" aria-hidden="true"></span></button>
+                <div class="faq-tabbed__answer"><div class="faq-tabbed__answer-inner">Yes, we deliver within a 5-mile radius. You can also order through DoorDash and UberEats.</div></div>
+            </div>
+            <div class="faq-tabbed__item">
+                <button class="faq-tabbed__question" aria-expanded="false">Can I customize my order?<span class="faq-tabbed__icon" aria-hidden="true"></span></button>
+                <div class="faq-tabbed__answer"><div class="faq-tabbed__answer-inner">Absolutely. Let us know about any modifications and we will do our best to accommodate.</div></div>
+            </div>
+        </div>
+
+        <div class="faq-tabbed__panel" data-category="dining" role="tabpanel">
+            <div class="faq-tabbed__item">
+                <button class="faq-tabbed__question" aria-expanded="false">Do you take reservations?<span class="faq-tabbed__icon" aria-hidden="true"></span></button>
+                <div class="faq-tabbed__answer"><div class="faq-tabbed__answer-inner">Yes, call us or book online. Walk-ins are always welcome.</div></div>
+            </div>
+            <div class="faq-tabbed__item">
+                <button class="faq-tabbed__question" aria-expanded="false">Is there outdoor seating?<span class="faq-tabbed__icon" aria-hidden="true"></span></button>
+                <div class="faq-tabbed__answer"><div class="faq-tabbed__answer-inner">Yes, we have a covered patio with 8 tables available year-round.</div></div>
+            </div>
+            <div class="faq-tabbed__item">
+                <button class="faq-tabbed__question" aria-expanded="false">Do you accommodate large parties?<span class="faq-tabbed__icon" aria-hidden="true"></span></button>
+                <div class="faq-tabbed__answer"><div class="faq-tabbed__answer-inner">We can seat parties up to 24 in our private dining room. Contact us to reserve.</div></div>
+            </div>
+        </div>
+
+        <div class="faq-tabbed__panel" data-category="menu" role="tabpanel">
+            <div class="faq-tabbed__item">
+                <button class="faq-tabbed__question" aria-expanded="false">Do you have vegetarian options?<span class="faq-tabbed__icon" aria-hidden="true"></span></button>
+                <div class="faq-tabbed__answer"><div class="faq-tabbed__answer-inner">Yes, we have a full vegetarian section on our menu plus vegan modifications for most dishes.</div></div>
+            </div>
+            <div class="faq-tabbed__item">
+                <button class="faq-tabbed__question" aria-expanded="false">Are allergen details available?<span class="faq-tabbed__icon" aria-hidden="true"></span></button>
+                <div class="faq-tabbed__answer"><div class="faq-tabbed__answer-inner">Yes, ask your server for our allergen guide. We can also customize dishes to avoid specific allergens.</div></div>
+            </div>
+            <div class="faq-tabbed__item">
+                <button class="faq-tabbed__question" aria-expanded="false">Do you have a kids menu?<span class="faq-tabbed__icon" aria-hidden="true"></span></button>
+                <div class="faq-tabbed__answer"><div class="faq-tabbed__answer-inner">Yes, our kids menu is available for children 12 and under with smaller portions and kid-friendly options.</div></div>
+            </div>
+        </div>
+    </section>
+
+    <script src="faq-tabbed.js"></script>
+</body>
+</html>

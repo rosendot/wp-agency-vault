@@ -14,14 +14,14 @@ export interface MegaMenuProps {
 }
 
 const defaultProps: MegaMenuProps = {
-  panelBg: "#ffffff",
-  panelBorder: "#e0d6c8",
-  navBg: "#1a1208",
-  navTextColor: "#ffffff",
-  accentColor: "#b42318",
-  columnHeadingColor: "#1a1208",
-  linkColor: "#2c2416",
-  descColor: "#6b5e4f",
+  panelBg: "var(--color-white)",
+  panelBorder: "var(--color-border)",
+  navBg: "var(--color-dark)",
+  navTextColor: "var(--color-white)",
+  accentColor: "var(--color-primary)",
+  columnHeadingColor: "var(--color-dark)",
+  linkColor: "var(--color-text)",
+  descColor: "var(--color-text-light)",
 };
 
 interface MenuColumn {
@@ -60,8 +60,8 @@ const menuItems: MenuItem[] = [
         title: "Specials",
         links: [
           { text: "Daily Specials" },
-          { text: "Happy Hour", desc: "Mon–Fri, 4–6pm" },
-          { text: "Weekend Brunch", desc: "Sat–Sun, 10am–2pm" },
+          { text: "Happy Hour", desc: "Mon-Fri, 4-6pm" },
+          { text: "Weekend Brunch", desc: "Sat-Sun, 10am-2pm" },
         ],
       },
     ],
@@ -96,7 +96,25 @@ export default function MegaMenu(props: Partial<MegaMenuProps>) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
+    <div style={{ padding: "var(--space-16) var(--space-6)" }}>
+      {/* Standard section header */}
+      <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
+        <h2 style={{
+          fontFamily: "var(--font-heading)",
+          fontSize: "var(--text-4xl)",
+          fontWeight: 700,
+          color: "var(--color-dark)",
+          margin: "0 0 var(--space-2)",
+          lineHeight: "var(--leading-snug)",
+        }}>
+          Mega Menu
+        </h2>
+        <p style={{ fontSize: "var(--text-xl)", color: "var(--color-text-light)", margin: 0 }}>
+          Hover the nav tabs to see dropdown panels
+        </p>
+      </div>
+
+      {/* The nav bar IS the kit */}
       <nav style={{ position: "relative", zIndex: 1000 }}>
         <div
           style={{
@@ -104,14 +122,15 @@ export default function MegaMenu(props: Partial<MegaMenuProps>) {
             alignItems: "center",
             justifyContent: "space-between",
             background: v.navBg,
-            padding: "0 2rem",
+            padding: "0 var(--space-8)",
             height: 64,
+            borderRadius: "var(--radius-lg) var(--radius-lg) 0 0",
           }}
         >
           <a
             href="#"
             onClick={(e) => e.preventDefault()}
-            style={{ fontSize: "1.25rem", fontWeight: 700, color: v.navTextColor, textDecoration: "none" }}
+            style={{ fontSize: "var(--text-2xl)", fontWeight: 700, color: v.navTextColor, textDecoration: "none" }}
           >
             Restaurant Name
           </a>
@@ -137,11 +156,11 @@ export default function MegaMenu(props: Partial<MegaMenuProps>) {
                     style={{
                       display: "flex",
                       alignItems: "center",
-                      gap: "0.35rem",
+                      gap: "var(--space-1)",
                       height: "100%",
-                      padding: "0 1.25rem",
+                      padding: "0 var(--space-5)",
                       color: isOpen ? v.accentColor : v.navTextColor,
-                      fontSize: "0.9rem",
+                      fontSize: "var(--text-sm)",
                       fontWeight: 500,
                       textDecoration: "none",
                       background: "none",
@@ -155,12 +174,12 @@ export default function MegaMenu(props: Partial<MegaMenuProps>) {
                     {hasPanel && (
                       <span
                         style={{
-                          fontSize: "0.6rem",
+                          fontSize: "var(--text-xs)",
                           transition: "transform 0.2s",
                           transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
                         }}
                       >
-                        ▾
+                        &#9662;
                       </span>
                     )}
                   </button>
@@ -172,55 +191,55 @@ export default function MegaMenu(props: Partial<MegaMenuProps>) {
                         top: "100%",
                         left: "50%",
                         width: "100vw",
-                        maxWidth: 900,
+                        maxWidth: "var(--max-w-md)",
                         background: v.panelBg,
                         borderTop: `3px solid ${v.accentColor}`,
                         borderBottom: `1px solid ${v.panelBorder}`,
-                        boxShadow: "0 8px 30px rgba(0,0,0,0.1)",
+                        boxShadow: "var(--shadow-lg)",
                         opacity: isOpen ? 1 : 0,
                         visibility: isOpen ? "visible" as const : "hidden" as const,
                         transform: isOpen ? "translateX(-50%) translateY(0)" : "translateX(-50%) translateY(-4px)",
                         transition: "opacity 0.25s ease, transform 0.25s ease, visibility 0.25s",
-                        padding: "2.5rem 0",
+                        padding: "var(--space-10) 0",
                       }}
                     >
                       <div
                         style={{
                           display: "grid",
                           gridTemplateColumns: `repeat(${item.columns!.length}, 1fr)`,
-                          gap: "2.5rem",
-                          maxWidth: 1200,
+                          gap: "var(--space-10)",
+                          maxWidth: "var(--max-w-xl)",
                           margin: "0 auto",
-                          padding: "0 2rem",
+                          padding: "0 var(--space-8)",
                         }}
                       >
                         {item.columns!.map((col, ci) => (
                           <div key={ci}>
                             <h3
                               style={{
-                                fontSize: "0.75rem",
+                                fontSize: "var(--text-xs)",
                                 fontWeight: 700,
                                 textTransform: "uppercase",
-                                letterSpacing: "1.5px",
+                                letterSpacing: "var(--tracking-normal)",
                                 color: v.columnHeadingColor,
-                                marginBottom: "1rem",
-                                paddingBottom: "0.5rem",
+                                marginBottom: "var(--space-4)",
+                                paddingBottom: "var(--space-2)",
                                 borderBottom: `2px solid ${v.accentColor}`,
                               }}
                             >
                               {col.title}
                             </h3>
-                            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+                            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "var(--space-1)" }}>
                               {col.links.map((link, li) => (
                                 <li key={li}>
                                   <a
                                     href="#"
                                     onClick={(e) => e.preventDefault()}
-                                    style={{ display: "block", padding: "0.4rem 0", color: v.linkColor, textDecoration: "none", fontSize: "0.9rem" }}
+                                    style={{ display: "block", padding: "var(--space-1) 0", color: v.linkColor, textDecoration: "none", fontSize: "var(--text-sm)" }}
                                   >
                                     {link.text}
                                     {link.desc && (
-                                      <span style={{ display: "block", fontSize: "0.8rem", color: v.descColor, marginTop: "0.1rem" }}>
+                                      <span style={{ display: "block", fontSize: "var(--text-xs)", color: v.descColor, marginTop: "var(--space-1)" }}>
                                         {link.desc}
                                       </span>
                                     )}
@@ -243,16 +262,16 @@ export default function MegaMenu(props: Partial<MegaMenuProps>) {
             onClick={(e) => e.preventDefault()}
             style={{
               display: "inline-block",
-              padding: "0.5rem 1.25rem",
-              fontSize: "0.8rem",
+              padding: "var(--space-2) var(--space-5)",
+              fontSize: "var(--text-xs)",
               fontWeight: 600,
               textTransform: "uppercase",
-              letterSpacing: "1px",
+              letterSpacing: "var(--tracking-tight)",
               border: `2px solid ${v.navTextColor}`,
               color: v.navTextColor,
               textDecoration: "none",
-              borderRadius: 4,
-              marginLeft: "1rem",
+              borderRadius: "var(--radius-md)",
+              marginLeft: "var(--space-4)",
             }}
           >
             Order Online
@@ -260,11 +279,9 @@ export default function MegaMenu(props: Partial<MegaMenuProps>) {
         </div>
       </nav>
 
-      <div style={{ padding: "4rem 2rem", textAlign: "center", background: "#faf6f0", color: "#6b5e4f" }}>
-        <h1 style={{ fontFamily: "Georgia, serif", fontSize: "2.5rem", color: "#1a1208", marginBottom: "1rem" }}>
-          Hover the nav tabs above
-        </h1>
-        <p>Menu and About have multi-column dropdown panels. Gallery and Contact are regular links.</p>
+      {/* Spacer below nav so dropdowns have room */}
+      <div style={{ padding: "var(--space-16) var(--space-8)", textAlign: "center", color: "var(--color-text-light)" }}>
+        <p style={{ margin: 0 }}>Page content appears below the navigation</p>
       </div>
     </div>
   );

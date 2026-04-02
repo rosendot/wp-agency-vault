@@ -5,7 +5,6 @@ import { useState } from "react";
 export interface InfiniteCarouselProps {
   slidesPerView: number;
   transitionSpeed: string;
-  dotColorActive: string;
   arrowBg: string;
   arrowHoverBg: string;
 }
@@ -13,7 +12,6 @@ export interface InfiniteCarouselProps {
 const defaultProps: InfiniteCarouselProps = {
   slidesPerView: 4,
   transitionSpeed: "0.5s",
-  dotColorActive: "#b42318",
   arrowBg: "#ffffff",
   arrowHoverBg: "#1a1a1a",
 };
@@ -42,7 +40,6 @@ function Carousel({
   items,
   slidesPerView,
   transitionSpeed,
-  dotColorActive,
   arrowBg,
   arrowHoverBg,
   renderSlide,
@@ -50,7 +47,6 @@ function Carousel({
   items: unknown[];
   slidesPerView: number;
   transitionSpeed: string;
-  dotColorActive: string;
   arrowBg: string;
   arrowHoverBg: string;
   renderSlide: (item: unknown, index: number) => React.ReactNode;
@@ -65,7 +61,7 @@ function Carousel({
   const offset = (100 / slidesPerView) * currentIndex * slidesPerView;
 
   return (
-    <div style={{ maxWidth: 1200, margin: "0 auto", overflow: "hidden", position: "relative", padding: "0 2.5rem" }}>
+    <div style={{ maxWidth: "var(--max-w-xl)", margin: "0 auto", overflow: "hidden", position: "relative", padding: "0 var(--space-10)" }}>
       <div
         style={{
           display: "flex",
@@ -78,7 +74,7 @@ function Carousel({
             key={i}
             style={{
               flex: `0 0 ${100 / slidesPerView}%`,
-              padding: "0 1rem",
+              padding: "0 var(--space-4)",
             }}
           >
             {renderSlide(item, i)}
@@ -97,19 +93,19 @@ function Carousel({
           left: 0,
           transform: "translateY(-50%)",
           background: hoveredArrow === "prev" ? arrowHoverBg : arrowBg,
-          color: hoveredArrow === "prev" ? "#fff" : "#1a1a1a",
-          border: "1px solid #e0e0e0",
+          color: hoveredArrow === "prev" ? "var(--color-white)" : "var(--color-dark)",
+          border: "1px solid var(--color-border)",
           width: 40,
           height: 40,
-          borderRadius: "50%",
-          fontSize: "1.5rem",
-          lineHeight: 1,
+          borderRadius: "var(--radius-full)",
+          fontSize: "var(--text-3xl)",
+          lineHeight: "var(--leading-tight)",
           cursor: "pointer",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           zIndex: 10,
-          boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+          boxShadow: "var(--shadow-sm)",
           transition: `background ${transitionSpeed}`,
         }}
         aria-label="Previous"
@@ -126,19 +122,19 @@ function Carousel({
           right: 0,
           transform: "translateY(-50%)",
           background: hoveredArrow === "next" ? arrowHoverBg : arrowBg,
-          color: hoveredArrow === "next" ? "#fff" : "#1a1a1a",
-          border: "1px solid #e0e0e0",
+          color: hoveredArrow === "next" ? "var(--color-white)" : "var(--color-dark)",
+          border: "1px solid var(--color-border)",
           width: 40,
           height: 40,
-          borderRadius: "50%",
-          fontSize: "1.5rem",
-          lineHeight: 1,
+          borderRadius: "var(--radius-full)",
+          fontSize: "var(--text-3xl)",
+          lineHeight: "var(--leading-tight)",
           cursor: "pointer",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           zIndex: 10,
-          boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
+          boxShadow: "var(--shadow-sm)",
           transition: `background ${transitionSpeed}`,
         }}
         aria-label="Next"
@@ -147,7 +143,7 @@ function Carousel({
       </button>
 
       {/* Dots */}
-      <div style={{ display: "flex", justifyContent: "center", gap: "0.5rem", marginTop: "2rem" }}>
+      <div style={{ display: "flex", justifyContent: "center", gap: "var(--space-2)", marginTop: "var(--space-8)" }}>
         {Array.from({ length: totalPages }).map((_, i) => (
           <button
             key={i}
@@ -155,8 +151,8 @@ function Carousel({
             style={{
               width: 10,
               height: 10,
-              borderRadius: "50%",
-              background: i === currentIndex ? dotColorActive : "#d0d0d0",
+              borderRadius: "var(--radius-full)",
+              background: i === currentIndex ? "var(--color-primary)" : "var(--color-border)",
               border: "none",
               cursor: "pointer",
               padding: 0,
@@ -171,64 +167,93 @@ function Carousel({
 }
 
 export default function InfiniteCarousel(props: Partial<InfiniteCarouselProps>) {
-  const vars = { ...defaultProps, ...props };
-  const perView = typeof vars.slidesPerView === "string" ? Number(vars.slidesPerView) : vars.slidesPerView;
+  const v = { ...defaultProps, ...props };
+  const perView = typeof v.slidesPerView === "string" ? Number(v.slidesPerView) : v.slidesPerView;
 
   return (
-    <div style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", background: "#faf6f0", padding: "3rem 1rem" }}>
-      <h2 style={{ textAlign: "center", fontSize: "2rem", marginBottom: "0.5rem", color: "#1a1208" }}>
-        Fan Favorites
-      </h2>
-      <p style={{ textAlign: "center", color: "#888", marginBottom: "2rem", fontSize: "0.95rem" }}>
-        Our most popular dishes, loved by the community
-      </p>
+    <div style={{ padding: "var(--space-16) var(--space-6)" }}>
+      {/* Section header */}
+      <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
+        <h2 style={{
+          fontFamily: "var(--font-heading)",
+          fontSize: "var(--text-4xl)",
+          fontWeight: 700,
+          color: "var(--color-dark)",
+          margin: "0 0 var(--space-2)",
+          lineHeight: "var(--leading-snug)",
+        }}>
+          Fan Favorites
+        </h2>
+        <p style={{
+          fontSize: "var(--text-xl)",
+          color: "var(--color-text-light)",
+          margin: 0,
+        }}>
+          Our most popular dishes, loved by the community
+        </p>
+      </div>
 
-      <Carousel
-        items={dishes}
-        slidesPerView={perView}
-        transitionSpeed={vars.transitionSpeed}
-        dotColorActive={vars.dotColorActive}
-        arrowBg={vars.arrowBg}
-        arrowHoverBg={vars.arrowHoverBg}
-        renderSlide={(item) => {
-          const dish = item as (typeof dishes)[0];
-          return (
-            <div style={{ background: "#fff", borderRadius: 12, overflow: "hidden", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
-              <div style={{ width: "100%", height: 180, background: "#d4c5b0", display: "flex", alignItems: "center", justifyContent: "center", color: "#8a7e6e", fontSize: "0.85rem", fontStyle: "italic" }}>
-                Photo placeholder
+      {/* Kit-specific content */}
+      <div style={{ maxWidth: "var(--max-w-xl)", margin: "0 auto" }}>
+        <Carousel
+          items={dishes}
+          slidesPerView={perView}
+          transitionSpeed={v.transitionSpeed}
+          arrowBg={v.arrowBg}
+          arrowHoverBg={v.arrowHoverBg}
+          renderSlide={(item) => {
+            const dish = item as (typeof dishes)[0];
+            return (
+              <div style={{ background: "var(--color-white)", borderRadius: "var(--radius-xl)", overflow: "hidden", boxShadow: "var(--shadow-sm)" }}>
+                <div style={{ width: "100%", height: 180, background: "var(--color-cream)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--color-text-light)", fontSize: "var(--text-sm)" }}>
+                  Photo placeholder
+                </div>
+                <div style={{ padding: "var(--space-4)" }}>
+                  <h3 style={{ fontSize: "var(--text-lg)", fontWeight: 600, color: "var(--color-dark)", marginBottom: "var(--space-1)", fontFamily: "var(--font-heading)" }}>{dish.name}</h3>
+                  <p style={{ fontSize: "var(--text-sm)", color: "var(--color-text-light)", marginBottom: "var(--space-2)", fontFamily: "var(--font-body)" }}>{dish.desc}</p>
+                  <span style={{ fontSize: "var(--text-lg)", fontWeight: 700, color: "var(--color-primary)" }}>{dish.price}</span>
+                </div>
               </div>
-              <div style={{ padding: "1rem" }}>
-                <h3 style={{ fontSize: "1rem", fontWeight: 600, color: "#1a1208", marginBottom: "0.25rem" }}>{dish.name}</h3>
-                <p style={{ fontSize: "0.85rem", color: "#888", marginBottom: "0.5rem" }}>{dish.desc}</p>
-                <span style={{ fontSize: "1rem", fontWeight: 700, color: vars.dotColorActive }}>{dish.price}</span>
-              </div>
+            );
+          }}
+        />
+
+        <hr style={{ border: "none", borderTop: "1px solid var(--color-border)", margin: "var(--space-12) auto" }} />
+
+        {/* Gallery sub-section header */}
+        <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
+          <h2 style={{
+            fontFamily: "var(--font-heading)",
+            fontSize: "var(--text-4xl)",
+            fontWeight: 700,
+            color: "var(--color-dark)",
+            margin: "0 0 var(--space-2)",
+            lineHeight: "var(--leading-snug)",
+          }}>
+            Gallery
+          </h2>
+          <p style={{
+            fontSize: "var(--text-xl)",
+            color: "var(--color-text-light)",
+            margin: 0,
+          }}>
+            A look inside our kitchen and dining room
+          </p>
+        </div>
+
+        <Carousel
+          items={galleryItems}
+          slidesPerView={Math.max(perView - 1, 1)}
+          transitionSpeed={v.transitionSpeed}
+          arrowBg={v.arrowBg}
+          arrowHoverBg={v.arrowHoverBg}
+          renderSlide={(item) => (
+            <div style={{ borderRadius: "var(--radius-xl)", overflow: "hidden", height: 220, background: "var(--color-cream)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--color-text-light)", fontSize: "var(--text-sm)" }}>
+              {item as string}
             </div>
-          );
-        }}
-      />
-
-      <hr style={{ border: "none", borderTop: "1px solid #e0d8cc", margin: "3rem auto", maxWidth: 1200 }} />
-
-      <h2 style={{ textAlign: "center", fontSize: "2rem", marginBottom: "0.5rem", color: "#1a1208" }}>
-        Gallery
-      </h2>
-      <p style={{ textAlign: "center", color: "#888", marginBottom: "2rem", fontSize: "0.95rem" }}>
-        A look inside our kitchen and dining room
-      </p>
-
-      <Carousel
-        items={galleryItems}
-        slidesPerView={Math.max(perView - 1, 1)}
-        transitionSpeed={vars.transitionSpeed}
-        dotColorActive={vars.dotColorActive}
-        arrowBg={vars.arrowBg}
-        arrowHoverBg={vars.arrowHoverBg}
-        renderSlide={(item) => (
-          <div style={{ borderRadius: 12, overflow: "hidden", height: 220, background: "#d4c5b0", display: "flex", alignItems: "center", justifyContent: "center", color: "#8a7e6e", fontStyle: "italic", fontSize: "0.85rem" }}>
-            {item as string}
-          </div>
-        )}
-      />
+          )}
+        />
+      </div>
     </div>
   );
 }

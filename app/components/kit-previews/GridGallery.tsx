@@ -7,13 +7,15 @@ export interface GridGalleryProps {
   rows: number;
   gap: string;
   sectionTitle: string;
+  sectionSubtitle: string;
 }
 
-const defaultProps: GridGalleryProps = {
+const defaults: GridGalleryProps = {
   columns: 5,
   rows: 3,
   gap: "4px",
   sectionTitle: "Gallery",
+  sectionSubtitle: "A glimpse inside our space",
 };
 
 const placeholderColors = [
@@ -25,89 +27,106 @@ const placeholderColors = [
 ];
 
 export default function GridGallery(props: Partial<GridGalleryProps>) {
-  const v = { ...defaultProps, ...props };
+  const v = { ...defaults, ...props };
   const cols = typeof v.columns === "string" ? Number(v.columns) : v.columns;
   const rows = typeof v.rows === "string" ? Number(v.rows) : v.rows;
   const total = cols * rows;
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div style={{ maxWidth: 1400, margin: "0 auto", padding: "4rem 1rem", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
+    <div style={{ padding: "var(--space-16) var(--space-6)" }}>
+      {/* Section header */}
       {v.sectionTitle && (
-        <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
-          <h2 style={{ fontFamily: "Georgia, serif", fontSize: "2.5rem", fontWeight: 700, color: "#1a1208", margin: 0 }}>
+        <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
+          <h2 style={{
+            fontFamily: "var(--font-heading)",
+            fontSize: "var(--text-4xl)",
+            fontWeight: 700,
+            color: "var(--color-dark)",
+            margin: "0 0 var(--space-2)",
+            lineHeight: "var(--leading-snug)",
+          }}>
             {v.sectionTitle}
           </h2>
+          <p style={{
+            fontSize: "var(--text-xl)",
+            color: "var(--color-text-light)",
+            margin: 0,
+          }}>
+            {v.sectionSubtitle}
+          </p>
         </div>
       )}
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: `repeat(${cols}, 1fr)`,
-          gap: v.gap,
-        }}
-      >
-        {Array.from({ length: total }).map((_, i) => {
-          const isHovered = hoveredIndex === i;
-          return (
-            <div
-              key={i}
-              style={{
-                position: "relative",
-                overflow: "hidden",
-                aspectRatio: "1",
-                cursor: "pointer",
-              }}
-              onMouseEnter={() => setHoveredIndex(i)}
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              {/* Placeholder image */}
+      {/* Kit-specific content */}
+      <div style={{ maxWidth: "var(--max-w-2xl)", margin: "0 auto" }}>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: `repeat(${cols}, 1fr)`,
+            gap: v.gap,
+          }}
+        >
+          {Array.from({ length: total }).map((_, i) => {
+            const isHovered = hoveredIndex === i;
+            return (
               <div
+                key={i}
                 style={{
-                  width: "100%",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "0.75rem",
-                  fontStyle: "italic",
-                  color: "#8a8279",
-                  background: placeholderColors[i % placeholderColors.length],
-                  transform: isHovered ? "scale(1.08)" : "scale(1)",
-                  transition: "transform 0.4s ease",
+                  position: "relative",
+                  overflow: "hidden",
+                  aspectRatio: "1",
+                  cursor: "pointer",
                 }}
+                onMouseEnter={() => setHoveredIndex(i)}
+                onMouseLeave={() => setHoveredIndex(null)}
               >
-                {i + 1}
-              </div>
-
-              {/* Hover overlay */}
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background: isHovered ? "rgba(0,0,0,0.35)" : "rgba(0,0,0,0)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  transition: "background 0.3s ease",
-                }}
-              >
-                <span
+                {/* Placeholder image */}
+                <div
                   style={{
-                    color: "#fff",
-                    fontSize: "1.5rem",
-                    opacity: isHovered ? 1 : 0,
-                    transform: isHovered ? "scale(1)" : "scale(0.8)",
-                    transition: "opacity 0.3s ease, transform 0.3s ease",
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "var(--text-xs)",
+                    color: "var(--color-text-light)",
+                    background: placeholderColors[i % placeholderColors.length],
+                    transform: isHovered ? "scale(1.08)" : "scale(1)",
+                    transition: "transform 0.4s ease",
                   }}
                 >
-                  +
-                </span>
+                  {i + 1}
+                </div>
+
+                {/* Hover overlay */}
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background: isHovered ? "rgba(0,0,0,0.35)" : "rgba(0,0,0,0)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    transition: "background 0.3s ease",
+                  }}
+                >
+                  <span
+                    style={{
+                      color: "var(--color-white)",
+                      fontSize: "var(--text-2xl)",
+                      opacity: isHovered ? 1 : 0,
+                      transform: isHovered ? "scale(1)" : "scale(0.8)",
+                      transition: "opacity 0.3s ease, transform 0.3s ease",
+                    }}
+                  >
+                    +
+                  </span>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );

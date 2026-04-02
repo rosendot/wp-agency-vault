@@ -15,51 +15,70 @@ const defaultProps: HeroSectionProps = {
 };
 
 export default function HeroSection(props: Partial<HeroSectionProps>) {
-  const vars = { ...defaultProps, ...props };
+  const v = { ...defaultProps, ...props };
 
   return (
-    <div style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
+    <div style={{ padding: "var(--space-16) var(--space-6)" }}>
+      {/* Standard section header */}
+      <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
+        <h2 style={{
+          fontFamily: "var(--font-heading)",
+          fontSize: "var(--text-4xl)",
+          fontWeight: 700,
+          color: "var(--color-dark)",
+          margin: "0 0 var(--space-2)",
+          lineHeight: "var(--leading-snug)",
+        }}>
+          Hero Section
+        </h2>
+        <p style={{ fontSize: "var(--text-xl)", color: "var(--color-text-light)", margin: 0 }}>
+          Full-width hero with overlay, text, and CTA buttons
+        </p>
+      </div>
+
+      {/* Hero preview */}
       <section
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          minHeight: vars.minHeight,
-          background: `linear-gradient(${vars.overlayColor}, ${vars.overlayColor}), linear-gradient(135deg, #8B6914 0%, #5a3e0a 50%, #3d2a06 100%)`,
+          minHeight: v.minHeight,
+          background: `linear-gradient(${v.overlayColor}, ${v.overlayColor}), linear-gradient(135deg, #8B6914 0%, #5a3e0a 50%, #3d2a06 100%)`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          color: "#ffffff",
+          color: "var(--color-white)",
           textAlign: "center",
           position: "relative",
           overflow: "hidden",
+          borderRadius: "var(--radius-lg)",
         }}
       >
         <div
           style={{
             position: "relative",
             zIndex: 2,
-            maxWidth: vars.maxWidth,
-            padding: "2rem",
+            maxWidth: v.maxWidth,
+            padding: "var(--space-8)",
           }}
         >
           <p
             style={{
-              fontSize: "0.9rem",
+              fontSize: "var(--text-sm)",
               textTransform: "uppercase",
-              letterSpacing: "3px",
-              marginBottom: "1rem",
+              letterSpacing: "var(--tracking-wide)",
+              marginBottom: "var(--space-4)",
               fontWeight: 600,
-              color: "#d4a017",
+              color: "var(--color-secondary)",
             }}
           >
             Welcome to
           </p>
           <h1
             style={{
-              fontSize: "4rem",
-              lineHeight: 1.1,
-              marginBottom: "1.25rem",
-              fontFamily: "Georgia, 'Times New Roman', serif",
+              fontSize: "var(--text-5xl)",
+              lineHeight: "var(--leading-tight)",
+              marginBottom: "var(--space-5)",
+              fontFamily: "var(--font-heading)",
             }}
           >
             Your City&rsquo;s Home for
@@ -68,11 +87,11 @@ export default function HeroSection(props: Partial<HeroSectionProps>) {
           </h1>
           <p
             style={{
-              fontSize: "1.15rem",
-              lineHeight: 1.8,
-              opacity: 0.85,
-              marginBottom: "2.5rem",
-              maxWidth: "600px",
+              fontSize: "var(--text-xl)",
+              lineHeight: "var(--leading-loose)",
+              opacity: "var(--opacity-soft)",
+              marginBottom: "var(--space-10)",
+              maxWidth: 600,
               marginLeft: "auto",
               marginRight: "auto",
             }}
@@ -83,7 +102,7 @@ export default function HeroSection(props: Partial<HeroSectionProps>) {
           <div
             style={{
               display: "flex",
-              gap: "1rem",
+              gap: "var(--space-4)",
               justifyContent: "center",
               flexWrap: "wrap",
             }}
@@ -93,16 +112,16 @@ export default function HeroSection(props: Partial<HeroSectionProps>) {
               onClick={(e) => e.preventDefault()}
               style={{
                 display: "inline-block",
-                padding: "0.9rem 2rem",
-                fontSize: "0.85rem",
+                padding: "var(--space-3) var(--space-8)",
+                fontSize: "var(--text-sm)",
                 fontWeight: 600,
                 textTransform: "uppercase",
-                letterSpacing: "1.5px",
+                letterSpacing: "var(--tracking-normal)",
                 textDecoration: "none",
-                borderRadius: "4px",
-                background: "#b42318",
-                color: "#fff",
-                border: "2px solid #b42318",
+                borderRadius: "var(--radius-md)",
+                background: "var(--color-primary)",
+                color: "var(--color-white)",
+                border: "2px solid var(--color-primary)",
                 cursor: "pointer",
               }}
             >
@@ -113,15 +132,15 @@ export default function HeroSection(props: Partial<HeroSectionProps>) {
               onClick={(e) => e.preventDefault()}
               style={{
                 display: "inline-block",
-                padding: "0.9rem 2rem",
-                fontSize: "0.85rem",
+                padding: "var(--space-3) var(--space-8)",
+                fontSize: "var(--text-sm)",
                 fontWeight: 600,
                 textTransform: "uppercase",
-                letterSpacing: "1.5px",
+                letterSpacing: "var(--tracking-normal)",
                 textDecoration: "none",
-                borderRadius: "4px",
+                borderRadius: "var(--radius-md)",
                 background: "transparent",
-                color: "#fff",
+                color: "var(--color-white)",
                 border: "2px solid rgba(255, 255, 255, 0.5)",
                 cursor: "pointer",
               }}
@@ -131,16 +150,6 @@ export default function HeroSection(props: Partial<HeroSectionProps>) {
           </div>
         </div>
       </section>
-      <div
-        style={{
-          padding: "3rem 2rem",
-          textAlign: "center",
-          background: "#faf6f0",
-          color: "#888",
-        }}
-      >
-        <p>Content continues below the hero...</p>
-      </div>
     </div>
   );
 }

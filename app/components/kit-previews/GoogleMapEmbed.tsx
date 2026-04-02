@@ -32,33 +32,47 @@ function MultiLine({ text }: { text: string }) {
 }
 
 export default function GoogleMapEmbed(props: Partial<GoogleMapEmbedProps>) {
-  const vars = { ...defaultProps, ...props };
+  const v = { ...defaultProps, ...props };
 
   return (
-    <div style={{ fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif", background: "#1a1208", color: "#faf6f0" }}>
-      <section style={{ padding: "4rem 2rem" }}>
-        <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-          <h2 style={{ fontFamily: "Georgia, serif", fontSize: "2.5rem", color: "#d4a017" }}>
-            Visit Us
-          </h2>
-        </div>
+    <div style={{ padding: "var(--space-16) var(--space-6)" }}>
+      {/* Section header */}
+      <div style={{ textAlign: "center", marginBottom: "var(--space-10)" }}>
+        <h2 style={{
+          fontFamily: "var(--font-heading)",
+          fontSize: "var(--text-4xl)",
+          fontWeight: 700,
+          color: "var(--color-dark)",
+          margin: "0 0 var(--space-2)",
+          lineHeight: "var(--leading-snug)",
+        }}>
+          Visit Us
+        </h2>
+        <p style={{
+          fontSize: "var(--text-xl)",
+          color: "var(--color-text-light)",
+          margin: 0,
+        }}>
+          We would love to see you
+        </p>
+      </div>
 
+      {/* Kit-specific content */}
+      <div style={{ maxWidth: "var(--max-w-xl)", margin: "0 auto" }}>
         <div
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
-            gap: "3rem",
-            maxWidth: 1200,
-            margin: "0 auto",
+            gap: "var(--space-12)",
             alignItems: "start",
           }}
         >
           {/* Map */}
-          <div style={{ borderRadius: 8, overflow: "hidden", height: "100%" }}>
-            {vars.embedUrl ? (
+          <div style={{ borderRadius: "var(--radius-lg)", overflow: "hidden", height: "100%" }}>
+            {v.embedUrl ? (
               <iframe
-                src={vars.embedUrl}
-                style={{ width: "100%", height: "100%", minHeight: vars.mapMinHeight, border: 0, display: "block" }}
+                src={v.embedUrl}
+                style={{ width: "100%", height: "100%", minHeight: v.mapMinHeight, border: 0, display: "block" }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -68,15 +82,14 @@ export default function GoogleMapEmbed(props: Partial<GoogleMapEmbedProps>) {
               <div
                 style={{
                   width: "100%",
-                  minHeight: vars.mapMinHeight,
-                  background: "#2a2218",
-                  borderRadius: 8,
+                  minHeight: v.mapMinHeight,
+                  background: "var(--color-cream)",
+                  borderRadius: "var(--radius-lg)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  color: "#8a7e6e",
-                  fontStyle: "italic",
-                  border: "1px dashed #555",
+                  color: "var(--color-text-light)",
+                  border: "1px dashed var(--color-border)",
                 }}
               >
                 Google Maps embed goes here
@@ -85,36 +98,36 @@ export default function GoogleMapEmbed(props: Partial<GoogleMapEmbedProps>) {
           </div>
 
           {/* Info */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-8)" }}>
             <div>
-              <h3 style={{ fontSize: "1.15rem", marginBottom: "0.5rem", color: "#d4a017" }}>
+              <h3 style={{ fontSize: "var(--text-xl)", marginBottom: "var(--space-2)", color: "var(--color-primary)", fontFamily: "var(--font-heading)" }}>
                 Location
               </h3>
-              <p style={{ fontSize: "0.95rem", opacity: 0.75, lineHeight: 1.7 }}>
-                <MultiLine text={vars.address} />
+              <p style={{ fontSize: "var(--text-base)", color: "var(--color-text-light)", lineHeight: "var(--leading-loose)", fontFamily: "var(--font-body)", margin: 0 }}>
+                <MultiLine text={v.address} />
               </p>
             </div>
             <div>
-              <h3 style={{ fontSize: "1.15rem", marginBottom: "0.5rem", color: "#d4a017" }}>
+              <h3 style={{ fontSize: "var(--text-xl)", marginBottom: "var(--space-2)", color: "var(--color-primary)", fontFamily: "var(--font-heading)" }}>
                 Hours
               </h3>
-              <p style={{ fontSize: "0.95rem", opacity: 0.75, lineHeight: 1.7 }}>
-                <MultiLine text={vars.hours} />
+              <p style={{ fontSize: "var(--text-base)", color: "var(--color-text-light)", lineHeight: "var(--leading-loose)", fontFamily: "var(--font-body)", margin: 0 }}>
+                <MultiLine text={v.hours} />
               </p>
             </div>
             <div>
-              <h3 style={{ fontSize: "1.15rem", marginBottom: "0.5rem", color: "#d4a017" }}>
+              <h3 style={{ fontSize: "var(--text-xl)", marginBottom: "var(--space-2)", color: "var(--color-primary)", fontFamily: "var(--font-heading)" }}>
                 Contact
               </h3>
-              <p style={{ fontSize: "0.95rem", opacity: 0.75, lineHeight: 1.7 }}>
-                {vars.phone}
+              <p style={{ fontSize: "var(--text-base)", color: "var(--color-text-light)", lineHeight: "var(--leading-loose)", fontFamily: "var(--font-body)", margin: 0 }}>
+                {v.phone}
                 <br />
-                {vars.email}
+                {v.email}
               </p>
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
