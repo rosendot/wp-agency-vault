@@ -1,0 +1,30 @@
+{
+  "name": "Masonry Gallery",
+  "slug": "masonry-gallery",
+  "description": "Pinterest-style masonry layout with varying image heights across columns. Hover overlay with zoom effect.",
+  "category": "section",
+  "tags": ["gallery", "masonry", "pinterest", "photos", "images", "portfolio", "columns"],
+  "files": {
+    "css": ["masonry-gallery.css"],
+    "php": ["masonry-gallery.php"]
+  },
+  "variables": {
+    "columns": {
+      "label": "Columns",
+      "type": "number",
+      "default": 4
+    },
+    "gap": {
+      "label": "Gap between items",
+      "type": "string",
+      "default": "12px"
+    },
+    "sectionTitle": {
+      "label": "Section title",
+      "type": "string",
+      "default": "Gallery"
+    }
+  },
+  "variants": {},
+  "dependencies": []
+}

@@ -32,6 +32,13 @@ Validates a kit folder for completeness, correctness, and dashboard compatibilit
 - [ ] Each variable has `label`, `type`, and `default`
 - [ ] `type` is one of: `string`, `number`, `color`
 
+### TSX preview component
+- [ ] A TSX file exists in `app/components/kit-previews/` for this kit (PascalCase name matching the kit)
+- [ ] The component is registered in the `KIT_PREVIEWS` registry in `app/components/KitDetail.tsx`
+- [ ] The component uses `var(--token)` design tokens — no hardcoded colors, fonts, sizes, spacing, or radii
+- [ ] The component follows the standard section header pattern (h2 + subtitle + padding)
+- [ ] Decorative buttons/links use `<span>` not `<a>` (avoids nested anchor hydration errors)
+
 ### preview.html works
 - [ ] References the kit's own CSS/JS files
 - [ ] Does not reference external CDNs for core kit functionality

@@ -15,6 +15,10 @@ import MenuList from "./kit-previews/MenuList";
 import MenuGrid from "./kit-previews/MenuGrid";
 import MenuCards from "./kit-previews/MenuCards";
 import GridGallery from "./kit-previews/GridGallery";
+import MasonryGallery from "./kit-previews/MasonryGallery";
+import LightboxGallery from "./kit-previews/LightboxGallery";
+import BeforeAfterSlider from "./kit-previews/BeforeAfterSlider";
+import ImageComparison from "./kit-previews/ImageComparison";
 import FaqTwoColumn from "./kit-previews/FaqTwoColumn";
 import FaqCards from "./kit-previews/FaqCards";
 import FaqTabbed from "./kit-previews/FaqTabbed";
@@ -37,6 +41,10 @@ const KIT_PREVIEWS: Record<string, ComponentType<Record<string, string | number>
   "menu-grid": MenuGrid,
   "menu-cards": MenuCards,
   "grid-gallery": GridGallery,
+  "masonry-gallery": MasonryGallery,
+  "lightbox-gallery": LightboxGallery,
+  "before-after-slider": BeforeAfterSlider,
+  "image-comparison": ImageComparison,
 };
 
 const LANG_COLORS: Record<string, string> = {

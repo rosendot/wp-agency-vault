@@ -1,0 +1,26 @@
+{
+  "name": "Before/After Slider",
+  "slug": "before-after-slider",
+  "description": "Two images overlaid with a draggable divider to reveal before and after states. Perfect for renovations, detailing, and transformations.",
+  "category": "interactive",
+  "tags": ["before-after", "slider", "comparison", "drag", "renovation", "transformation", "images"],
+  "files": {
+    "css": ["before-after-slider.css"],
+    "js": ["before-after-slider.js"],
+    "php": ["before-after-slider.php"]
+  },
+  "variables": {
+    "startPosition": {
+      "label": "Start position (%)",
+      "type": "number",
+      "default": 50
+    },
+    "sectionTitle": {
+      "label": "Section title",
+      "type": "string",
+      "default": "Before & After"
+    }
+  },
+  "variants": {},
+  "dependencies": []
+}

@@ -326,8 +326,14 @@ After the theme is working, identify any sections that are reusable across futur
 
 7. Create `preview.html` — self-contained static preview with inline or linked CSS/JS
 8. Create `README.md` with integration instructions and the HTML structure snippet
-9. Update the theme's `theme.json` to reference the new kit in `kits_used`
-10. Remove the duplicated code from the theme and replace with a reference/include
+9. Create a TSX preview component in `app/components/kit-previews/[KitName].tsx`:
+   - Use design tokens from `shared.ts` via `var(--token-name)` for all visual values
+   - Follow the standard section header pattern (h2 + subtitle + padding)
+   - Props should be content/behavior only — no color/font/size props
+   - Use `<span>` not `<a>` for decorative buttons/links
+10. Register the preview in the `KIT_PREVIEWS` registry in `app/components/KitDetail.tsx`
+11. Update the theme's `theme.json` to reference the new kit in `kits_used`
+12. Remove the duplicated code from the theme and replace with a reference/include
 
 ---
 
@@ -348,6 +354,9 @@ Final checklist before committing.
 - [ ] All required files present (source files, kit.json, preview.html, README.md)
 - [ ] kit.json complete and schema-valid
 - [ ] preview.html is self-contained and renders in the dashboard iframe
+- [ ] TSX preview component created in `app/components/kit-previews/`
+- [ ] TSX preview registered in `KIT_PREVIEWS` in `app/components/KitDetail.tsx`
+- [ ] TSX preview uses only `var(--token-name)` design tokens — no hardcoded values
 - [ ] PHP partial uses CSS variables, not hardcoded values
 - [ ] README.md includes the full HTML structure snippet and integration steps
 - [ ] No theme-specific logic inside the kit — it must work in any theme

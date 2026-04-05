@@ -1,0 +1,30 @@
+{
+  "name": "Image Comparison",
+  "slug": "image-comparison",
+  "description": "Side-by-side image pairs with labels. Static layout for comparing options, variations, or before/after results.",
+  "category": "section",
+  "tags": ["comparison", "side-by-side", "before-after", "images", "photos", "pairs", "options"],
+  "files": {
+    "css": ["image-comparison.css"],
+    "php": ["image-comparison.php"]
+  },
+  "variables": {
+    "columns": {
+      "label": "Pairs per row",
+      "type": "number",
+      "default": 2
+    },
+    "gap": {
+      "label": "Gap between pairs",
+      "type": "string",
+      "default": "2rem"
+    },
+    "sectionTitle": {
+      "label": "Section title",
+      "type": "string",
+      "default": "Compare"
+    }
+  },
+  "variants": {},
+  "dependencies": []
+}

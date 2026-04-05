@@ -1,0 +1,107 @@
+/* Masonry Gallery — see README.md for usage */
+
+.masonry-gallery {
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 4rem 1rem;
+}
+
+.masonry-gallery__header {
+	text-align: center;
+	margin-bottom: 2.5rem;
+}
+
+.masonry-gallery__title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin: 0;
+}
+
+.masonry-gallery__grid {
+	columns: 4;
+	column-gap: 12px;
+}
+
+.masonry-gallery__item {
+	break-inside: avoid;
+	margin-bottom: 12px;
+	position: relative;
+	overflow: hidden;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.masonry-gallery__img {
+	width: 100%;
+	display: block;
+	transition: transform 0.4s ease;
+}
+
+.masonry-gallery__item:hover .masonry-gallery__img {
+	transform: scale(1.05);
+}
+
+.masonry-gallery__overlay {
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: background 0.3s ease;
+}
+
+.masonry-gallery__item:hover .masonry-gallery__overlay {
+	background: rgba(0, 0, 0, 0.3);
+}
+
+.masonry-gallery__icon {
+	color: #fff;
+	font-size: 1.5rem;
+	opacity: 0;
+	transform: scale(0.8);
+	transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.masonry-gallery__item:hover .masonry-gallery__icon {
+	opacity: 1;
+	transform: scale(1);
+}
+
+/* Placeholder styling for previews */
+.masonry-gallery__placeholder {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.75rem;
+	font-style: italic;
+	color: #8a8279;
+	transition: transform 0.4s ease;
+}
+
+.masonry-gallery__item:hover .masonry-gallery__placeholder {
+	transform: scale(1.05);
+}
+
+@media (max-width: 1024px) {
+	.masonry-gallery__grid {
+		columns: 3;
+	}
+}
+
+@media (max-width: 768px) {
+	.masonry-gallery__grid {
+		columns: 2;
+	}
+
+	.masonry-gallery__title {
+		font-size: 2rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.masonry-gallery__grid {
+		columns: 1;
+	}
+}

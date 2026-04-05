@@ -1,0 +1,95 @@
+/* Image Comparison — see README.md for usage */
+
+.img-comparison {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 4rem 1rem;
+}
+
+.img-comparison__header {
+	text-align: center;
+	margin-bottom: 2.5rem;
+}
+
+.img-comparison__title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin: 0;
+}
+
+.img-comparison__grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 2rem;
+}
+
+/* Each comparison pair */
+.img-comparison__pair {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 4px;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.img-comparison__side {
+	position: relative;
+}
+
+.img-comparison__img {
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	display: block;
+}
+
+.img-comparison__label {
+	position: absolute;
+	bottom: 0.75rem;
+	left: 0.75rem;
+	background: rgba(0, 0, 0, 0.6);
+	color: #fff;
+	padding: 0.25rem 0.65rem;
+	border-radius: 4px;
+	font-size: 0.7rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.img-comparison__caption {
+	grid-column: 1 / -1;
+	padding: 0.75rem 1rem;
+	text-align: center;
+	font-size: 0.85rem;
+	font-weight: 500;
+}
+
+/* Placeholder styling for previews */
+.img-comparison__placeholder {
+	width: 100%;
+	aspect-ratio: 4 / 3;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.75rem;
+	color: #8a8279;
+}
+
+@media (max-width: 1024px) {
+	.img-comparison__grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 768px) {
+	.img-comparison__title {
+		font-size: 2rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.img-comparison__pair {
+		grid-template-columns: 1fr;
+	}
+}

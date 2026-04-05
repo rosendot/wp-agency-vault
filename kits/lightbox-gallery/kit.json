@@ -1,0 +1,31 @@
+{
+  "name": "Lightbox Gallery",
+  "slug": "lightbox-gallery",
+  "description": "Thumbnail grid that opens a full-screen lightbox modal with previous/next navigation and keyboard controls.",
+  "category": "interactive",
+  "tags": ["gallery", "lightbox", "modal", "fullscreen", "photos", "images", "portfolio", "zoom"],
+  "files": {
+    "css": ["lightbox-gallery.css"],
+    "js": ["lightbox-gallery.js"],
+    "php": ["lightbox-gallery.php"]
+  },
+  "variables": {
+    "columns": {
+      "label": "Thumbnail columns",
+      "type": "number",
+      "default": 4
+    },
+    "gap": {
+      "label": "Gap between thumbnails",
+      "type": "string",
+      "default": "8px"
+    },
+    "sectionTitle": {
+      "label": "Section title",
+      "type": "string",
+      "default": "Gallery"
+    }
+  },
+  "variants": {},
+  "dependencies": []
+}

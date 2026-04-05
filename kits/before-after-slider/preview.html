@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Before/After Slider Preview</title>
+    <link rel="stylesheet" href="before-after-slider.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #faf6f0; }
+        .ba-slider__title { font-family: Georgia, 'Times New Roman', serif; color: #1a1208; }
+        .after-slider { padding: 3rem 2rem; text-align: center; color: #888; }
+    </style>
+</head>
+<body>
+
+    <section class="ba-slider">
+        <div class="ba-slider__header">
+            <h2 class="ba-slider__title">Before & After</h2>
+        </div>
+        <div class="ba-slider__container" data-start="50">
+            <div class="ba-slider__after" style="width:100%;aspect-ratio:16/9;background:linear-gradient(135deg, #c4b5a0, #d4c5b0);"></div>
+            <div class="ba-slider__before-wrap">
+                <div class="ba-slider__before" style="width:100%;height:100%;background:linear-gradient(135deg, #8a7a68, #a89880);"></div>
+                <span class="ba-slider__label ba-slider__label--before">Before</span>
+            </div>
+            <span class="ba-slider__label ba-slider__label--after">After</span>
+            <div class="ba-slider__divider"></div>
+            <div class="ba-slider__handle">
+                <span class="ba-slider__handle-arrows">&#8249; &#8250;</span>
+            </div>
+        </div>
+    </section>
+
+    <div class="after-slider"><p>Content continues below the slider...</p></div>
+    <script src="before-after-slider.js"></script>
+</body>
+</html>

@@ -50,7 +50,11 @@ wp-agency-vault/
 │   ├── menu-list/           # Vertical menu list with dotted leaders
 │   ├── menu-grid/           # Responsive menu card grid with filter tabs
 │   ├── menu-cards/          # Large editorial menu cards with overlays
-│   └── grid-gallery/        # Configurable photo grid with hover overlay
+│   ├── grid-gallery/        # Configurable photo grid with hover overlay
+│   ├── masonry-gallery/     # Pinterest-style varying-height columns
+│   ├── lightbox-gallery/    # Thumbnail grid with full-screen modal viewer
+│   ├── before-after-slider/ # Draggable divider comparing two images
+│   └── image-comparison/    # Side-by-side image pairs with labels
 ├── palettes/                # Color systems + typography (mix and match with anything)
 │   └── ember-hearth/        # Rich reds, warm golds, serif headings
 ├── sections/                # Full page-level compositions of kits + palette (e.g., a complete menu page)
@@ -232,6 +236,27 @@ Plugins have a `buy_when` field: `day-1` (buy before first client) or `later` (b
 - Every section needs a valid `section.json`, `section.php`, `section.css`, and working `preview.html`
 - Every template needs a valid `template.json` and working `preview.html`
 - Every palette needs a valid `palette.json`
+
+### Documentation freshness
+After any structural changes, update ALL affected documentation before committing. Structural changes include:
+- Adding, removing, or renaming kits, sections, templates, palettes, or fonts
+- Changing the routing structure or adding/removing dashboard tabs
+- Modifying the data flow (types, fetchers, imports)
+- Changing how kits are built or registered (new conventions, new required files)
+
+Documentation files to check and update:
+- `README.md` — kit table, palette count, tab descriptions, "Adding to the Vault" instructions
+- `CLAUDE.md` — repo structure tree, dashboard routing table, kit inventory, architecture rules
+- `.claude/rules/dashboard-code.md` — component patterns, data flow, routing, adding new entities
+- `.claude/rules/css-styling.md` — CSS conventions (BEM, responsive breakpoints, custom properties)
+- `.claude/rules/wordpress-theme.md` — PHP escaping, enqueuing, security patterns
+- `.claude/skills/audit-kit/SKILL.md` — kit validation checklist (TSX preview, file matching)
+- `.claude/skills/new-kit/SKILL.md` — kit scaffolding steps and required files
+- `guides/design-process.md` — kit extraction steps, kit checklist
+- `guides/full-agency-flow.md` — infrastructure layers and vault references
+- `plugins/README.md` — plugin registry structure and schema
+
+Do NOT wait to be asked — update docs as part of the same body of work. If creating new kits, add them to the README kit table and CLAUDE.md structure tree in the same commit.
 
 ### Git hygiene
 - Never commit `vendor/`, `web/wp/`, `node_modules/`, `web/app/plugins/`, or `web/app/uploads/`

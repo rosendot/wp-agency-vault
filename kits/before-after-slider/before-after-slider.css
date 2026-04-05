@@ -1,0 +1,125 @@
+/* Before/After Slider — see README.md for usage */
+
+.ba-slider {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 4rem 1rem;
+}
+
+.ba-slider__header {
+	text-align: center;
+	margin-bottom: 2.5rem;
+}
+
+.ba-slider__title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin: 0;
+}
+
+.ba-slider__container {
+	position: relative;
+	overflow: hidden;
+	border-radius: 8px;
+	cursor: ew-resize;
+	user-select: none;
+	-webkit-user-select: none;
+}
+
+/* After image — fills the container */
+.ba-slider__after {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+/* Before image — absolutely positioned, clipped */
+.ba-slider__before-wrap {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 50%;
+	overflow: hidden;
+}
+
+.ba-slider__before {
+	display: block;
+	width: auto;
+	height: 100%;
+	min-width: 100%;
+	max-width: none;
+	object-fit: cover;
+}
+
+/* Divider line + handle */
+.ba-slider__divider {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 50%;
+	width: 3px;
+	background: #fff;
+	transform: translateX(-50%);
+	z-index: 2;
+	pointer-events: none;
+}
+
+.ba-slider__handle {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 44px;
+	height: 44px;
+	background: #fff;
+	border-radius: 50%;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 3;
+	pointer-events: none;
+}
+
+.ba-slider__handle-arrows {
+	display: flex;
+	gap: 6px;
+	color: #333;
+	font-size: 0.8rem;
+	font-weight: 700;
+}
+
+/* Labels */
+.ba-slider__label {
+	position: absolute;
+	top: 1rem;
+	z-index: 1;
+	background: rgba(0, 0, 0, 0.55);
+	color: #fff;
+	padding: 0.3rem 0.75rem;
+	border-radius: 4px;
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.ba-slider__label--before {
+	left: 1rem;
+}
+
+.ba-slider__label--after {
+	right: 1rem;
+}
+
+@media (max-width: 768px) {
+	.ba-slider__title {
+		font-size: 2rem;
+	}
+
+	.ba-slider__handle {
+		width: 36px;
+		height: 36px;
+	}
+}
