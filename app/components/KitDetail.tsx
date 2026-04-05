@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, type ComponentType } from "react";
-import type { KitData } from "../page";
+import Link from "next/link";
+import type { KitData } from "../lib/data";
 import HeroSection from "./kit-previews/HeroSection";
 import InfiniteCarousel from "./kit-previews/InfiniteCarousel";
 import GoogleMapEmbed from "./kit-previews/GoogleMapEmbed";
@@ -40,10 +41,8 @@ const LANG_COLORS: Record<string, string> = {
 
 export default function KitDetail({
   kit,
-  onBack,
 }: {
   kit: KitData;
-  onBack: () => void;
 }) {
   const allFiles = Object.entries(kit.files).flatMap(([lang, files]) =>
     files.map((f) => ({ name: f, lang }))
@@ -64,12 +63,12 @@ export default function KitDetail({
     <div className="min-h-[calc(100vh-57px)]">
       {/* Top bar */}
       <div className="border-b border-[var(--card-border)] px-6 py-3 flex items-center gap-4">
-        <button
-          onClick={onBack}
+        <Link
+          href="/kits"
           className="text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors flex items-center gap-1.5"
         >
           <span>←</span> Back to kits
-        </button>
+        </Link>
         <span className="text-[var(--card-border)]">|</span>
         <h2 className="font-semibold">{kit.name}</h2>
         <span className="text-xs text-[var(--muted)] bg-[var(--card-bg)] px-2 py-0.5 rounded">

@@ -1,11 +1,10 @@
 "use client";
 
 import { useState, useRef, useEffect, type ComponentType } from "react";
-import type { PaletteData, SectionData } from "../page";
-import SectionDetail from "./SectionDetail";
+import Link from "next/link";
+import type { PaletteData, SectionData } from "../lib/data";
 
 // Registry of section slugs → React preview components
-// Add entries here as you build full page-composition sections
 const SECTION_PREVIEWS: Record<string, ComponentType<Record<string, string | number>>> = {
 };
 
@@ -78,7 +77,6 @@ export default function SectionBrowser({
   sections: SectionData[];
   palettes: PaletteData[];
 }) {
-  const [selectedSection, setSelectedSection] = useState<SectionData | null>(null);
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -92,18 +90,6 @@ export default function SectionBrowser({
       s.tags.some((t) => t.toLowerCase().includes(searchQuery.toLowerCase()));
     return matchesCategory && matchesSearch;
   });
-
-  if (selectedSection) {
-    const defaultPalette = palettes.find((p) => p.slug === selectedSection.default_palette);
-    return (
-      <SectionDetail
-        section={selectedSection}
-        palettes={palettes}
-        defaultPalette={defaultPalette}
-        onBack={() => setSelectedSection(null)}
-      />
-    );
-  }
 
   return (
     <div className="flex">
@@ -150,9 +136,9 @@ export default function SectionBrowser({
           {filtered.map((section) => {
             const palette = palettes.find((p) => p.slug === section.default_palette);
             return (
-              <button
+              <Link
                 key={section.slug}
-                onClick={() => setSelectedSection(section)}
+                href={`/sections/${section.slug}`}
                 className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl overflow-hidden text-left hover:border-[var(--accent)] transition-all hover:shadow-lg hover:shadow-[var(--accent)]/5 group"
               >
                 <SectionThumbnail section={section} palette={palette} />
@@ -179,7 +165,7 @@ export default function SectionBrowser({
                     ))}
                   </div>
                 </div>
-              </button>
+              </Link>
             );
           })}
         </div>

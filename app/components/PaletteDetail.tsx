@@ -1,13 +1,12 @@
 "use client";
 
-import type { PaletteData } from "../page";
+import Link from "next/link";
+import type { PaletteData } from "../lib/data";
 
 export default function PaletteDetail({
   palette,
-  onBack,
 }: {
   palette: PaletteData;
-  onBack: () => void;
 }) {
   // Generate CSS custom properties output
   const cssOutput = [
@@ -25,12 +24,12 @@ export default function PaletteDetail({
     <div className="min-h-[calc(100vh-57px)]">
       {/* Top bar */}
       <div className="border-b border-[var(--card-border)] px-6 py-3 flex items-center gap-4">
-        <button
-          onClick={onBack}
+        <Link
+          href="/palettes"
           className="text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors flex items-center gap-1.5"
         >
           <span>←</span> Back to palettes
-        </button>
+        </Link>
         <span className="text-[var(--card-border)]">|</span>
         <h2 className="font-semibold">{palette.name}</h2>
         <div className="flex gap-1 ml-2">

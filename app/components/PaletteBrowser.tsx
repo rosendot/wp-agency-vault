@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import type { PaletteData } from "../page";
-import PaletteDetail from "./PaletteDetail";
+import Link from "next/link";
+import type { PaletteData } from "../lib/data";
 
 export default function PaletteBrowser({ palettes }: { palettes: PaletteData[] }) {
-  const [selectedPalette, setSelectedPalette] = useState<PaletteData | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
   const filtered = palettes.filter((p) => {
@@ -16,12 +15,6 @@ export default function PaletteBrowser({ palettes }: { palettes: PaletteData[] }
       p.tags.some((t) => t.toLowerCase().includes(q))
     );
   });
-
-  if (selectedPalette) {
-    return (
-      <PaletteDetail palette={selectedPalette} onBack={() => setSelectedPalette(null)} />
-    );
-  }
 
   return (
     <div className="p-6">
@@ -39,9 +32,9 @@ export default function PaletteBrowser({ palettes }: { palettes: PaletteData[] }
       {/* Palette grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {filtered.map((palette) => (
-          <button
+          <Link
             key={palette.slug}
-            onClick={() => setSelectedPalette(palette)}
+            href={`/palettes/${palette.slug}`}
             className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl p-5 text-left hover:border-[var(--accent)] transition-all hover:shadow-lg hover:shadow-[var(--accent)]/5 group"
           >
             {/* Color swatches */}
@@ -86,7 +79,7 @@ export default function PaletteBrowser({ palettes }: { palettes: PaletteData[] }
                 </span>
               ))}
             </div>
-          </button>
+          </Link>
         ))}
       </div>
 

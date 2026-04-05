@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, type ComponentType } from "react";
-import type { PaletteData, SectionData } from "../page";
+import Link from "next/link";
+import type { PaletteData, SectionData } from "../lib/data";
 
 // Registry of section slugs → React preview components
 // Add entries here as you build full page-composition sections
@@ -18,12 +19,10 @@ export default function SectionDetail({
   section,
   palettes,
   defaultPalette,
-  onBack,
 }: {
   section: SectionData;
   palettes: PaletteData[];
   defaultPalette?: PaletteData;
-  onBack: () => void;
 }) {
   const [activeView, setActiveView] = useState<"preview" | "code" | "variables">("preview");
 
@@ -60,12 +59,12 @@ export default function SectionDetail({
       {/* Top bar */}
       <div className="border-b border-[var(--card-border)] px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <button
-            onClick={onBack}
+          <Link
+            href="/sections"
             className="text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors flex items-center gap-1.5"
           >
             <span>←</span> Back to sections
-          </button>
+          </Link>
           <span className="text-[var(--card-border)]">|</span>
           <h2 className="font-semibold">{section.name}</h2>
           <span className="text-xs text-[var(--muted)] bg-[var(--card-bg)] px-2 py-0.5 rounded capitalize">

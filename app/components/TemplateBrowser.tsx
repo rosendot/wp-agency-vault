@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect, type ComponentType } from "react";
-import type { PaletteData, TemplateData } from "../page";
-import TemplateDetail from "./TemplateDetail";
+import Link from "next/link";
+import type { PaletteData, TemplateData } from "../lib/data";
 import RestaurantClassic from "./template-previews/RestaurantClassic";
 
 // Registry of template slugs → React preview components
@@ -70,7 +70,6 @@ export default function TemplateBrowser({
   templates: TemplateData[];
   palettes: PaletteData[];
 }) {
-  const [selectedTemplate, setSelectedTemplate] = useState<TemplateData | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
   const filtered = templates.filter((t) => {
@@ -82,18 +81,6 @@ export default function TemplateBrowser({
       t.tags.some((tag) => tag.toLowerCase().includes(q))
     );
   });
-
-  if (selectedTemplate) {
-    const defaultPalette = palettes.find((p) => p.slug === selectedTemplate.default_palette);
-    return (
-      <TemplateDetail
-        template={selectedTemplate}
-        palettes={palettes}
-        defaultPalette={defaultPalette}
-        onBack={() => setSelectedTemplate(null)}
-      />
-    );
-  }
 
   return (
     <div className="flex">
@@ -154,13 +141,10 @@ export default function TemplateBrowser({
           {filtered.map((template) => {
             const palette = palettes.find((p) => p.slug === template.default_palette);
             return (
-              <div
+              <Link
                 key={template.slug}
-                onClick={() => setSelectedTemplate(template)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setSelectedTemplate(template); }}
-                className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl overflow-hidden text-left hover:border-[var(--accent)] transition-all hover:shadow-lg hover:shadow-[var(--accent)]/5 group cursor-pointer"
+                href={`/templates/${template.slug}`}
+                className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl overflow-hidden text-left hover:border-[var(--accent)] transition-all hover:shadow-lg hover:shadow-[var(--accent)]/5 group"
               >
                 <TemplateThumbnail template={template} palette={palette} />
 
@@ -208,7 +192,7 @@ export default function TemplateBrowser({
                     )}
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { FontData } from "../page";
+import type { FontData } from "../lib/data";
 
 const TYPE_LABELS: Record<string, string> = {
   all: "All Fonts",

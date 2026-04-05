@@ -158,12 +158,12 @@ export default function RestaurantClassic(props: Partial<RestaurantClassicProps>
             {v.hero_text}
           </p>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="#" onClick={(e) => e.preventDefault()} style={{ display: "inline-block", padding: "0.85rem 2.25rem", borderRadius: 4, fontWeight: 600, fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: 1, background: v.color_primary, color: "#fff", border: `2px solid ${v.color_primary}`, textDecoration: "none", cursor: "pointer" }}>
+            <span style={{ display: "inline-block", padding: "0.85rem 2.25rem", borderRadius: 4, fontWeight: 600, fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: 1, background: v.color_primary, color: "#fff", border: `2px solid ${v.color_primary}`, textDecoration: "none" }}>
               Order Online
-            </a>
-            <a href="#" onClick={(e) => e.preventDefault()} style={{ display: "inline-block", padding: "0.85rem 2.25rem", borderRadius: 4, fontWeight: 600, fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: 1, background: "transparent", color: "#fff", border: "2px solid #fff", textDecoration: "none", cursor: "pointer" }}>
+            </span>
+            <span style={{ display: "inline-block", padding: "0.85rem 2.25rem", borderRadius: 4, fontWeight: 600, fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: 1, background: "transparent", color: "#fff", border: "2px solid #fff", textDecoration: "none" }}>
               Our Story
-            </a>
+            </span>
           </div>
         </div>
       </section>
@@ -192,9 +192,9 @@ export default function RestaurantClassic(props: Partial<RestaurantClassicProps>
           }}
         />
         <div style={{ textAlign: "center", marginTop: "3rem" }}>
-          <a href="#" onClick={(e) => e.preventDefault()} style={{ display: "inline-block", padding: "0.85rem 2.25rem", borderRadius: 4, fontWeight: 600, fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: 1, background: "transparent", color: v.color_dark, border: `2px solid ${v.color_dark}`, textDecoration: "none", cursor: "pointer" }}>
+          <span style={{ display: "inline-block", padding: "0.85rem 2.25rem", borderRadius: 4, fontWeight: 600, fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: 1, background: "transparent", color: v.color_dark, border: `2px solid ${v.color_dark}`, textDecoration: "none" }}>
             View Menu
-          </a>
+          </span>
         </div>
       </section>
 
@@ -232,9 +232,9 @@ export default function RestaurantClassic(props: Partial<RestaurantClassicProps>
               <p style={{ fontSize: "0.9rem", opacity: 0.7, lineHeight: 1.7 }}>{v.phone}</p>
               <p style={{ fontSize: "0.9rem", opacity: 0.7, lineHeight: 1.7 }}>{v.email}</p>
             </div>
-            <a href="#" onClick={(e) => e.preventDefault()} style={{ display: "inline-block", padding: "0.85rem 2.25rem", borderRadius: 4, fontWeight: 600, fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: 1, background: v.color_primary, color: "#fff", border: `2px solid ${v.color_primary}`, textDecoration: "none", cursor: "pointer", alignSelf: "flex-start" }}>
+            <span style={{ display: "inline-block", padding: "0.85rem 2.25rem", borderRadius: 4, fontWeight: 600, fontSize: "0.85rem", textTransform: "uppercase", letterSpacing: 1, background: v.color_primary, color: "#fff", border: `2px solid ${v.color_primary}`, textDecoration: "none", alignSelf: "flex-start" }}>
               Call {v.phone}
-            </a>
+            </span>
           </div>
         </div>
       </section>
@@ -271,9 +271,9 @@ export default function RestaurantClassic(props: Partial<RestaurantClassicProps>
             <p style={{ fontSize: "0.85rem", opacity: 0.5, marginBottom: "1.25rem", letterSpacing: 1 }}>{v.tagline}</p>
             <div style={{ display: "flex", gap: "1rem", justifyContent: "center" }}>
               {["FB", "IG"].map((label) => (
-                <a key={label} href="#" onClick={(e) => e.preventDefault()} style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 36, height: 36, borderRadius: "50%", background: "rgba(250,246,240,0.15)", color: v.color_cream, fontSize: "0.75rem", fontWeight: 700, textDecoration: "none" }} aria-label={label}>
+                <span key={label} style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 36, height: 36, borderRadius: "50%", background: "rgba(250,246,240,0.15)", color: v.color_cream, fontSize: "0.75rem", fontWeight: 700, textDecoration: "none" }} aria-label={label}>
                   {label}
-                </a>
+                </span>
               ))}
             </div>
           </div>

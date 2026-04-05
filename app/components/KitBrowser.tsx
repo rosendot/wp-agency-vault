@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import type { KitData } from "../page";
-import KitDetail from "./KitDetail";
+import Link from "next/link";
+import type { KitData } from "../lib/data";
 
 const CATEGORY_LABELS: Record<string, string> = {
   all: "All Kits",
@@ -22,7 +22,6 @@ const CATEGORY_ICONS: Record<string, string> = {
 
 export default function KitBrowser({ kits }: { kits: KitData[] }) {
   const [activeCategory, setActiveCategory] = useState("all");
-  const [selectedKit, setSelectedKit] = useState<KitData | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
   const categories = ["all", ...Array.from(new Set(kits.map((k) => k.category)))];
@@ -42,12 +41,6 @@ export default function KitBrowser({ kits }: { kits: KitData[] }) {
 
   const langBadges = (kit: KitData) =>
     Object.keys(kit.files).map((lang) => lang.toUpperCase());
-
-  if (selectedKit) {
-    return (
-      <KitDetail kit={selectedKit} onBack={() => setSelectedKit(null)} />
-    );
-  }
 
   return (
     <div className="flex">
@@ -103,9 +96,9 @@ export default function KitBrowser({ kits }: { kits: KitData[] }) {
         {/* Kit grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filtered.map((kit) => (
-            <button
+            <Link
               key={kit.slug}
-              onClick={() => setSelectedKit(kit)}
+              href={`/kits/${kit.slug}`}
               className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-xl p-5 text-left hover:border-[var(--accent)] transition-all hover:shadow-lg hover:shadow-[var(--accent)]/5 group"
             >
               {/* Header */}
@@ -158,7 +151,7 @@ export default function KitBrowser({ kits }: { kits: KitData[] }) {
                   </span>
                 ))}
               </div>
-            </button>
+            </Link>
           ))}
         </div>
 
