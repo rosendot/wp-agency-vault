@@ -9,6 +9,7 @@ const TABS = [
   { key: "kits", label: "Kits" },
   { key: "palettes", label: "Palettes" },
   { key: "fonts", label: "Fonts" },
+  { key: "guides", label: "Guides" },
 ] as const;
 
 export default function NavHeader({

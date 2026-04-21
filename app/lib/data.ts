@@ -21,9 +21,18 @@ async function countJsonFiles(dir: string, filename: string): Promise<number> {
   }
 }
 
+async function countMarkdownFiles(dir: string): Promise<number> {
+  try {
+    const files = await fs.readdir(dir);
+    return files.filter((f) => f.endsWith(".md")).length;
+  } catch {
+    return 0;
+  }
+}
+
 export async function getCounts(): Promise<Record<string, number>> {
   const cwd = process.cwd();
-  const [templates, sections, kits, palettes, fonts] = await Promise.all([
+  const [templates, sections, kits, palettes, fonts, guides] = await Promise.all([
     countJsonFiles(path.join(cwd, "templates"), "template.json"),
     countJsonFiles(path.join(cwd, "sections"), "section.json"),
     countJsonFiles(path.join(cwd, "kits"), "kit.json"),
@@ -31,8 +40,9 @@ export async function getCounts(): Promise<Record<string, number>> {
     fs.readFile(path.join(cwd, "fonts", "fonts.json"), "utf-8")
       .then((raw) => (JSON.parse(raw) as unknown[]).length)
       .catch(() => 0),
+    countMarkdownFiles(path.join(cwd, "guides")),
   ]);
-  return { templates, sections, kits, palettes, fonts };
+  return { templates, sections, kits, palettes, fonts, guides };
 }
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -328,6 +338,86 @@ export async function getTemplates(): Promise<TemplateData[]> {
   }
 
   return templates;
+}
+
+// ─── Guides ──────────────────────────────────────────────────────────────────
+
+export interface GuideSummary {
+  slug: string;
+  title: string;
+  description: string;
+}
+
+export interface GuideData extends GuideSummary {
+  content: string;
+}
+
+function slugFromFilename(filename: string): string {
+  return filename.replace(/\.md$/, "");
+}
+
+function titleFromSlug(slug: string): string {
+  return slug
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
+function parseGuideMeta(content: string, slug: string): { title: string; description: string } {
+  const lines = content.split(/\r?\n/);
+  let title = titleFromSlug(slug);
+  let description = "";
+
+  const h1 = lines.find((line) => line.startsWith("# "));
+  if (h1) title = h1.replace(/^#\s+/, "").trim();
+
+  const h1Index = h1 ? lines.indexOf(h1) : -1;
+  for (let i = h1Index + 1; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line) continue;
+    if (line.startsWith("#")) break;
+    description = line.replace(/[*_`]/g, "");
+    break;
+  }
+
+  return { title, description };
+}
+
+export async function getGuides(): Promise<GuideSummary[]> {
+  const guidesDir = path.join(process.cwd(), "guides");
+  let files: string[];
+  try {
+    files = await fs.readdir(guidesDir);
+  } catch {
+    return [];
+  }
+
+  const guides: GuideSummary[] = [];
+  for (const file of files) {
+    if (!file.endsWith(".md")) continue;
+    const slug = slugFromFilename(file);
+    try {
+      const content = await fs.readFile(path.join(guidesDir, file), "utf-8");
+      const { title, description } = parseGuideMeta(content, slug);
+      guides.push({ slug, title, description });
+    } catch {
+      // skip unreadable files
+    }
+  }
+
+  return guides.sort((a, b) => a.title.localeCompare(b.title));
+}
+
+export async function getGuide(slug: string): Promise<GuideData | null> {
+  if (slug.includes("/") || slug.includes("\\") || slug.includes("..")) return null;
+  const filePath = path.join(process.cwd(), "guides", `${slug}.md`);
+  try {
+    const content = await fs.readFile(filePath, "utf-8");
+    const { title, description } = parseGuideMeta(content, slug);
+    return { slug, title, description, content };
+  } catch {
+    return null;
+  }
 }
 
 export async function getTemplate(slug: string): Promise<TemplateData | null> {

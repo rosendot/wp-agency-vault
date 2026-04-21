@@ -29,6 +29,9 @@ atlas-studio-internal/
 │   │   └── [slug]/page.tsx  # Palette detail page
 │   ├── fonts/
 │   │   └── page.tsx         # Fonts list page
+│   ├── guides/
+│   │   ├── page.tsx         # Guides list page
+│   │   └── [slug]/page.tsx  # Guide detail page (renders guides/*.md)
 │   ├── api/
 │   │   ├── kit-preview/     # Serves kit preview.html with correct asset paths
 │   │   ├── kit-file/        # Serves kit static files (CSS, JS)
@@ -100,6 +103,8 @@ The dashboard uses **Next.js App Router file-based routing**. Each tab is its ow
 | `/palettes` | Palette list |
 | `/palettes/[slug]` | Palette detail (swatches, typography, CSS output) |
 | `/fonts` | Font browser |
+| `/guides` | Guides list |
+| `/guides/[slug]` | Guide detail (rendered markdown) |
 | `/` | Redirects to `/templates` |
 
 ### Navigation
@@ -136,6 +141,12 @@ The dashboard uses **Next.js App Router file-based routing**. Each tab is its ow
 - Search by name, vibe, or pairing
 - Adjustable preview size slider
 - Shows font pairings and which palettes use each font
+
+### Guides tab (`/guides`)
+- Browse every markdown file in `guides/` as a card (title + first-paragraph description)
+- Search by title, description, or slug
+- Click a guide to navigate to `/guides/[slug]`: full markdown rendered with prose styling (headings, lists, code blocks, tables, blockquotes, links)
+- Markdown is rendered server-side via `app/lib/markdown.ts` — no external deps
 
 ## Four-Layer Architecture
 

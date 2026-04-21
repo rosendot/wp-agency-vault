@@ -27,7 +27,7 @@ npm run dev
 # Open http://localhost:3000
 ```
 
-Five tabs: **Templates**, **Sections**, **Kits**, **Palettes**, and **Fonts**.
+Six tabs: **Templates**, **Sections**, **Kits**, **Palettes**, **Fonts**, and **Guides**.
 
 Each tab and detail view has its own URL (e.g., `/kits/hero-split`). Refreshing the page stays on the current view. Browser back/forward works natively.
 
@@ -36,6 +36,7 @@ Each tab and detail view has its own URL (e.g., `/kits/hero-split`). Refreshing 
 - **Kits** (`/kits`) — Browse individual components with live previews, view code, see tags/variants/dependencies
 - **Palettes** (`/palettes`) — Browse color systems with swatches, font previews, and CSS custom property output
 - **Fonts** (`/fonts`) — Browse fonts by type, preview at adjustable sizes, see pairings and palette usage
+- **Guides** (`/guides`) — Browse and read the step-by-step reference docs in `guides/` with rendered markdown
 
 ## Kits
 

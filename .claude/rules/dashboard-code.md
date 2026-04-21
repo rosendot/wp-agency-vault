@@ -50,6 +50,14 @@ Next.js + TypeScript + Tailwind conventions for the vault dashboard UI.
 - File contents are read server-side and passed as `fileContents` prop — no client-side file reads
 - Search and filtering happen client-side in Browser components
 
+## Guides (markdown rendering)
+- Guide source files are raw markdown in `guides/` — one `.md` per guide; slug = filename without `.md`
+- `getGuides()` / `getGuide(slug)` in `app/lib/data.ts` read files directly; `getGuide` rejects slugs containing `/`, `\`, or `..` to block directory traversal
+- Markdown → HTML conversion lives in `app/lib/markdown.ts` (no external dep). All input is escaped before formatting, so the output is safe to set via `dangerouslySetInnerHTML`
+- If a guide uses a feature the renderer doesn't support, extend `markdown.ts` — do not add a markdown library without discussing first
+- `GuideDetail` is a **server component** (no `"use client"`) — it renders HTML at request time
+- Prose styling lives in `.guide-prose` in `globals.css` — scope any new prose rules to that class
+
 ## Kit Preview Components
 - Kit previews live in `app/components/kit-previews/` — one TSX file per kit
 - Design tokens defined in `app/components/kit-previews/shared.ts` — single source of truth for all visual values
