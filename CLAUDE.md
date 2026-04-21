@@ -1,11 +1,13 @@
-# WP Agency Vault
+# Atlas Studio Vault (`atlas-studio-internal`)
 
-Personal knowledge base, reusable toolkit, and internal dashboard for building WordPress client sites using Bedrock + LocalWP.
+Atlas Studio's internal knowledge base, reusable toolkit, and dashboard for building WordPress client sites using Bedrock + LocalWP.
+
+Tagline: **You run the business. We hold up your site.**
 
 ## Repo Structure
 
 ```
-wp-agency-vault/
+atlas-studio-internal/
 ├── app/                     # Next.js dashboard UI (TypeScript + Tailwind)
 │   ├── components/          # NavHeader, Browser, Detail, and kit-preview components
 │   │   ├── NavHeader.tsx    # Shared header with tab navigation (uses usePathname)

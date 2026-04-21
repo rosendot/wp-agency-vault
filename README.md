@@ -1,6 +1,10 @@
-# WP Agency Vault
+# Atlas Studio Vault
 
-A personal knowledge base, reusable toolkit, and internal dashboard for building WordPress client sites. Browse templates, kits, and palettes visually, mix and match, and ship faster.
+Internal knowledge base, reusable toolkit, and dashboard for Atlas Studio. Browse templates, kits, and palettes visually, mix and match, and ship faster.
+
+> **You run the business. We hold up your site.**
+
+This is the `atlas-studio-internal` repo — the private vault behind every Atlas Studio client site.
 
 ## What's Inside
 

@@ -1,4 +1,4 @@
-# Agency infrastructure – full flow
+# Atlas Studio infrastructure – full flow
 
 ## The big picture
 
@@ -60,11 +60,13 @@ client-tacoria/               → git repo (your code only)
 
 ## Layer 2 – GitHub
 
-One private repo per client. Your agency vault is its own separate repo.
+One private repo per client. The Atlas Studio repos (internal vault, public frontend, backend) each live separately.
 
 ```
 GitHub/
-├── wp-agency-vault/          → your internal toolkit (kits, base themes, guides)
+├── atlas-studio-internal/    → internal toolkit (kits, base themes, guides, dashboard)
+├── atlas-studio-frontend/    → public brochure site (atlasstudio.com)
+├── atlas-studio-backend/     → internal backend services
 ├── client-tacoria/           → Tacoria's site
 ├── client-sunrise-salon/     → Salon's site
 └── client-jewelry-co/        → Jewelry store's site
@@ -72,14 +74,14 @@ GitHub/
 
 **What lives in the vault vs client repos:**
 
-| Agency vault | Client repo |
-|-------------|-------------|
+| `atlas-studio-internal` (vault) | Client repo |
+|--------------------------------|-------------|
 | Reusable kits (carousel, nav, hero, etc.) | Bedrock config |
 | Base themes to pull from | Client-specific custom theme |
 | Plugin registry (JSON) | composer.json referencing vault kits |
 | Guides + documentation | .env.example |
 
-The vault is your competitive moat. Client repos are the deliverables built from it. Client repos pull from the vault via Git submodules or Composer – they never duplicate vault code.
+The vault is the studio's competitive moat. Client repos are the deliverables built from it. Client repos pull from the vault via Git submodules or Composer – they never duplicate vault code.
 
 ---
 
@@ -99,7 +101,7 @@ Varnish + Redis + Breeze – replaces WP Rocket. No extra cost, no extra plugin.
 
 ```
 Cloudways server
-├── mainwp.youragency.com     → YOUR site (not a client site)
+├── mainwp.atlasstudio.com    → Atlas Studio's own site (not a client site)
 │   └── MainWP Pro plugin     → monitors + manages all client sites
 │
 ├── tacoria.com               → Client site A
@@ -214,15 +216,19 @@ Step by step for each new client:
 ```
 GitHub/
 │
-├── wp-agency-vault/                    → private, internal only
-│   ├── dashboard/                      → Next.js kit/theme browser
+├── atlas-studio-internal/              → private vault (this repo)
+│   ├── app/                            → Next.js kit/theme browser
 │   ├── kits/                           → reusable components
-│   ├── themes/                         → base themes
-│   ├── plugins/                        → plugin registry (JSON)
+│   ├── palettes/                       → color systems + typography
+│   ├── sections/                       → full page-level compositions
+│   ├── templates/                      → full page layouts
+│   ├── plugins/                        → plugin + tools registry (JSON)
 │   └── guides/                         → this file lives here
 │
-├── agency-website/                     → your public brochure site
+├── atlas-studio-frontend/              → public brochure site (atlasstudio.com)
 │   └── (Astro + Tailwind + Vercel)
+│
+├── atlas-studio-backend/               → internal backend services
 │
 ├── client-tacoria/                     → one repo per client
 │   ├── composer.json
