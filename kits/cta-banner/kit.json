@@ -1,0 +1,58 @@
+{
+  "name": "CTA Banner",
+  "slug": "cta-banner",
+  "description": "Final-call conversion banner with headline, subhead, and 1–2 buttons on an accent background. The 'Ready to get started?' closer every landing page needs.",
+  "category": "section",
+  "tags": ["cta", "conversion", "banner", "closer", "accent", "buttons", "landing"],
+  "files": {
+    "css": ["cta-banner.css"],
+    "php": ["cta-banner.php"]
+  },
+  "variables": {
+    "title": {
+      "label": "Headline",
+      "type": "string",
+      "default": "Ready to ship faster?"
+    },
+    "subtitle": {
+      "label": "Subheadline",
+      "type": "string",
+      "default": "Get a custom site built by people who actually maintain it afterward."
+    },
+    "primaryLabel": {
+      "label": "Primary button label",
+      "type": "string",
+      "default": "Start a project"
+    },
+    "primaryUrl": {
+      "label": "Primary button URL",
+      "type": "string",
+      "default": "#"
+    },
+    "secondaryLabel": {
+      "label": "Secondary button label",
+      "type": "string",
+      "default": "Book a call"
+    },
+    "secondaryUrl": {
+      "label": "Secondary button URL",
+      "type": "string",
+      "default": "#"
+    }
+  },
+  "variants": {
+    "split": {
+      "label": "Split (text left, buttons right)",
+      "class": "cta-banner--split"
+    },
+    "dark": {
+      "label": "Dark background",
+      "class": "cta-banner--dark"
+    },
+    "outlined": {
+      "label": "Outlined (no fill, bordered)",
+      "class": "cta-banner--outlined"
+    }
+  },
+  "dependencies": []
+}

@@ -1,0 +1,160 @@
+/* Process Steps — see README.md for usage */
+
+.process-steps {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 4rem 1rem;
+}
+
+.process-steps__header {
+	text-align: center;
+	max-width: 640px;
+	margin: 0 auto 3rem;
+}
+
+.process-steps__title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	line-height: 1.2;
+	margin: 0 0 0.75rem;
+}
+
+.process-steps__subtitle {
+	font-size: 1.1rem;
+	line-height: 1.6;
+	opacity: 0.75;
+	margin: 0;
+}
+
+.process-steps__list {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 2rem;
+	position: relative;
+}
+
+/* Connector line behind badges (desktop only, horizontal layout) */
+.process-steps--connected .process-steps__list::before {
+	content: "";
+	position: absolute;
+	top: 24px;
+	left: 10%;
+	right: 10%;
+	height: 2px;
+	background: currentColor;
+	opacity: 0.15;
+	z-index: 0;
+}
+
+.process-steps__item {
+	position: relative;
+	text-align: center;
+	z-index: 1;
+}
+
+.process-steps__badge {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.25rem;
+	font-weight: 700;
+	margin: 0 auto 1.25rem;
+	position: relative;
+	z-index: 2;
+}
+
+.process-steps__step-title {
+	font-size: 1.2rem;
+	font-weight: 600;
+	line-height: 1.3;
+	margin: 0 0 0.5rem;
+}
+
+.process-steps__step-body {
+	font-size: 0.95rem;
+	line-height: 1.6;
+	opacity: 0.75;
+	margin: 0;
+}
+
+/* Variant: card-style */
+.process-steps--cards .process-steps__item {
+	padding: 2rem;
+	border-radius: 12px;
+	border: 1px solid;
+	text-align: left;
+}
+
+.process-steps--cards .process-steps__badge {
+	margin: 0 0 1.25rem;
+}
+
+.process-steps--cards .process-steps__list::before {
+	display: none;
+}
+
+/* Variant: vertical */
+.process-steps--vertical .process-steps__list {
+	grid-template-columns: 1fr;
+	gap: 2.5rem;
+	max-width: 640px;
+	margin: 0 auto;
+}
+
+.process-steps--vertical .process-steps__item {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 1.5rem;
+	text-align: left;
+	align-items: start;
+}
+
+.process-steps--vertical .process-steps__badge {
+	margin: 0;
+}
+
+.process-steps--vertical .process-steps__list::before {
+	top: 0;
+	bottom: 0;
+	left: 24px;
+	right: auto;
+	width: 2px;
+	height: auto;
+}
+
+@media (max-width: 900px) {
+	.process-steps__list {
+		grid-template-columns: 1fr;
+		gap: 2.5rem;
+		max-width: 520px;
+		margin: 0 auto;
+	}
+
+	.process-steps__item {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		gap: 1.25rem;
+		text-align: left;
+		align-items: start;
+	}
+
+	.process-steps__badge {
+		margin: 0;
+	}
+
+	.process-steps--connected .process-steps__list::before {
+		top: 0;
+		bottom: 0;
+		left: 24px;
+		right: auto;
+		width: 2px;
+		height: auto;
+	}
+
+	.process-steps__title {
+		font-size: 2rem;
+	}
+}

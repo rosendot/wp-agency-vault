@@ -1,0 +1,110 @@
+/* Feature Grid — see README.md for usage */
+
+.feature-grid {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 4rem 1rem;
+}
+
+.feature-grid__header {
+	text-align: center;
+	max-width: 640px;
+	margin: 0 auto 3rem;
+}
+
+.feature-grid__title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	line-height: 1.2;
+	margin: 0 0 0.75rem;
+}
+
+.feature-grid__subtitle {
+	font-size: 1.1rem;
+	line-height: 1.6;
+	opacity: 0.75;
+	margin: 0;
+}
+
+.feature-grid__grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1.5rem;
+}
+
+.feature-grid__card {
+	padding: 2rem;
+	border-radius: 8px;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-grid__card:hover {
+	transform: translateY(-2px);
+}
+
+/* Variant: bordered */
+.feature-grid--bordered .feature-grid__card {
+	border: 1px solid;
+}
+
+/* Variant: filled (card bg) */
+.feature-grid--filled .feature-grid__card {
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.feature-grid--filled .feature-grid__card:hover {
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Variant: minimal (no card chrome) */
+.feature-grid--minimal .feature-grid__card {
+	padding: 1rem 0;
+	border: none;
+	background: none;
+	box-shadow: none;
+}
+
+.feature-grid__icon {
+	width: 48px;
+	height: 48px;
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.5rem;
+	margin-bottom: 1.25rem;
+}
+
+.feature-grid__card-title {
+	font-size: 1.25rem;
+	font-weight: 600;
+	line-height: 1.3;
+	margin: 0 0 0.5rem;
+}
+
+.feature-grid__card-body {
+	font-size: 0.95rem;
+	line-height: 1.6;
+	opacity: 0.75;
+	margin: 0;
+}
+
+@media (max-width: 1024px) {
+	.feature-grid__grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 600px) {
+	.feature-grid__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.feature-grid__title {
+		font-size: 2rem;
+	}
+
+	.feature-grid {
+		padding: 3rem 1rem;
+	}
+}

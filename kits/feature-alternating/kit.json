@@ -1,0 +1,34 @@
+{
+  "name": "Feature Alternating",
+  "slug": "feature-alternating",
+  "description": "Alternating rows of text + image/screenshot pairs for feature deep-dives. The classic 'tell the product story' pattern used by Stripe, Notion, and Basecamp.",
+  "category": "section",
+  "tags": ["features", "deep-dive", "alternating", "zig-zag", "split", "screenshot", "landing", "storytelling"],
+  "files": {
+    "css": ["feature-alternating.css"],
+    "php": ["feature-alternating.php"]
+  },
+  "variables": {
+    "sectionTitle": {
+      "label": "Section title",
+      "type": "string",
+      "default": "Built for the way you actually work"
+    },
+    "sectionSubtitle": {
+      "label": "Section subtitle",
+      "type": "string",
+      "default": "Each feature, explained in detail"
+    }
+  },
+  "variants": {
+    "compact": {
+      "label": "Compact spacing",
+      "class": "feature-alternating--compact"
+    },
+    "image-bleed": {
+      "label": "Full-bleed images (no padding)",
+      "class": "feature-alternating--image-bleed"
+    }
+  },
+  "dependencies": []
+}

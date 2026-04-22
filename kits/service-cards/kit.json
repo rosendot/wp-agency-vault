@@ -1,0 +1,39 @@
+{
+  "name": "Service Cards",
+  "slug": "service-cards",
+  "description": "Service offering cards with image/icon, title, description, price, and 'Learn more' link. Taller and more detailed than feature-grid — built for linking to service detail pages.",
+  "category": "section",
+  "tags": ["services", "cards", "offerings", "landing", "service-business", "pricing", "learn-more"],
+  "files": {
+    "css": ["service-cards.css"],
+    "php": ["service-cards.php"]
+  },
+  "variables": {
+    "sectionTitle": {
+      "label": "Section title",
+      "type": "string",
+      "default": "What we do"
+    },
+    "sectionSubtitle": {
+      "label": "Section subtitle",
+      "type": "string",
+      "default": "Pick a service, or let us build you a full package"
+    },
+    "columns": {
+      "label": "Columns",
+      "type": "number",
+      "default": 3
+    }
+  },
+  "variants": {
+    "image-top": {
+      "label": "Image on top (instead of icon)",
+      "class": "service-cards--image-top"
+    },
+    "compact": {
+      "label": "Compact (no body copy)",
+      "class": "service-cards--compact"
+    }
+  },
+  "dependencies": []
+}

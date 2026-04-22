@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Cards Preview</title>
+    <link rel="stylesheet" href="service-cards.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #faf6f0; color: #2c2416; }
+        .service-cards__title { font-family: Georgia, serif; color: #1a1208; }
+        .service-cards__card { background: #fff; border-color: #e0d6c8; }
+        .service-cards__icon { background: #b42318; color: #fff; }
+        .service-cards__card-title { color: #1a1208; }
+        .service-cards__cta { color: #b42318; }
+    </style>
+</head>
+<body>
+    <section class="service-cards">
+        <div class="service-cards__header">
+            <h2 class="service-cards__title">What we do</h2>
+            <p class="service-cards__subtitle">Pick a service, or let us build you a full package</p>
+        </div>
+        <div class="service-cards__grid">
+            <div class="service-cards__card">
+                <div class="service-cards__icon">🌐</div>
+                <div class="service-cards__body-wrap">
+                    <h3 class="service-cards__card-title">Website design &amp; build</h3>
+                    <p class="service-cards__card-body">Custom WordPress sites built on Bedrock. Mobile-first, fast, and built to match your brand.</p>
+                    <div class="service-cards__price">From <span class="service-cards__price-value">$2,400</span></div>
+                    <a class="service-cards__cta" href="#">Learn more →</a>
+                </div>
+            </div>
+            <div class="service-cards__card">
+                <div class="service-cards__icon">🛠</div>
+                <div class="service-cards__body-wrap">
+                    <h3 class="service-cards__card-title">Ongoing care</h3>
+                    <p class="service-cards__card-body">Updates, backups, uptime monitoring, and security patches. Your site stays healthy while you run the business.</p>
+                    <div class="service-cards__price"><span class="service-cards__price-value">$149/mo</span></div>
+                    <a class="service-cards__cta" href="#">See what's included →</a>
+                </div>
+            </div>
+            <div class="service-cards__card">
+                <div class="service-cards__icon">📈</div>
+                <div class="service-cards__body-wrap">
+                    <h3 class="service-cards__card-title">SEO &amp; content</h3>
+                    <p class="service-cards__card-body">Schema markup, on-page SEO, Google Business optimization, and quarterly content refreshes.</p>
+                    <div class="service-cards__price">From <span class="service-cards__price-value">$600</span></div>
+                    <a class="service-cards__cta" href="#">Get a quote →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

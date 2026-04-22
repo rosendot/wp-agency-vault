@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feature Alternating Preview</title>
+    <link rel="stylesheet" href="feature-alternating.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #faf6f0; color: #2c2416; }
+        .feature-alternating__title { font-family: Georgia, serif; color: #1a1208; }
+        .feature-alternating__row-title { font-family: Georgia, serif; color: #1a1208; }
+        .feature-alternating__eyebrow { color: #b42318; }
+        .feature-alternating__bullets li::before { color: #b42318; }
+        .feature-alternating__cta { color: #b42318; }
+        .feature-alternating__visual { background: linear-gradient(135deg, #b42318 0%, #d4a017 100%); color: #fff; font-family: Georgia, serif; font-size: 1.5rem; }
+    </style>
+</head>
+<body>
+    <section class="feature-alternating">
+        <div class="feature-alternating__header">
+            <h2 class="feature-alternating__title">Built for the way you actually work</h2>
+            <p class="feature-alternating__subtitle">Each feature, explained in detail</p>
+        </div>
+        <div class="feature-alternating__rows">
+            <div class="feature-alternating__row">
+                <div class="feature-alternating__text">
+                    <span class="feature-alternating__eyebrow">Performance</span>
+                    <h3 class="feature-alternating__row-title">Fast on the first visit</h3>
+                    <p class="feature-alternating__row-body">Every page is statically generated and served from the edge. No spinners, no layout shifts, just content that appears when you click.</p>
+                    <ul class="feature-alternating__bullets">
+                        <li>Core Web Vitals in the green</li>
+                        <li>Edge caching included</li>
+                        <li>Optimized images out of the box</li>
+                    </ul>
+                    <a class="feature-alternating__cta" href="#">See the benchmarks →</a>
+                </div>
+                <div class="feature-alternating__visual">Performance</div>
+            </div>
+            <div class="feature-alternating__row feature-alternating__row--reverse">
+                <div class="feature-alternating__text">
+                    <span class="feature-alternating__eyebrow">Design</span>
+                    <h3 class="feature-alternating__row-title">Your brand, not a template</h3>
+                    <p class="feature-alternating__row-body">Custom typography, custom colors, custom layouts. We start from your brand and build out — no off-the-shelf themes, no cookie-cutter look.</p>
+                    <ul class="feature-alternating__bullets">
+                        <li>Bespoke layouts per page</li>
+                        <li>Your type, your color system</li>
+                        <li>Mobile-first, always</li>
+                    </ul>
+                    <a class="feature-alternating__cta" href="#">View our work →</a>
+                </div>
+                <div class="feature-alternating__visual">Design</div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

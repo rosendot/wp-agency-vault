@@ -69,6 +69,11 @@ Each tab and detail view has its own URL (e.g., `/kits/hero-split`). Refreshing 
 | `logo-wall/` | Section | Client logo grid, grayscale with color on hover |
 | `stats-counter/` | Section | Animated number counters that count up on scroll |
 | `breadcrumbs/` | Navigation | Hierarchical nav trail with schema.org SEO markup |
+| `feature-grid/` | Section | Icon + title + blurb cards — the three-pillar / six-up value-prop grid |
+| `feature-alternating/` | Section | Alternating text + visual rows for feature deep-dives (zig-zag pattern) |
+| `cta-banner/` | Section | Final-call conversion banner with headline, subhead, and 1–2 buttons |
+| `service-cards/` | Section | Service offering cards with icon/image, description, price, and learn-more link |
+| `process-steps/` | Section | Numbered "How it works" steps with connector line, 3–5 stages |
 | `footer-classic/` | Section | Multi-column footer with logo, contact, links, and hours |
 | `footer-minimal/` | Section | Clean single-line footer with logo, copyright, and social icons |
 | `footer-mega/` | Section | Large footer with about, services, links, newsletter, and contact row |

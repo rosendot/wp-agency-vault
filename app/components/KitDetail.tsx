@@ -34,6 +34,11 @@ import BreadcrumbsPreview from "./kit-previews/Breadcrumbs";
 import FaqTwoColumn from "./kit-previews/FaqTwoColumn";
 import FaqCards from "./kit-previews/FaqCards";
 import FaqTabbed from "./kit-previews/FaqTabbed";
+import FeatureGrid from "./kit-previews/FeatureGrid";
+import FeatureAlternating from "./kit-previews/FeatureAlternating";
+import CtaBanner from "./kit-previews/CtaBanner";
+import ServiceCards from "./kit-previews/ServiceCards";
+import ProcessSteps from "./kit-previews/ProcessSteps";
 import { designTokens } from "./kit-previews/shared";
 
 // Registry of kit slugs → React preview components
@@ -69,6 +74,11 @@ const KIT_PREVIEWS: Record<string, ComponentType<Record<string, string | number>
   "logo-wall": LogoWall,
   "stats-counter": StatsCounter,
   "breadcrumbs": BreadcrumbsPreview,
+  "feature-grid": FeatureGrid,
+  "feature-alternating": FeatureAlternating,
+  "cta-banner": CtaBanner,
+  "service-cards": ServiceCards,
+  "process-steps": ProcessSteps,
 };
 
 const LANG_COLORS: Record<string, string> = {

@@ -71,7 +71,12 @@ atlas-studio-internal/
 │   ├── testimonial-slider/  # Single-testimonial carousel with crossfade
 │   ├── logo-wall/           # Client logo grid, grayscale → color on hover
 │   ├── stats-counter/       # Animated number counters on scroll
-│   └── breadcrumbs/         # Hierarchical nav trail with schema.org markup
+│   ├── breadcrumbs/         # Hierarchical nav trail with schema.org markup
+│   ├── feature-grid/        # Icon + title + blurb cards (three-pillar value-prop grid)
+│   ├── feature-alternating/ # Alternating text + visual rows (zig-zag feature deep-dive)
+│   ├── cta-banner/          # Final-call conversion banner with 1–2 buttons
+│   ├── service-cards/       # Service offering cards with price + learn-more link
+│   └── process-steps/       # Numbered "How it works" steps (3–5 stages)
 ├── palettes/                # Color systems + typography (mix and match with anything)
 │   └── ember-hearth/        # Rich reds, warm golds, serif headings
 ├── sections/                # Full page-level compositions of kits + palette (e.g., a complete menu page)

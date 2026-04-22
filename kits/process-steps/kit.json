@@ -1,0 +1,38 @@
+{
+  "name": "Process Steps",
+  "slug": "process-steps",
+  "description": "Numbered 'How it works' steps — 3 to 5 stages with number badges, titles, and descriptions. Horizontal on desktop, vertical on mobile.",
+  "category": "section",
+  "tags": ["process", "steps", "how-it-works", "timeline", "numbered", "workflow", "onboarding", "landing"],
+  "files": {
+    "css": ["process-steps.css"],
+    "php": ["process-steps.php"]
+  },
+  "variables": {
+    "sectionTitle": {
+      "label": "Section title",
+      "type": "string",
+      "default": "How it works"
+    },
+    "sectionSubtitle": {
+      "label": "Section subtitle",
+      "type": "string",
+      "default": "From kickoff to live site in four simple steps"
+    }
+  },
+  "variants": {
+    "vertical": {
+      "label": "Vertical on desktop",
+      "class": "process-steps--vertical"
+    },
+    "connected": {
+      "label": "Connected (line between steps)",
+      "class": "process-steps--connected"
+    },
+    "cards": {
+      "label": "Card-style steps",
+      "class": "process-steps--cards"
+    }
+  },
+  "dependencies": []
+}

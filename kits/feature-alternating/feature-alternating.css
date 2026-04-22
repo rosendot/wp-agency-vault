@@ -1,0 +1,154 @@
+/* Feature Alternating — see README.md for usage */
+
+.feature-alternating {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 5rem 1rem;
+}
+
+.feature-alternating__header {
+	text-align: center;
+	max-width: 640px;
+	margin: 0 auto 4rem;
+}
+
+.feature-alternating__title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	line-height: 1.2;
+	margin: 0 0 0.75rem;
+}
+
+.feature-alternating__subtitle {
+	font-size: 1.1rem;
+	line-height: 1.6;
+	opacity: 0.75;
+	margin: 0;
+}
+
+.feature-alternating__rows {
+	display: flex;
+	flex-direction: column;
+	gap: 6rem;
+}
+
+.feature-alternating--compact .feature-alternating__rows {
+	gap: 3.5rem;
+}
+
+.feature-alternating__row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 4rem;
+	align-items: center;
+}
+
+.feature-alternating__row--reverse .feature-alternating__text {
+	order: 2;
+}
+
+.feature-alternating__row--reverse .feature-alternating__visual {
+	order: 1;
+}
+
+.feature-alternating__eyebrow {
+	display: inline-block;
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 1.5px;
+	text-transform: uppercase;
+	margin-bottom: 1rem;
+}
+
+.feature-alternating__row-title {
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 1.2;
+	margin: 0 0 1rem;
+}
+
+.feature-alternating__row-body {
+	font-size: 1.05rem;
+	line-height: 1.7;
+	opacity: 0.8;
+	margin: 0 0 1.5rem;
+}
+
+.feature-alternating__bullets {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 1.5rem;
+}
+
+.feature-alternating__bullets li {
+	font-size: 0.95rem;
+	line-height: 1.6;
+	padding: 0.35rem 0 0.35rem 1.5rem;
+	position: relative;
+	opacity: 0.85;
+}
+
+.feature-alternating__bullets li::before {
+	content: "✓";
+	position: absolute;
+	left: 0;
+	font-weight: 700;
+}
+
+.feature-alternating__cta {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	font-size: 0.95rem;
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.feature-alternating__cta:hover {
+	text-decoration: underline;
+}
+
+.feature-alternating__visual {
+	border-radius: 12px;
+	overflow: hidden;
+	aspect-ratio: 4 / 3;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.feature-alternating__visual img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.feature-alternating--image-bleed .feature-alternating__visual {
+	border-radius: 0;
+}
+
+@media (max-width: 900px) {
+	.feature-alternating__row,
+	.feature-alternating__row--reverse {
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+
+	.feature-alternating__row--reverse .feature-alternating__text,
+	.feature-alternating__row--reverse .feature-alternating__visual {
+		order: unset;
+	}
+
+	.feature-alternating__rows {
+		gap: 4rem;
+	}
+
+	.feature-alternating__title {
+		font-size: 2rem;
+	}
+
+	.feature-alternating__row-title {
+		font-size: 1.5rem;
+	}
+}

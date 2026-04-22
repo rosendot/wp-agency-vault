@@ -1,0 +1,43 @@
+{
+  "name": "Feature Grid",
+  "slug": "feature-grid",
+  "description": "Icon + title + blurb feature cards in a responsive grid. The workhorse three-pillar / six-feature value-prop pattern.",
+  "category": "section",
+  "tags": ["features", "value-prop", "grid", "cards", "icons", "landing", "three-up", "six-up", "pillars"],
+  "files": {
+    "css": ["feature-grid.css"],
+    "php": ["feature-grid.php"]
+  },
+  "variables": {
+    "sectionTitle": {
+      "label": "Section title",
+      "type": "string",
+      "default": "Why Choose Us"
+    },
+    "sectionSubtitle": {
+      "label": "Section subtitle",
+      "type": "string",
+      "default": "Everything you need, nothing you don't"
+    },
+    "columns": {
+      "label": "Columns",
+      "type": "number",
+      "default": 3
+    }
+  },
+  "variants": {
+    "bordered": {
+      "label": "Bordered cards",
+      "class": "feature-grid--bordered"
+    },
+    "filled": {
+      "label": "Filled cards",
+      "class": "feature-grid--filled"
+    },
+    "minimal": {
+      "label": "Minimal (no card chrome)",
+      "class": "feature-grid--minimal"
+    }
+  },
+  "dependencies": []
+}

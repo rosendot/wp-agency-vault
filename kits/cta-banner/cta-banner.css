@@ -1,0 +1,108 @@
+/* CTA Banner — see README.md for usage */
+
+.cta-banner {
+	padding: 5rem 1rem;
+}
+
+.cta-banner__inner {
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 4rem 3rem;
+	border-radius: 16px;
+	text-align: center;
+}
+
+.cta-banner__title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	line-height: 1.2;
+	margin: 0 0 1rem;
+}
+
+.cta-banner__subtitle {
+	font-size: 1.15rem;
+	line-height: 1.6;
+	opacity: 0.9;
+	margin: 0 auto 2rem;
+	max-width: 560px;
+}
+
+.cta-banner__actions {
+	display: flex;
+	gap: 0.75rem;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.cta-banner__btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.9rem 1.75rem;
+	border-radius: 8px;
+	font-size: 1rem;
+	font-weight: 600;
+	text-decoration: none;
+	cursor: pointer;
+	border: 2px solid transparent;
+	transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.cta-banner__btn:hover {
+	transform: translateY(-1px);
+}
+
+.cta-banner__btn--primary {
+	/* colors come from theme / palette */
+}
+
+.cta-banner__btn--secondary {
+	background: transparent;
+}
+
+/* Variant: split (text left, buttons right) */
+.cta-banner--split .cta-banner__inner {
+	text-align: left;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 2rem;
+	align-items: center;
+}
+
+.cta-banner--split .cta-banner__subtitle {
+	margin-left: 0;
+}
+
+.cta-banner--split .cta-banner__actions {
+	justify-content: flex-end;
+	flex-wrap: nowrap;
+}
+
+/* Variant: outlined (no fill) */
+.cta-banner--outlined .cta-banner__inner {
+	border: 2px solid;
+	background: transparent;
+}
+
+@media (max-width: 720px) {
+	.cta-banner__inner {
+		padding: 3rem 1.5rem;
+	}
+
+	.cta-banner__title {
+		font-size: 1.875rem;
+	}
+
+	.cta-banner__subtitle {
+		font-size: 1rem;
+	}
+
+	.cta-banner--split .cta-banner__inner {
+		grid-template-columns: 1fr;
+		text-align: center;
+	}
+
+	.cta-banner--split .cta-banner__actions {
+		justify-content: center;
+	}
+}
