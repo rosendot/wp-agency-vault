@@ -1,6 +1,6 @@
 # Atlas Studio Vault
 
-Internal knowledge base, reusable toolkit, and dashboard for Atlas Studio. Browse templates, kits, and palettes visually, mix and match, and ship faster.
+Internal knowledge base, reusable toolkit, and dashboard for Atlas Studio. Browse kits, palettes, fonts, and guides, and track every website the studio mocks up, builds, or hosts — all in one place.
 
 > **You run the business. We hold up your site.**
 
@@ -11,10 +11,9 @@ This is the `atlas-studio-internal` repo — the private vault behind every Atla
 | Folder | Purpose |
 |--------|---------|
 | `app/` | Next.js dashboard UI — file-based routing with live previews and variable customization |
+| `websites/` | Mocks, in-progress builds, and live client sites — one folder per site, loose structure |
 | `kits/` | Self-contained feature kits — each has all files (JS, CSS, PHP), a README, kit.json, and preview.html |
-| `palettes/` | Color systems + typography — mix and match with any section or template |
-| `sections/` | Pre-built page sections — different layout structures for the same content type |
-| `templates/` | Full page layouts with placeholder content — compose kits, pick a palette, swap placeholders, deploy |
+| `palettes/` | Color systems + typography — 31 palettes with 9 colors and 2 fonts each |
 | `fonts/` | Font registry — curated Google Fonts with pairing info, vibe tags, and weight details |
 | `plugins/` | Structured plugin registry — individual JSON files with costs, licensing, install conditions |
 | `guides/` | Step-by-step reference docs — Bedrock setup, LocalWP config, design process, agency flow, client contracts/onboarding/offboarding, billing, accessibility and performance audits, image licensing, uptime monitoring |
@@ -27,12 +26,11 @@ npm run dev
 # Open http://localhost:3000
 ```
 
-Six tabs: **Templates**, **Sections**, **Kits**, **Palettes**, **Fonts**, and **Guides**.
+Five tabs: **Websites**, **Kits**, **Palettes**, **Fonts**, and **Guides**.
 
 Each tab and detail view has its own URL (e.g., `/kits/hero-split`). Refreshing the page stays on the current view. Browser back/forward works natively.
 
-- **Templates** (`/templates`) — Browse full page layouts with live previews, swap palettes, edit content variables
-- **Sections** (`/sections`) — Browse full page compositions that wire kits together with a palette
+- **Websites** (`/websites`) — Every site Atlas Studio has mocked, built, or hosts — filter by status (`mock`, `in-progress`, `live`, `archived`)
 - **Kits** (`/kits`) — Browse individual components with live previews, view code, see tags/variants/dependencies
 - **Palettes** (`/palettes`) — Browse color systems with swatches, font previews, and CSS custom property output
 - **Fonts** (`/fonts`) — Browse fonts by type, preview at adjustable sizes, see pairings and palette usage
@@ -79,15 +77,11 @@ Each tab and detail view has its own URL (e.g., `/kits/hero-split`). Refreshing 
 | `footer-mega/` | Section | Large footer with about, services, links, newsletter, and contact row |
 | `footer-cta/` | Section | CTA banner above a standard multi-column footer |
 
-## Sections
+## Websites
 
-Sections are full page-level compositions that wire multiple kits together into a complete page view.
+Every site the studio touches lives under `websites/<slug>/`. Each folder has a `website.json` with status (`mock`, `in-progress`, `live`, `archived`), category, client, live URL (once deployed), and a pointer to a local `preview.html` mock if one exists. The folder structure itself is intentionally loose — a website can be a handwritten HTML mock, a full Bedrock theme, or just metadata pointing at a live URL.
 
-| Section | Category | Composes |
-|---------|----------|----------|
-| `landing-service-business/` | Landing | header-classic, hero-split, logo-wall, service-cards, process-steps, testimonial-cards, faq-accordion, cta-banner, footer-classic |
-| `landing-saas/` | Landing | header-classic, hero-split, logo-wall, feature-grid, feature-alternating, stats-counter, testimonial-slider, cta-banner, footer-minimal |
-| `landing-restaurant/` | Landing | header-transparent, hero-video, infinite-carousel, menu-list, grid-gallery, testimonial-cards, google-map-embed, cta-banner, footer-mega |
+Browse them all in the dashboard at `/websites`, filter by status, and add new entries as clients come in.
 
 ## Palettes
 
@@ -101,12 +95,6 @@ Sections are full page-level compositions that wire multiple kits together into 
 | `rustic-brick/` | Earthy reds, warm browns |
 | `nordic-frost/` | Cool grays, icy blues |
 | + 26 more | Browse at `/palettes` for full list |
-
-## Templates
-
-| Template | Category | Description |
-|----------|----------|-------------|
-| `restaurant-classic/` | Restaurant | Hero overlay, fan favorites carousel, Google Maps, photo gallery, menu page (CPT), about page |
 
 ## Fonts
 
@@ -122,10 +110,10 @@ Organized by `plugins/core/`, `plugins/restaurant/`, `plugins/service/`. Each pl
 
 ## How to Use
 
-1. **Browse** — Run the dashboard to explore templates, kits, and palettes
-2. **New client project?** Pick a template + palette, copy into your Bedrock project, swap placeholders
-3. **Want a different look?** Switch the palette — same layout, different colors
-4. **Need a feature?** Grab the kit folder, read its README, integrate
+1. **Browse** — Run the dashboard to explore kits, palettes, and websites
+2. **New client project?** Add a folder in `websites/<client-slug>/` with a `website.json` (status: `in-progress`), then build whatever the site needs inside it
+3. **Looking for a pattern?** Check the kit catalog for reusable components (heroes, features, CTAs, footers)
+4. **Picking colors?** Browse `/palettes` — every palette provides 9 colors + 2 fonts and can drive any site's CSS custom properties
 5. **Setup help?** Check `guides/` for step-by-step instructions
 6. **Choosing plugins?** Check `plugins/` for vetted options with costs and install conditions
 
@@ -133,7 +121,6 @@ Organized by `plugins/core/`, `plugins/restaurant/`, `plugins/service/`. Each pl
 
 - **New kit** — `/new-kit <name>` or create a folder in `kits/` with source files, README.md, kit.json, preview.html, and a TSX preview component in `app/components/kit-previews/`
 - **New palette** — `/new-palette <name>` or create a folder in `palettes/` with palette.json
-- **New section** — `/new-section <name>` or create a folder in `sections/` with section.json, section.php, section.css, preview.html, README.md
-- **New template** — `/new-template <name>` or create a folder in `templates/` with PHP templates, template.json, preview.html, and README.md. Reference kits via `kits_used` and a palette via `default_palette`
+- **New website** — Create a folder in `websites/<slug>/` with a `website.json` (status, category, description, url, preview). Add whatever files the site needs alongside it — no rigid schema
 - **New plugin** — `/new-plugin <name>` or add a JSON file to the appropriate `plugins/` subdirectory
 - **New guide** — Add a markdown file to `guides/`

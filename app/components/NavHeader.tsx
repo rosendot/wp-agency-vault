@@ -4,8 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const TABS = [
-  { key: "templates", label: "Templates" },
-  { key: "sections", label: "Sections" },
+  { key: "websites", label: "Websites" },
   { key: "kits", label: "Kits" },
   { key: "palettes", label: "Palettes" },
   { key: "fonts", label: "Fonts" },
@@ -19,13 +18,13 @@ export default function NavHeader({
 }) {
   const pathname = usePathname();
 
-  // Match /templates, /templates/foo, etc.
-  const activeTab = TABS.find((t) => pathname.startsWith(`/${t.key}`))?.key || "templates";
+  // Match /websites, /websites/foo, etc.
+  const activeTab = TABS.find((t) => pathname.startsWith(`/${t.key}`))?.key || "websites";
 
   return (
     <header className="border-b border-[var(--card-border)] px-6 py-4 flex items-center justify-between">
       <div className="flex items-center gap-6">
-        <Link href="/templates" className="flex items-center gap-3">
+        <Link href="/websites" className="flex items-center gap-3">
           <div className="w-8 h-8 bg-[var(--accent)] rounded-lg flex items-center justify-center text-white font-bold text-sm">
             V
           </div>

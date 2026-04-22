@@ -217,11 +217,10 @@ Step by step for each new client:
 GitHub/
 │
 ├── atlas-studio-internal/              → private vault (this repo)
-│   ├── app/                            → Next.js kit/theme browser
+│   ├── app/                            → Next.js dashboard
+│   ├── websites/                       → mocks, in-progress builds, live client sites
 │   ├── kits/                           → reusable components
 │   ├── palettes/                       → color systems + typography
-│   ├── sections/                       → full page-level compositions
-│   ├── templates/                      → full page layouts
 │   ├── plugins/                        → plugin + tools registry (JSON)
 │   └── guides/                         → this file lives here
 │

@@ -1,0 +1,11 @@
+{
+  "name": "Example Service Business",
+  "slug": "example-service-business",
+  "status": "mock",
+  "category": "service-business",
+  "description": "Mock landing page for a contractor/consultant-style service business. Placeholder for illustrating the service-business layout.",
+  "url": null,
+  "preview": "preview.html",
+  "client": null,
+  "launched": null
+}

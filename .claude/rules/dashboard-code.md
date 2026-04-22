@@ -9,7 +9,7 @@ Next.js + TypeScript + Tailwind conventions for the vault dashboard UI.
 ## Routing Architecture
 - The dashboard uses **Next.js App Router file-based routing** — each tab is its own route
 - Route structure: `app/<entity>/page.tsx` for list views, `app/<entity>/[slug]/page.tsx` for detail views
-- Root `/` redirects to `/templates`
+- Root `/` redirects to `/websites`
 - The shared `NavHeader` component lives in `layout.tsx` and persists across all routes
 - Tab highlighting uses `usePathname()` to detect the active route
 - Navigation between pages uses Next.js `<Link>` — never `onClick` + `setState` for page transitions
@@ -32,13 +32,13 @@ Next.js + TypeScript + Tailwind conventions for the vault dashboard UI.
 - Dark theme only — do not add light theme support
 
 ## API Routes
-- Kit/template file serving goes through API routes in `app/api/`
+- Kit file serving goes through API routes in `app/api/`
 - Pattern: `app/api/<entity>-preview/` serves preview.html, `app/api/<entity>-file/` serves static assets
 - API routes must validate query params and return appropriate error responses
 - File paths must be sanitized — never allow directory traversal (no `..` in paths)
 
 ## TypeScript
-- Strict types for all kit/section/template/palette data — use the interfaces from `app/lib/data.ts`
+- Strict types for all kit/palette/website data — use the interfaces from `app/lib/data.ts`
 - No `any` types — use `Record<string, T>` or proper interfaces
 - Props must be typed inline or with a named interface
 

@@ -32,9 +32,8 @@ async function countMarkdownFiles(dir: string): Promise<number> {
 
 export async function getCounts(): Promise<Record<string, number>> {
   const cwd = process.cwd();
-  const [templates, sections, kits, palettes, fonts, guides] = await Promise.all([
-    countJsonFiles(path.join(cwd, "templates"), "template.json"),
-    countJsonFiles(path.join(cwd, "sections"), "section.json"),
+  const [websites, kits, palettes, fonts, guides] = await Promise.all([
+    countJsonFiles(path.join(cwd, "websites"), "website.json"),
     countJsonFiles(path.join(cwd, "kits"), "kit.json"),
     countJsonFiles(path.join(cwd, "palettes"), "palette.json"),
     fs.readFile(path.join(cwd, "fonts", "fonts.json"), "utf-8")
@@ -42,7 +41,7 @@ export async function getCounts(): Promise<Record<string, number>> {
       .catch(() => 0),
     countMarkdownFiles(path.join(cwd, "guides")),
   ]);
-  return { templates, sections, kits, palettes, fonts, guides };
+  return { websites, kits, palettes, fonts, guides };
 }
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -97,35 +96,16 @@ export interface PaletteData {
   fonts: Record<string, PaletteFont>;
 }
 
-export interface SectionData {
+export interface WebsiteData {
   name: string;
   slug: string;
-  description: string;
+  status: "mock" | "in-progress" | "live" | "archived";
   category: string;
-  tags: string[];
-  layout: string;
-  default_palette: string;
-  kits_used: string[];
-  files: Record<string, string[]>;
-  variables: Record<string, KitVariable>;
-  fileContents: Record<string, string>;
-}
-
-export interface TemplateData {
-  name: string;
-  slug: string;
   description: string;
-  category: string;
-  tags: string[];
-  layout: string;
-  version: string;
-  pages: string[];
-  default_palette: string;
-  kits_used: string[];
-  files: Record<string, string[]>;
-  kit_files: Record<string, string[]>;
-  variables: Record<string, KitVariable>;
-  fileContents: Record<string, string>;
+  url: string | null;
+  preview: string | null;
+  client: string | null;
+  launched: string | null;
 }
 
 // ─── Data fetchers ───────────────────────────────────────────────────────────
@@ -235,109 +215,37 @@ export async function getPalette(slug: string): Promise<PaletteData | null> {
   }
 }
 
-export async function getSections(): Promise<SectionData[]> {
-  const sectionsDir = path.join(process.cwd(), "sections");
+// ─── Websites ────────────────────────────────────────────────────────────────
+
+export async function getWebsites(): Promise<WebsiteData[]> {
+  const dir = path.join(process.cwd(), "websites");
   let folders: string[];
   try {
-    folders = await fs.readdir(sectionsDir);
+    folders = await fs.readdir(dir);
   } catch {
     return [];
   }
-  const sections: SectionData[] = [];
-
+  const websites: WebsiteData[] = [];
   for (const folder of folders) {
-    const sectionJsonPath = path.join(sectionsDir, folder, "section.json");
     try {
-      const raw = await fs.readFile(sectionJsonPath, "utf-8");
-      const section = JSON.parse(raw) as SectionData;
-
-      const fileContents: Record<string, string> = {};
-      for (const [, files] of Object.entries(section.files)) {
-        for (const file of files) {
-          const filePath = path.join(sectionsDir, folder, file);
-          try {
-            const content = await fs.readFile(filePath, "utf-8");
-            fileContents[file] = content;
-          } catch {
-            fileContents[file] = "// File not found";
-          }
-        }
-      }
-      section.fileContents = fileContents;
-
-      sections.push(section);
+      const raw = await fs.readFile(path.join(dir, folder, "website.json"), "utf-8");
+      websites.push(JSON.parse(raw) as WebsiteData);
     } catch {
-      // skip folders without section.json
+      // skip folders without website.json
     }
   }
-
-  return sections;
+  return websites;
 }
 
-export async function getSection(slug: string): Promise<SectionData | null> {
-  const sectionsDir = path.join(process.cwd(), "sections");
-  const sectionJsonPath = path.join(sectionsDir, slug, "section.json");
+export async function getWebsite(slug: string): Promise<WebsiteData | null> {
+  if (slug.includes("/") || slug.includes("\\") || slug.includes("..")) return null;
+  const filePath = path.join(process.cwd(), "websites", slug, "website.json");
   try {
-    const raw = await fs.readFile(sectionJsonPath, "utf-8");
-    const section = JSON.parse(raw) as SectionData;
-
-    const fileContents: Record<string, string> = {};
-    for (const [, files] of Object.entries(section.files)) {
-      for (const file of files) {
-        const filePath = path.join(sectionsDir, slug, file);
-        try {
-          const content = await fs.readFile(filePath, "utf-8");
-          fileContents[file] = content;
-        } catch {
-          fileContents[file] = "// File not found";
-        }
-      }
-    }
-    section.fileContents = fileContents;
-
-    return section;
+    const raw = await fs.readFile(filePath, "utf-8");
+    return JSON.parse(raw) as WebsiteData;
   } catch {
     return null;
   }
-}
-
-export async function getTemplates(): Promise<TemplateData[]> {
-  const templatesDir = path.join(process.cwd(), "templates");
-  let folders: string[];
-  try {
-    folders = await fs.readdir(templatesDir);
-  } catch {
-    return [];
-  }
-  const templates: TemplateData[] = [];
-
-  for (const folder of folders) {
-    const templateJsonPath = path.join(templatesDir, folder, "template.json");
-    try {
-      const raw = await fs.readFile(templateJsonPath, "utf-8");
-      const template = JSON.parse(raw) as TemplateData;
-
-      const fileContents: Record<string, string> = {};
-      for (const [, files] of Object.entries(template.files)) {
-        for (const file of files) {
-          const filePath = path.join(templatesDir, folder, file);
-          try {
-            const content = await fs.readFile(filePath, "utf-8");
-            fileContents[file] = content;
-          } catch {
-            fileContents[file] = "// File not found";
-          }
-        }
-      }
-      template.fileContents = fileContents;
-
-      templates.push(template);
-    } catch {
-      // skip folders without template.json
-    }
-  }
-
-  return templates;
 }
 
 // ─── Guides ──────────────────────────────────────────────────────────────────
@@ -420,29 +328,3 @@ export async function getGuide(slug: string): Promise<GuideData | null> {
   }
 }
 
-export async function getTemplate(slug: string): Promise<TemplateData | null> {
-  const templatesDir = path.join(process.cwd(), "templates");
-  const templateJsonPath = path.join(templatesDir, slug, "template.json");
-  try {
-    const raw = await fs.readFile(templateJsonPath, "utf-8");
-    const template = JSON.parse(raw) as TemplateData;
-
-    const fileContents: Record<string, string> = {};
-    for (const [, files] of Object.entries(template.files)) {
-      for (const file of files) {
-        const filePath = path.join(templatesDir, slug, file);
-        try {
-          const content = await fs.readFile(filePath, "utf-8");
-          fileContents[file] = content;
-        } catch {
-          fileContents[file] = "// File not found";
-        }
-      }
-    }
-    template.fileContents = fileContents;
-
-    return template;
-  } catch {
-    return null;
-  }
-}

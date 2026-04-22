@@ -1,0 +1,11 @@
+{
+  "name": "Example Restaurant",
+  "slug": "example-restaurant",
+  "status": "mock",
+  "category": "restaurant",
+  "description": "Mock landing page for a family-run Italian restaurant. Placeholder until a real client is onboarded.",
+  "url": null,
+  "preview": "preview.html",
+  "client": null,
+  "launched": null
+}

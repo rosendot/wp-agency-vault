@@ -11,16 +11,12 @@ atlas-studio-internal/
 ├── app/                     # Next.js dashboard UI (TypeScript + Tailwind)
 │   ├── components/          # NavHeader, Browser, Detail, and kit-preview components
 │   │   ├── NavHeader.tsx    # Shared header with tab navigation (uses usePathname)
-│   │   ├── kit-previews/    # TSX preview components for each kit
-│   │   └── template-previews/ # TSX preview components for each template
+│   │   └── kit-previews/    # TSX preview components for each kit
 │   ├── lib/
 │   │   └── data.ts          # Shared types + data-fetching functions
-│   ├── templates/
-│   │   ├── page.tsx         # Templates list page
-│   │   └── [slug]/page.tsx  # Template detail page
-│   ├── sections/
-│   │   ├── page.tsx         # Sections list page
-│   │   └── [slug]/page.tsx  # Section detail page
+│   ├── websites/
+│   │   ├── page.tsx         # Websites list page
+│   │   └── [slug]/page.tsx  # Website detail page
 │   ├── kits/
 │   │   ├── page.tsx         # Kits list page
 │   │   └── [slug]/page.tsx  # Kit detail page
@@ -34,10 +30,8 @@ atlas-studio-internal/
 │   │   └── [slug]/page.tsx  # Guide detail page (renders guides/*.md)
 │   ├── api/
 │   │   ├── kit-preview/     # Serves kit preview.html with correct asset paths
-│   │   ├── kit-file/        # Serves kit static files (CSS, JS)
-│   │   ├── template-preview/# Serves template preview.html
-│   │   └── template-file/   # Serves template static files
-│   ├── page.tsx             # Root redirect to /templates
+│   │   └── kit-file/        # Serves kit static files (CSS, JS)
+│   ├── page.tsx             # Root redirect to /websites
 │   ├── layout.tsx           # Root layout with NavHeader + data counts
 │   └── globals.css          # Dark theme variables
 ├── kits/                    # Individual components — the building blocks
@@ -79,12 +73,9 @@ atlas-studio-internal/
 │   └── process-steps/       # Numbered "How it works" steps (3–5 stages)
 ├── palettes/                # Color systems + typography (mix and match with anything)
 │   └── ember-hearth/        # Rich reds, warm golds, serif headings
-├── sections/                # Full page-level compositions of kits + palette (e.g., a complete menu page)
-│   ├── landing-service-business/ # Service-business landing: hero → trust → services → process → testimonials → FAQ → CTA
-│   ├── landing-saas/        # SaaS landing: hero → trust → pillars → feature deep-dive → stats → testimonial slider → CTA
-│   └── landing-restaurant/  # Restaurant landing: hero-video → favorites → menu → gallery → reviews → map → reservation CTA
-├── templates/               # Full page layouts that compose kits + reference a palette
-│   └── restaurant-classic/  # Restaurant template with hero, carousel, map, gallery
+├── websites/                # Mocks, in-progress builds, and live client sites (one folder per site)
+│   ├── example-restaurant/  # Mock restaurant landing (placeholder until a real client)
+│   └── example-service-business/ # Mock service-business landing (placeholder)
 ├── plugins/                 # Structured plugin registry (JSON per plugin)
 │   ├── core/                # Install on every client site
 │   ├── restaurant/          # Restaurant-specific (Clover, Toast)
@@ -102,10 +93,8 @@ The dashboard uses **Next.js App Router file-based routing**. Each tab is its ow
 
 | Route | Page |
 |-------|------|
-| `/templates` | Template list |
-| `/templates/[slug]` | Template detail (preview, code, variables, palette picker) |
-| `/sections` | Section list |
-| `/sections/[slug]` | Section detail (preview, code, variables, palette picker) |
+| `/websites` | Websites list (mocks, in-progress, live) |
+| `/websites/[slug]` | Website detail (status, category, client, URL, local preview path) |
 | `/kits` | Kit list |
 | `/kits/[slug]` | Kit detail (preview, code, variables) |
 | `/palettes` | Palette list |
@@ -113,7 +102,7 @@ The dashboard uses **Next.js App Router file-based routing**. Each tab is its ow
 | `/fonts` | Font browser |
 | `/guides` | Guides list |
 | `/guides/[slug]` | Guide detail (rendered markdown) |
-| `/` | Redirects to `/templates` |
+| `/` | Redirects to `/websites` |
 
 ### Navigation
 - The shared `NavHeader` component lives in `layout.tsx` and persists across all routes
@@ -122,17 +111,12 @@ The dashboard uses **Next.js App Router file-based routing**. Each tab is its ow
 - Browser components use `<Link>` for card navigation (not `onClick` + `setState`)
 - Detail components use `<Link>` for back navigation (not `onBack` callbacks)
 
-### Templates tab (`/templates`)
-- Browse templates as cards with live preview thumbnails
-- Search by name or tag
-- Click a template to navigate to `/templates/[slug]`: full-page live preview, code viewer with file tabs, content variables, palette picker
-- Switch palettes to see the same layout with different color schemes
-
-### Sections tab (`/sections`)
-- Browse pre-built page sections by category (menu, hero, faq, gallery, etc.)
-- Search by name or tag
-- Click a section to navigate to `/sections/[slug]`: live preview with palette picker, code viewer, content variables
-- Sections focus on layout structure — colors come from the palette
+### Websites tab (`/websites`)
+- Browse every site Atlas Studio has built or mocked up, as cards with status badge
+- Filter by status in the sidebar: `mock`, `in-progress`, `live`, `archived`
+- Search by name, description, category, or client
+- Click a website to navigate to `/websites/[slug]`: status, category, client, launch date, live URL, and path to any local `preview.html` mock
+- A website entry is intentionally lightweight — just `website.json` — so each site can be whatever it needs to be (a handwritten HTML mock, a full Bedrock theme, or just metadata pointing at a live URL)
 
 ### Kits tab (`/kits`)
 - Browse kits filtered by category (Sections, Interactive, Navigation, Data)
@@ -156,9 +140,11 @@ The dashboard uses **Next.js App Router file-based routing**. Each tab is its ow
 - Click a guide to navigate to `/guides/[slug]`: full markdown rendered with prose styling (headings, lists, code blocks, tables, blockquotes, links)
 - Markdown is rendered server-side via `app/lib/markdown.ts` — no external deps
 
-## Four-Layer Architecture
+## Architecture
 
-### Kits
+The vault has two kinds of content: **reference material** (kits, palettes, fonts, guides) that supports design work, and **actual work** (websites) that ships. The reference material is strictly standardized and composable. Websites are intentionally loose — each one is whatever it needs to be.
+
+### Kits (reference)
 Self-contained components. Every kit must contain:
 - Source files (JS, CSS, PHP)
 - `README.md` — integration instructions and HTML structure
@@ -195,21 +181,7 @@ All kit preview components share a design token system defined in `app/component
 
 Kit components must use `var(--token-name)` for every visual value. No hardcoded rem, px, hex, or font strings.
 
-### Sections
-Full page-level compositions that wire multiple kits together into a complete page view. A section is NOT a single component — it's how an entire page tab is laid out.
-
-Example: A "Menu Classic" section composes a hero-section kit at the top, a menu-list kit in the middle, and a CTA at the bottom. A "Menu Modern" section uses the same menu-grid kit but with filter tabs and no hero.
-
-Every section must contain:
-- `section.json` — metadata (name, slug, category, layout, default_palette, kits_used, variables)
-- `section.php` — WordPress template that composes kits together
-- `section.css` — layout-level styles (spacing between kits, page structure)
-- `preview.html` — self-contained preview of the full page
-- `README.md` — integration instructions
-
-Sections use CSS custom properties for colors so palettes can be swapped. Content variables (titles, subtitles) live in `section.json`. Color variables do NOT — those come from the palette. Individual component styling lives in the kits, not the section.
-
-### Palettes
+### Palettes (reference)
 Color system + typography. Every palette must contain:
 - `palette.json` — colors and fonts
 
@@ -219,14 +191,20 @@ Color system + typography. Every palette must contain:
 - `colors` — 9 required keys: `primary`, `primary_dark`, `secondary`, `dark`, `cream`, `text`, `text_light`, `border`, `white` — each with `label` and `value`
 - `fonts` — 2 required keys: `heading`, `body` — each with `label` and `value`
 
-### Templates
-Full page layouts that compose kits and reference a palette. Every template must contain:
-- PHP templates, CSS, and an `index.php`
-- `template.json` — metadata (name, slug, category, layout, default_palette, kits_used, variables)
-- `preview.html` — self-contained HTML preview of the full template
-- `README.md` — setup instructions
+### Websites (work)
+One folder per site Atlas Studio has touched. Mocks, in-progress builds, and live client sites all live here. The only required file is `website.json`; anything else in the folder is whatever the site needs (a full Bedrock theme, a handwritten HTML mock, etc.).
 
-Templates reference kits via `kits_used` and a default palette via `default_palette`. They do NOT duplicate kit code. Color variables live in the palette, not the template — template `variables` contain only content values (business name, phone, hours, etc.).
+`website.json` schema (kept deliberately small):
+- `name`, `slug` — identity
+- `status` — one of: `mock`, `in-progress`, `live`, `archived`
+- `category` — free-form (restaurant, service-business, saas, portfolio, etc.)
+- `description` — one-line summary
+- `url` — live site URL once deployed, otherwise `null`
+- `preview` — path to a local mock HTML file (relative to the website folder) or `null`
+- `client` — client name once a real client is attached, otherwise `null`
+- `launched` — ISO date string (`YYYY-MM-DD`) when the site went live, otherwise `null`
+
+Websites deliberately do NOT follow a rigid composition model. They reference kits informally if they want to; they can also diverge and do whatever a real page needs. Kits are the design vocabulary; websites are the deliverables.
 
 ## Plugin Registry
 
@@ -241,8 +219,7 @@ Plugins have a `buy_when` field: `day-1` (buy before first client) or `later` (b
 - Only the custom theme is version-controlled in client projects
 - `.env` files contain secrets and are never committed
 - Each kit is self-contained: all files for one feature in one folder
-- Templates reference kits, never duplicate kit code
-- Colors and fonts live in palettes, not templates
+- Websites are loose by design — each `websites/<slug>/` folder can be whatever the site needs
 - PHP follows WordPress coding standards (tabs for indentation, snake_case functions)
 
 ## Rules
@@ -252,11 +229,11 @@ Plugins have a `buy_when` field: `day-1` (buy before first client) or `later` (b
 - Never create a kit without `kit.json`, `preview.html`, and `README.md`
 - Run `/audit-kit <slug>` after any kit changes to validate
 
-### Template-kit-palette boundary
-- Templates must reference kits via `kits_used` in `template.json` — never copy kit code into a template folder
-- Kit CSS/JS paths in `template.json` `kit_files` must point to real files in `kits/`
-- Templates must reference a palette via `default_palette` — never hardcode colors in template variables
-- Color variables belong in palettes, content variables belong in templates
+### Websites
+- Every entry under `websites/<slug>/` must have a valid `website.json`
+- `status` must be one of `mock`, `in-progress`, `live`, `archived`
+- Real client sites may contain sensitive data (URLs, unreleased copy, client names) — keep the repo private
+- No forced schema beyond `website.json`: feel free to include whatever a site needs (HTML mocks, Bedrock theme code, screenshots, notes)
 
 ### Security
 - Never create, stage, or display `.env` files, API keys, or database credentials
@@ -265,15 +242,14 @@ Plugins have a `buy_when` field: `day-1` (buy before first client) or `later` (b
 - All user input must be sanitized before saving (`sanitize_text_field`, etc.)
 
 ### Dashboard consistency
-- All new kits, sections, templates, and palettes must be browsable in the dashboard
+- All new kits, palettes, websites, fonts, and guides must be browsable in the dashboard
 - Every kit needs a valid `kit.json` and working `preview.html`
-- Every section needs a valid `section.json`, `section.php`, `section.css`, and working `preview.html`
-- Every template needs a valid `template.json` and working `preview.html`
 - Every palette needs a valid `palette.json`
+- Every website needs a valid `website.json`
 
 ### Documentation freshness
 After any structural changes, update ALL affected documentation before committing. Structural changes include:
-- Adding, removing, or renaming kits, sections, templates, palettes, or fonts
+- Adding, removing, or renaming kits, palettes, fonts, websites, or guides
 - Changing the routing structure or adding/removing dashboard tabs
 - Modifying the data flow (types, fetchers, imports)
 - Changing how kits are built or registered (new conventions, new required files)
