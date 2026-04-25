@@ -6,6 +6,10 @@ Internal knowledge base, reusable toolkit, and dashboard for Atlas Studio. Brows
 
 This is the `atlas-studio-internal` repo — the private vault behind every Atlas Studio client site.
 
+## What Atlas Studio sells
+
+A custom website for local businesses where **the client controls the day-to-day content and we handle everything else.** One flat **$399/mo**, no setup fee. See [CLAUDE.md](./CLAUDE.md) for what this vault specifically powers, and [`../atlas-studio-frontend/CLAUDE.md`](../atlas-studio-frontend/CLAUDE.md) for the full positioning rules.
+
 ## What's Inside
 
 | Folder | Purpose |

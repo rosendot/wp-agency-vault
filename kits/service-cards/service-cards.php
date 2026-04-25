@@ -29,7 +29,7 @@ $services = array(
 		'title'    => 'Ongoing care',
 		'body'     => 'Updates, backups, uptime monitoring, and security patches. Your site stays healthy while you run the business.',
 		'price'    => '',
-		'price_value' => '$149/mo',
+		'price_value' => '$399/mo',
 		'url'      => '#',
 		'cta'      => 'See what\'s included',
 	),

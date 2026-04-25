@@ -23,7 +23,7 @@ Use Google Workspace eSignature (built into Google Docs) to send contracts for s
 ## What the contract must cover
 
 - Scope of work (what is and isn't included)
-- Monthly retainer amount ($149/mo) and billing date
+- Monthly retainer amount ($399/mo) and billing date
 - What happens if client stops paying (site goes offline after X days)
 - IP ownership — custom theme stays agency property, client owns their domain/email/GA4
 - Cancellation terms — how much notice is required

@@ -6,13 +6,13 @@
   "license": "free",
   "cost": "2.9% + 30¢ per transaction",
   "covers": "unlimited",
-  "cost_per_site": "negligible at $149/mo retainer",
+  "cost_per_site": "negligible at $399/mo retainer",
   "category": "billing",
   "buy_when": "day-1",
   "install_on": ["external-tool"],
-  "description": "Recurring subscription billing for client retainers. Create a $149/mo subscription per client, send payment link, Stripe handles automatic monthly charging and failed payment retries. Not a WordPress plugin — managed at dashboard.stripe.com.",
+  "description": "Recurring subscription billing for client retainers. Create a $399/mo subscription per client, send payment link, Stripe handles automatic monthly charging and failed payment retries. Not a WordPress plugin — managed at dashboard.stripe.com.",
   "tags": ["billing", "payments", "subscriptions", "invoicing", "recurring"],
   "replaces": [],
   "requires": [],
-  "config_notes": "One-time setup: create a Product called 'Monthly Retainer' with a $149/mo recurring Price. This generates a single Payment Link — reuse this same link for every client. When a client submits the link, Stripe automatically creates their Customer record and starts their subscription on that date. Enable automatic retries for failed payments in Stripe dashboard settings."
+  "config_notes": "One-time setup: create a Product called 'Monthly Retainer' with a $399/mo recurring Price. This generates a single Payment Link — reuse this same link for every client. When a client submits the link, Stripe automatically creates their Customer record and starts their subscription on that date. Enable automatic retries for failed payments in Stripe dashboard settings."
 }

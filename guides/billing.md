@@ -11,7 +11,7 @@
 2. Create a new Customer with the client's name, business, and email
 3. Create a Subscription:
    - Product: "Monthly Retainer"
-   - Price: $149/mo recurring
+   - Price: $399/mo recurring
    - Billing date: go-live date (first charge on launch day)
 4. Send the client the payment link — they enter their card once, Stripe handles everything after
 5. Stripe automatically retries failed payments and sends the client email reminders

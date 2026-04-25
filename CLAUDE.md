@@ -4,6 +4,19 @@ Atlas Studio's internal knowledge base, reusable toolkit, and dashboard for buil
 
 Tagline: **You run the business. We hold up your site.**
 
+## What this vault supports
+
+Atlas Studio sells a custom website for local businesses where **the client controls the day-to-day content and we handle everything else.** One flat **$399/mo**, no setup fee.
+
+- **We handle:** custom design, hosting, security, backups, performance, plugin updates, integrations.
+- **The client handles:** menu items, prices, hours, photos, retail categories — through the WordPress admin we set up for them, on any device, anytime.
+
+This vault exists to make that delivery model fast and consistent: kits are the design vocabulary, palettes are the color systems, plugins are the vetted toolkit, websites are the deliverables, and guides are the operational playbooks (onboarding, billing, offboarding, audits). The vault is internal — no client ever sees it — so all positioning rules below apply only to *outputs* that ship to clients (themes, copy, kits used in mocks, demo data).
+
+For the canonical positioning, audience, hook, tone rules, and banned words, see [`../atlas-studio-frontend/CLAUDE.md`](../atlas-studio-frontend/CLAUDE.md). Anything that ends up in front of a client (kit demo copy used in a mock, contract language, billing emails, onboarding docs the client reads) must match that voice. POS integration is a feature delivered when it makes sense, never a hook.
+
+**Pricing:** $399/mo retainer. If you see references to $149 anywhere in this repo, they are stale and should be updated.
+
 ## Repo Structure
 
 ```

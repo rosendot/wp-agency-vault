@@ -28,7 +28,7 @@ const services = [
     body:
       "Updates, backups, uptime monitoring, and security patches. Your site stays healthy while you run the business.",
     priceLabel: "",
-    priceValue: "$149/mo",
+    priceValue: "$399/mo",
     cta: "See what's included",
   },
   {

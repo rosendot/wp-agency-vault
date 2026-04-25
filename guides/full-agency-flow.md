@@ -165,7 +165,7 @@ Clients pay for these directly. You configure the connections as part of onboard
 | Cloudflare domain | Client (~$10–15/yr) | Point DNS to Cloudways, set up SSL |
 | SendGrid / Mailgun | You (via functions.php) | SMTP relay for form submissions + order emails |
 | GA4 + Search Console | Client (free) | Connect via Site Kit, give client direct dashboard access |
-| Stripe | You | Recurring $149/mo retainer per client. Client pays via Stripe payment link on go-live day. |
+| Stripe | You | Recurring $399/mo retainer per client. Client pays via Stripe payment link on go-live day. |
 
 ---
 

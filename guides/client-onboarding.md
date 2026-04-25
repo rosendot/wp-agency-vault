@@ -37,7 +37,7 @@ The following are free and must be set up in the client's Google account:
 
 ### Billing
 - Client will receive a Stripe payment link on the day they sign the contract
-- $149/mo charged automatically on the same date each month
+- $399/mo charged automatically on the same date each month
 - First charge is on the go-live date, not the contract date
 
 ## Agency's responsibilities during onboarding
